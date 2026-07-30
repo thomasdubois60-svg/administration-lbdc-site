@@ -134,3 +134,4 @@ h3 { font-size: 19px; margin-bottom: 0; }
   .section-heading { align-items: flex-start; }
   .actions { justify-content: flex-end; }
 }
+.notice{margin-bottom:18px;padding:12px 15px;border-radius:12px;background:#fff4da;color:#76581f;border:1px solid #ead8a6;font-weight:700;font-size:13px}.notice.success{background:#e5f6ea;color:#246b42;border-color:#bfe3ca}.editor-box{padding:15px;border:1px solid var(--line);border-radius:15px;background:#fafbf9}.section-heading>.field{flex:1}.primary-button:disabled{opacity:.65;cursor:wait}
