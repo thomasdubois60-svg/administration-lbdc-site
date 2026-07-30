@@ -120,3 +120,17 @@ h3 { font-size: 19px; margin-bottom: 0; }
   .hour-row > span:not(.closed) { display: none; }
   .closed { grid-column: 1 / -1; }
 }
+.top-gap { margin-top: 18px; }
+.actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.actions .secondary-button svg, .secondary-button svg { width: 18px; }
+.item-list { display: grid; gap: 14px; }
+.editor-row { display: flex; align-items: center; gap: 14px; padding: 15px; border: 1px solid var(--line); border-radius: 15px; background: #fafbf9; }
+.grow { flex: 1; }
+.sidebar { overflow-y: auto; }
+.sidebar-footer { margin-top: 24px; }
+@media (max-width: 760px) {
+  .editor-row { align-items: flex-start; flex-wrap: wrap; }
+  .editor-row .grow { flex-basis: 100%; }
+  .section-heading { align-items: flex-start; }
+  .actions { justify-content: flex-end; }
+}

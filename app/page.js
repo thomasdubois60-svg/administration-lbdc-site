@@ -5,250 +5,103 @@ import { Bars3Icon, BuildingStorefrontIcon, CalendarDaysIcon, CheckCircleIcon, C
 
 const defaultData = {
   restaurant: {
-    name: 'Le Bistrot Du Coin',
-    address: '15 place de la Halle, 41220',
-    phone: '02 54 44 36 70',
-    email: 'lebistrotducoin41220@gmail.com',
-    slogan: 'Le bistrot est avant tout un lieu où l’on vient se rencontrer, passer et partager de bons moments ! Voilà ce que vous trouverez en passant nos portes.',
+    name: 'Le Bistrot Du Coin', address: '15 place de la Halle, 41220', phone: '02 54 44 36 70', email: 'lebistrotducoin41220@gmail.com',
+    slogan: 'Le bistrot est avant tout un lieu où l’on vient se rencontrer, passer et partager de bons moments ! Voilà ce que vous trouverez en passant nos portes.'
   },
   hours: [
-    { day: 'Lundi', open: true, from: '07:00', to: '20:00' },
-    { day: 'Mardi', open: true, from: '07:00', to: '20:00' },
-    { day: 'Mercredi', open: true, from: '07:00', to: '20:00' },
-    { day: 'Jeudi', open: true, from: '07:00', to: '20:00' },
-    { day: 'Vendredi', open: true, from: '07:00', to: '15:00' },
-    { day: 'Samedi', open: false, from: '', to: '' },
-    { day: 'Dimanche', open: false, from: '', to: '' },
+    { day: 'Lundi', open: true, from: '07:00', to: '20:00' }, { day: 'Mardi', open: true, from: '07:00', to: '20:00' },
+    { day: 'Mercredi', open: true, from: '07:00', to: '20:00' }, { day: 'Jeudi', open: true, from: '07:00', to: '20:00' },
+    { day: 'Vendredi', open: true, from: '07:00', to: '15:00' }, { day: 'Samedi', open: false, from: '', to: '' }, { day: 'Dimanche', open: false, from: '', to: '' }
   ],
+  dailyMenu: { date: new Date().toISOString().slice(0, 10), starters: ['Entrée du jour 1', 'Entrée du jour 2', 'Entrée du jour 3'], mains: ['Plat du jour 1', 'Plat du jour 2', 'Plat du jour 3'], desserts: ['Dessert du jour 1', 'Dessert du jour 2', 'Dessert du jour 3'], suggestion: 'Suggestion du jour : +4 € avec le plat du jour ou la formule' },
   menu: {
-    date: new Date().toISOString().slice(0, 10),
-    starters: ['Entrée du jour 1', 'Entrée du jour 2', 'Entrée du jour 3'],
-    mains: ['Plat du jour 1', 'Plat du jour 2', 'Plat du jour 3'],
-    desserts: ['Dessert du jour 1', 'Dessert du jour 2', 'Dessert du jour 3'],
-    suggestion: 'Suggestion du jour : +4 € avec le plat du jour ou la formule',
+    intro: 'Découvrez notre carte de bistrot, élaborée avec des produits simples et généreux.',
+    categories: [
+      { id: 1, name: 'Entrées', items: [{ id: 11, name: 'Œuf mayonnaise', description: 'Mayonnaise maison', price: '6,50 €', active: true }] },
+      { id: 2, name: 'Plats', items: [{ id: 21, name: 'Pièce du boucher', description: 'Garniture du moment', price: '18,90 €', active: true }] },
+      { id: 3, name: 'Desserts', items: [{ id: 31, name: 'Dessert maison', description: 'Selon l’inspiration du chef', price: '7,00 €', active: true }] }
+    ]
   },
-  gallery: [
-    { id: 1, title: 'Salle du restaurant', url: '' },
-    { id: 2, title: 'Façade du bistrot', url: '' },
-  ],
-  settings: {
-    siteOnline: true,
-    menuPublished: true,
-    lastUpdate: 'Jamais',
-  },
+  events: [{ id: 1, title: 'Soirée au Bistrot', date: '', time: '19:00', description: 'Ajoute ici les informations de ton prochain événement.', image: '', published: false }],
+  privatization: { enabled: true, title: 'Privatisez Le Bistrot Du Coin', intro: 'Un repas de famille, un anniversaire ou un événement professionnel ?', capacity: 'À préciser', services: 'Repas de groupe, buffet, cocktail, formule personnalisée', contactText: 'Contactez-nous pour recevoir une proposition adaptée.', phone: '02 54 44 36 70', email: 'lebistrotducoin41220@gmail.com' },
+  loyalty: { enabled: true, title: 'Votre fidélité récompensée', description: 'Pour 10 formules achetées, la 11e est offerte.', reward: '11e formule offerte', stampsRequired: 10, terms: 'Carte nominative. Offre non cumulable.' },
+  story: { enabled: true, title: 'Notre histoire', subtitle: 'Un bistrot convivial au cœur du village', content: 'Le Bistrot Du Coin est avant tout un lieu où l’on vient se rencontrer, passer et partager de bons moments.', image: '' },
+  reviews: { enabled: true, googleUrl: '', facebookUrl: '', instagramUrl: '', reviewTitle: 'Ils parlent de nous', reviewText: 'Retrouvez les avis de nos clients et suivez toute l’actualité du Bistrot sur nos réseaux sociaux.' },
+  gallery: [{ id: 1, title: 'Salle du restaurant', url: '' }, { id: 2, title: 'Façade du bistrot', url: '' }],
+  settings: { siteOnline: true, dailyMenuPublished: true, menuPublished: true, eventsPublished: true, lastUpdate: 'Jamais' }
 };
 
 const nav = [
   { id: 'dashboard', label: 'Tableau de bord', icon: Squares2X2Icon },
-  { id: 'menu', label: 'Menu du jour', icon: CalendarDaysIcon },
+  { id: 'dailyMenu', label: 'Menu du jour', icon: CalendarDaysIcon },
+  { id: 'menu', label: 'Carte', icon: BuildingStorefrontIcon },
+  { id: 'events', label: 'Événements', icon: CalendarDaysIcon },
+  { id: 'privatization', label: 'Privatisation', icon: HomeIcon },
+  { id: 'loyalty', label: 'Fidélité', icon: CheckCircleIcon },
+  { id: 'story', label: 'Notre histoire', icon: InformationCircleIcon },
+  { id: 'reviews', label: 'Avis et réseaux', icon: InformationCircleIcon },
   { id: 'hours', label: 'Horaires', icon: ClockIcon },
   { id: 'info', label: 'Informations', icon: InformationCircleIcon },
   { id: 'gallery', label: 'Galerie', icon: PhotoIcon },
-  { id: 'settings', label: 'Paramètres', icon: Cog6ToothIcon },
+  { id: 'settings', label: 'Paramètres', icon: Cog6ToothIcon }
 ];
 
-function Card({ children, className = '' }) {
-  return <section className={`card ${className}`}>{children}</section>;
-}
-
+function Card({ children, className = '' }) { return <section className={`card ${className}`}>{children}</section>; }
 function TextField({ label, value, onChange, type = 'text', multiline = false, placeholder = '' }) {
-  return (
-    <label className="field">
-      <span>{label}</span>
-      {multiline ? (
-        <textarea value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={4} />
-      ) : (
-        <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
-      )}
-    </label>
-  );
+  return <label className="field"><span>{label}</span>{multiline ? <textarea value={value ?? ''} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={4} /> : <input type={type} value={value ?? ''} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />}</label>;
 }
+function Toggle({ value, onChange }) { return <button type="button" className={`switch ${value ? 'on' : ''}`} onClick={() => onChange(!value)} aria-label="Modifier l’état"><i /></button>; }
 
 export default function Home() {
-  const [data, setData] = useState(defaultData);
-  const [section, setSection] = useState('dashboard');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem('lbdc-admin-data');
-    if (stored) {
-      try { setData(JSON.parse(stored)); } catch {}
-    }
-    setReady(true);
-  }, []);
-
-  const save = () => {
-    const next = {
-      ...data,
-      settings: {
-        ...data.settings,
-        lastUpdate: new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date()),
-      },
-    };
-    setData(next);
-    localStorage.setItem('lbdc-admin-data', JSON.stringify(next));
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2200);
-  };
-
+  const [data, setData] = useState(defaultData); const [section, setSection] = useState('dashboard'); const [sidebarOpen, setSidebarOpen] = useState(false); const [saved, setSaved] = useState(false); const [ready, setReady] = useState(false);
+  useEffect(() => { const stored = localStorage.getItem('lbdc-admin-data-v2'); if (stored) { try { setData({ ...defaultData, ...JSON.parse(stored) }); } catch {} } setReady(true); }, []);
+  const save = () => { const next = { ...data, settings: { ...data.settings, lastUpdate: new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date()) } }; setData(next); localStorage.setItem('lbdc-admin-data-v2', JSON.stringify(next)); setSaved(true); setTimeout(() => setSaved(false), 1800); };
   const stats = useMemo(() => [
     { label: 'Site internet', value: data.settings.siteOnline ? 'En ligne' : 'Hors ligne', detail: 'État général', icon: BuildingStorefrontIcon },
-    { label: 'Menu du jour', value: data.settings.menuPublished ? 'Publié' : 'Brouillon', detail: data.menu.date, icon: CalendarDaysIcon },
-    { label: 'Photos', value: data.gallery.length, detail: 'Dans la galerie', icon: PhotoIcon },
-    { label: 'Dernière sauvegarde', value: data.settings.lastUpdate, detail: 'Sur cet appareil', icon: CheckCircleIcon },
+    { label: 'Carte', value: data.menu.categories.reduce((n, c) => n + c.items.length, 0), detail: 'Produits enregistrés', icon: BuildingStorefrontIcon },
+    { label: 'Événements', value: data.events.length, detail: 'Événements enregistrés', icon: CalendarDaysIcon },
+    { label: 'Dernière sauvegarde', value: data.settings.lastUpdate, detail: 'Sur cet appareil', icon: CheckCircleIcon }
   ], [data]);
-
   if (!ready) return null;
 
-  const updateMenuItem = (group, index, value) => {
-    const list = [...data.menu[group]];
-    list[index] = value;
-    setData({ ...data, menu: { ...data.menu, [group]: list } });
-  };
+  const updateDailyItem = (group, index, value) => { const list = [...data.dailyMenu[group]]; list[index] = value; setData({ ...data, dailyMenu: { ...data.dailyMenu, [group]: list } }); };
+  const updateCategory = (categoryId, patch) => setData({ ...data, menu: { ...data.menu, categories: data.menu.categories.map(c => c.id === categoryId ? { ...c, ...patch } : c) } });
+  const updateMenuItem = (categoryId, itemId, patch) => setData({ ...data, menu: { ...data.menu, categories: data.menu.categories.map(c => c.id === categoryId ? { ...c, items: c.items.map(i => i.id === itemId ? { ...i, ...patch } : i) } : c) } });
+  const addCategory = () => setData({ ...data, menu: { ...data.menu, categories: [...data.menu.categories, { id: Date.now(), name: 'Nouvelle catégorie', items: [] }] } });
+  const addMenuItem = (categoryId) => setData({ ...data, menu: { ...data.menu, categories: data.menu.categories.map(c => c.id === categoryId ? { ...c, items: [...c.items, { id: Date.now(), name: 'Nouveau produit', description: '', price: '', active: true }] } : c) } });
+  const addEvent = () => setData({ ...data, events: [...data.events, { id: Date.now(), title: 'Nouvel événement', date: '', time: '19:00', description: '', image: '', published: false }] });
 
-  const renderMenuGroup = (title, key) => (
-    <Card>
-      <div className="section-heading"><div><p className="eyebrow">Aujourd’hui au Bistrot</p><h3>{title}</h3></div></div>
-      <div className="stack">
-        {data.menu[key].map((item, index) => (
-          <TextField key={index} label={`${title.slice(0, -1)} ${index + 1}`} value={item} onChange={(value) => updateMenuItem(key, index, value)} />
-        ))}
+  return <main className="app-shell">
+    <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+      <div className="brand"><div className="brand-mark">LBDC</div><div><strong>Administration</strong><span>Gestion du site</span></div><button className="icon-button mobile-only" onClick={() => setSidebarOpen(false)}><XMarkIcon /></button></div>
+      <nav>{nav.map(item => { const Icon = item.icon; return <button key={item.id} className={section === item.id ? 'active' : ''} onClick={() => { setSection(item.id); setSidebarOpen(false); }}><Icon /><span>{item.label}</span></button>; })}</nav>
+      <div className="sidebar-footer"><div className="status-dot" /><div><strong>Administration LBDC</strong><span>V2 complète du site</span></div></div>
+    </aside>
+    {sidebarOpen && <button className="overlay" onClick={() => setSidebarOpen(false)} />}
+    <section className="main-area">
+      <header className="topbar"><button className="icon-button mobile-only" onClick={() => setSidebarOpen(true)}><Bars3Icon /></button><div><p className="eyebrow">Le Bistrot Du Coin</p><h1>{nav.find(n => n.id === section)?.label}</h1></div><button className="primary-button" onClick={save}>{saved ? 'Sauvegardé ✓' : 'Sauvegarder'}</button></header>
+      <div className="content">
+        {section === 'dashboard' && <><div className="hero-card"><div><p className="eyebrow">Administration du site internet</p><h2>Bonjour Thomas 👋</h2><p>Tous les contenus du site sont maintenant regroupés dans une seule interface pensée pour ton téléphone.</p></div><HomeIcon /></div><div className="stats-grid">{stats.map(s => { const Icon = s.icon; return <Card key={s.label} className="stat-card"><div className="stat-icon"><Icon /></div><span>{s.label}</span><strong>{s.value}</strong><small>{s.detail}</small></Card>; })}</div><Card><div className="section-heading"><div><p className="eyebrow">Accès rapide</p><h3>Contenus principaux</h3></div></div><div className="quick-grid">{nav.slice(1, 8).map(item => { const Icon = item.icon; return <button key={item.id} onClick={() => setSection(item.id)}><Icon /><span>{item.label}</span></button>; })}</div></Card></>}
+
+        {section === 'dailyMenu' && <><Card><div className="section-heading"><div><p className="eyebrow">Publication quotidienne</p><h2>Menu du jour</h2></div><Toggle value={data.settings.dailyMenuPublished} onChange={v => setData({ ...data, settings: { ...data.settings, dailyMenuPublished: v } })} /></div><TextField label="Date" type="date" value={data.dailyMenu.date} onChange={v => setData({ ...data, dailyMenu: { ...data.dailyMenu, date: v } })} /></Card><div className="three-columns">{[['Entrées','starters'],['Plats','mains'],['Desserts','desserts']].map(([title,key]) => <Card key={key}><h3>{title}</h3><div className="stack top-gap">{data.dailyMenu[key].map((item,i) => <TextField key={i} label={`${title.slice(0,-1)} ${i+1}`} value={item} onChange={v => updateDailyItem(key,i,v)} />)}</div></Card>)}</div><Card><TextField label="Suggestion du jour" multiline value={data.dailyMenu.suggestion} onChange={v => setData({ ...data, dailyMenu: { ...data.dailyMenu, suggestion: v } })} /></Card></>}
+
+        {section === 'menu' && <><Card><div className="section-heading"><div><p className="eyebrow">Carte permanente</p><h2>Gérer la carte</h2></div><div className="actions"><Toggle value={data.settings.menuPublished} onChange={v => setData({ ...data, settings: { ...data.settings, menuPublished: v } })} /><button className="secondary-button" onClick={addCategory}><PlusIcon />Catégorie</button></div></div><TextField label="Texte d’introduction" multiline value={data.menu.intro} onChange={v => setData({ ...data, menu: { ...data.menu, intro: v } })} /></Card>{data.menu.categories.map(cat => <Card key={cat.id} className="top-gap"><div className="section-heading"><TextField label="Nom de la catégorie" value={cat.name} onChange={v => updateCategory(cat.id,{name:v})} /><button className="secondary-button" onClick={() => addMenuItem(cat.id)}><PlusIcon />Ajouter</button></div><div className="item-list">{cat.items.map(item => <div className="editor-row" key={item.id}><div className="form-grid grow"><TextField label="Nom" value={item.name} onChange={v => updateMenuItem(cat.id,item.id,{name:v})} /><TextField label="Prix" value={item.price} onChange={v => updateMenuItem(cat.id,item.id,{price:v})} /><div className="full-width"><TextField label="Description" value={item.description} onChange={v => updateMenuItem(cat.id,item.id,{description:v})} /></div></div><Toggle value={item.active} onChange={v => updateMenuItem(cat.id,item.id,{active:v})} /><button className="danger-link" onClick={() => updateCategory(cat.id,{items:cat.items.filter(i=>i.id!==item.id)})}>Supprimer</button></div>)}</div></Card>)}</>}
+
+        {section === 'events' && <><Card><div className="section-heading"><div><p className="eyebrow">Actualités du bistrot</p><h2>Événements</h2></div><button className="secondary-button" onClick={addEvent}><PlusIcon />Créer</button></div></Card>{data.events.map((event,index) => <Card key={event.id} className="top-gap"><div className="section-heading"><h3>Événement {index+1}</h3><Toggle value={event.published} onChange={v => setData({ ...data, events: data.events.map(e => e.id===event.id ? {...e,published:v}:e) })} /></div><div className="form-grid"><TextField label="Titre" value={event.title} onChange={v => setData({...data,events:data.events.map(e=>e.id===event.id?{...e,title:v}:e)})}/><TextField label="Date" type="date" value={event.date} onChange={v => setData({...data,events:data.events.map(e=>e.id===event.id?{...e,date:v}:e)})}/><TextField label="Heure" type="time" value={event.time} onChange={v => setData({...data,events:data.events.map(e=>e.id===event.id?{...e,time:v}:e)})}/><TextField label="URL de l’image" value={event.image} onChange={v => setData({...data,events:data.events.map(e=>e.id===event.id?{...e,image:v}:e)})}/><div className="full-width"><TextField label="Description" multiline value={event.description} onChange={v => setData({...data,events:data.events.map(e=>e.id===event.id?{...e,description:v}:e)})}/></div></div><button className="danger-link top-gap" onClick={() => setData({...data,events:data.events.filter(e=>e.id!==event.id)})}>Supprimer l’événement</button></Card>)}</>}
+
+        {section === 'privatization' && <Card><div className="section-heading"><div><p className="eyebrow">Groupes et événements privés</p><h2>Privatisation</h2></div><Toggle value={data.privatization.enabled} onChange={v=>setData({...data,privatization:{...data.privatization,enabled:v}})} /></div><div className="form-grid"><TextField label="Titre" value={data.privatization.title} onChange={v=>setData({...data,privatization:{...data.privatization,title:v}})}/><TextField label="Capacité" value={data.privatization.capacity} onChange={v=>setData({...data,privatization:{...data.privatization,capacity:v}})}/><div className="full-width"><TextField label="Introduction" multiline value={data.privatization.intro} onChange={v=>setData({...data,privatization:{...data.privatization,intro:v}})}/></div><div className="full-width"><TextField label="Prestations proposées" multiline value={data.privatization.services} onChange={v=>setData({...data,privatization:{...data.privatization,services:v}})}/></div><TextField label="Téléphone" value={data.privatization.phone} onChange={v=>setData({...data,privatization:{...data.privatization,phone:v}})}/><TextField label="E-mail" value={data.privatization.email} onChange={v=>setData({...data,privatization:{...data.privatization,email:v}})}/><div className="full-width"><TextField label="Texte de contact" multiline value={data.privatization.contactText} onChange={v=>setData({...data,privatization:{...data.privatization,contactText:v}})}/></div></div></Card>}
+
+        {section === 'loyalty' && <Card><div className="section-heading"><div><p className="eyebrow">Programme client</p><h2>Fidélité</h2></div><Toggle value={data.loyalty.enabled} onChange={v=>setData({...data,loyalty:{...data.loyalty,enabled:v}})} /></div><div className="form-grid"><TextField label="Titre" value={data.loyalty.title} onChange={v=>setData({...data,loyalty:{...data.loyalty,title:v}})}/><TextField label="Nombre de tampons" type="number" value={data.loyalty.stampsRequired} onChange={v=>setData({...data,loyalty:{...data.loyalty,stampsRequired:v}})}/><div className="full-width"><TextField label="Description" multiline value={data.loyalty.description} onChange={v=>setData({...data,loyalty:{...data.loyalty,description:v}})}/></div><TextField label="Récompense" value={data.loyalty.reward} onChange={v=>setData({...data,loyalty:{...data.loyalty,reward:v}})}/><TextField label="Conditions" value={data.loyalty.terms} onChange={v=>setData({...data,loyalty:{...data.loyalty,terms:v}})}/></div></Card>}
+
+        {section === 'story' && <Card><div className="section-heading"><div><p className="eyebrow">Identité du restaurant</p><h2>Notre histoire</h2></div><Toggle value={data.story.enabled} onChange={v=>setData({...data,story:{...data.story,enabled:v}})} /></div><div className="form-grid"><TextField label="Titre" value={data.story.title} onChange={v=>setData({...data,story:{...data.story,title:v}})}/><TextField label="Sous-titre" value={data.story.subtitle} onChange={v=>setData({...data,story:{...data.story,subtitle:v}})}/><div className="full-width"><TextField label="Texte" multiline value={data.story.content} onChange={v=>setData({...data,story:{...data.story,content:v}})}/></div><div className="full-width"><TextField label="URL de l’image" value={data.story.image} onChange={v=>setData({...data,story:{...data.story,image:v}})}/></div></div></Card>}
+
+        {section === 'reviews' && <Card><div className="section-heading"><div><p className="eyebrow">Réputation et communauté</p><h2>Avis et réseaux</h2></div><Toggle value={data.reviews.enabled} onChange={v=>setData({...data,reviews:{...data.reviews,enabled:v}})} /></div><div className="form-grid"><TextField label="Titre" value={data.reviews.reviewTitle} onChange={v=>setData({...data,reviews:{...data.reviews,reviewTitle:v}})}/><TextField label="Lien Google" value={data.reviews.googleUrl} onChange={v=>setData({...data,reviews:{...data.reviews,googleUrl:v}})}/><TextField label="Lien Facebook" value={data.reviews.facebookUrl} onChange={v=>setData({...data,reviews:{...data.reviews,facebookUrl:v}})}/><TextField label="Lien Instagram" value={data.reviews.instagramUrl} onChange={v=>setData({...data,reviews:{...data.reviews,instagramUrl:v}})}/><div className="full-width"><TextField label="Texte de présentation" multiline value={data.reviews.reviewText} onChange={v=>setData({...data,reviews:{...data.reviews,reviewText:v}})}/></div></div></Card>}
+
+        {section === 'hours' && <Card><div className="section-heading"><div><p className="eyebrow">Informations pratiques</p><h2>Horaires d’ouverture</h2></div></div><div className="hours-list">{data.hours.map((row,index)=><div className="hour-row" key={row.day}><strong>{row.day}</strong><Toggle value={row.open} onChange={v=>{const h=[...data.hours];h[index]={...row,open:v};setData({...data,hours:h});}} />{row.open?<><input type="time" value={row.from} onChange={e=>{const h=[...data.hours];h[index]={...row,from:e.target.value};setData({...data,hours:h});}}/><span>à</span><input type="time" value={row.to} onChange={e=>{const h=[...data.hours];h[index]={...row,to:e.target.value};setData({...data,hours:h});}}/></>:<span className="closed">Fermé</span>}</div>)}</div></Card>}
+        {section === 'info' && <Card><div className="section-heading"><div><p className="eyebrow">Coordonnées</p><h2>Informations du restaurant</h2></div></div><div className="form-grid">{Object.entries(data.restaurant).map(([key,value])=><div key={key} className={key==='slogan'?'full-width':''}><TextField label={{name:'Nom',address:'Adresse',phone:'Téléphone',email:'E-mail',slogan:'Présentation'}[key]} multiline={key==='slogan'} value={value} onChange={v=>setData({...data,restaurant:{...data.restaurant,[key]:v}})}/></div>)}</div></Card>}
+        {section === 'gallery' && <Card><div className="section-heading"><div><p className="eyebrow">Images du site</p><h2>Galerie</h2></div><button className="secondary-button" onClick={()=>setData({...data,gallery:[...data.gallery,{id:Date.now(),title:'Nouvelle photo',url:''}]})}><PlusIcon />Ajouter</button></div><div className="gallery-grid">{data.gallery.map(photo=><div className="photo-card" key={photo.id}><div className="photo-placeholder"><PhotoIcon /><span>Aperçu</span></div><input value={photo.title} onChange={e=>setData({...data,gallery:data.gallery.map(p=>p.id===photo.id?{...p,title:e.target.value}:p)})}/><input placeholder="URL de l’image" value={photo.url} onChange={e=>setData({...data,gallery:data.gallery.map(p=>p.id===photo.id?{...p,url:e.target.value}:p)})}/><button className="danger-link" onClick={()=>setData({...data,gallery:data.gallery.filter(p=>p.id!==photo.id)})}>Supprimer</button></div>)}</div></Card>}
+        {section === 'settings' && <div className="two-columns"><Card><div className="section-heading"><div><p className="eyebrow">Publication</p><h2>État du site</h2></div></div><div className="publish-row"><span>Site visible en ligne</span><Toggle value={data.settings.siteOnline} onChange={v=>setData({...data,settings:{...data.settings,siteOnline:v}})}/></div><div className="publish-row"><span>Menu du jour publié</span><Toggle value={data.settings.dailyMenuPublished} onChange={v=>setData({...data,settings:{...data.settings,dailyMenuPublished:v}})}/></div><div className="publish-row"><span>Carte publiée</span><Toggle value={data.settings.menuPublished} onChange={v=>setData({...data,settings:{...data.settings,menuPublished:v}})}/></div></Card><Card><div className="section-heading"><div><p className="eyebrow">Maintenance</p><h2>Données locales</h2></div></div><p className="muted">Cette V2 sauvegarde les modifications sur l’appareil. La connexion au site et à la base de données sera la prochaine étape.</p><button className="danger-button" onClick={()=>{localStorage.removeItem('lbdc-admin-data-v2');setData(defaultData);}}>Réinitialiser</button></Card></div>}
       </div>
-    </Card>
-  );
-
-  return (
-    <main className="app-shell">
-      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="brand">
-          <div className="brand-mark">LBDC</div>
-          <div><strong>Administration</strong><span>Gestion du site</span></div>
-          <button className="icon-button mobile-only" onClick={() => setSidebarOpen(false)} aria-label="Fermer"><XMarkIcon /></button>
-        </div>
-        <nav>
-          {nav.map((item) => {
-            const Icon = item.icon;
-            return (
-              <button key={item.id} className={section === item.id ? 'active' : ''} onClick={() => { setSection(item.id); setSidebarOpen(false); }}>
-                <Icon /><span>{item.label}</span>
-              </button>
-            );
-          })}
-        </nav>
-        <div className="sidebar-footer">
-          <div className="status-dot" />
-          <div><strong>Application locale</strong><span>V1 prête à connecter</span></div>
-        </div>
-      </aside>
-
-      {sidebarOpen && <button className="overlay" onClick={() => setSidebarOpen(false)} aria-label="Fermer le menu" />}
-
-      <section className="main-area">
-        <header className="topbar">
-          <button className="icon-button mobile-only" onClick={() => setSidebarOpen(true)} aria-label="Ouvrir le menu"><Bars3Icon /></button>
-          <div><p className="eyebrow">Le Bistrot Du Coin</p><h1>{nav.find((item) => item.id === section)?.label}</h1></div>
-          <button className="primary-button" onClick={save}>{saved ? 'Sauvegardé ✓' : 'Sauvegarder'}</button>
-        </header>
-
-        <div className="content">
-          {section === 'dashboard' && (
-            <>
-              <div className="hero-card">
-                <div><p className="eyebrow">Administration du site internet</p><h2>Bonjour Thomas 👋</h2><p>Modifie facilement les contenus visibles sur le site du Bistrot, depuis ton téléphone ou ton ordinateur.</p></div>
-                <HomeIcon />
-              </div>
-              <div className="stats-grid">
-                {stats.map((stat) => { const Icon = stat.icon; return <Card key={stat.label} className="stat-card"><div className="stat-icon"><Icon /></div><span>{stat.label}</span><strong>{stat.value}</strong><small>{stat.detail}</small></Card>; })}
-              </div>
-              <div className="two-columns">
-                <Card>
-                  <div className="section-heading"><div><p className="eyebrow">Accès rapide</p><h3>Que veux-tu modifier ?</h3></div></div>
-                  <div className="quick-grid">
-                    {nav.slice(1, 5).map((item) => { const Icon = item.icon; return <button key={item.id} onClick={() => setSection(item.id)}><Icon /><span>{item.label}</span></button>; })}
-                  </div>
-                </Card>
-                <Card>
-                  <div className="section-heading"><div><p className="eyebrow">Publication</p><h3>État du contenu</h3></div></div>
-                  <div className="publish-row"><span>Site visible en ligne</span><button className={`switch ${data.settings.siteOnline ? 'on' : ''}`} onClick={() => setData({ ...data, settings: { ...data.settings, siteOnline: !data.settings.siteOnline } })}><i /></button></div>
-                  <div className="publish-row"><span>Menu du jour publié</span><button className={`switch ${data.settings.menuPublished ? 'on' : ''}`} onClick={() => setData({ ...data, settings: { ...data.settings, menuPublished: !data.settings.menuPublished } })}><i /></button></div>
-                </Card>
-              </div>
-            </>
-          )}
-
-          {section === 'menu' && (
-            <>
-              <Card>
-                <div className="section-heading"><div><p className="eyebrow">Publication quotidienne</p><h2>Menu du jour</h2></div><span className={`badge ${data.settings.menuPublished ? 'success' : ''}`}>{data.settings.menuPublished ? 'Publié' : 'Brouillon'}</span></div>
-                <TextField label="Date du menu" type="date" value={data.menu.date} onChange={(value) => setData({ ...data, menu: { ...data.menu, date: value } })} />
-              </Card>
-              <div className="three-columns">{renderMenuGroup('Entrées', 'starters')}{renderMenuGroup('Plats', 'mains')}{renderMenuGroup('Desserts', 'desserts')}</div>
-              <Card><TextField label="Suggestion du jour" value={data.menu.suggestion} onChange={(value) => setData({ ...data, menu: { ...data.menu, suggestion: value } })} multiline /></Card>
-            </>
-          )}
-
-          {section === 'hours' && (
-            <Card>
-              <div className="section-heading"><div><p className="eyebrow">Informations pratiques</p><h2>Horaires d’ouverture</h2></div></div>
-              <div className="hours-list">
-                {data.hours.map((row, index) => (
-                  <div className="hour-row" key={row.day}>
-                    <strong>{row.day}</strong>
-                    <button className={`switch ${row.open ? 'on' : ''}`} onClick={() => { const hours = [...data.hours]; hours[index] = { ...row, open: !row.open }; setData({ ...data, hours }); }}><i /></button>
-                    {row.open ? <><input type="time" value={row.from} onChange={(e) => { const hours = [...data.hours]; hours[index] = { ...row, from: e.target.value }; setData({ ...data, hours }); }} /><span>à</span><input type="time" value={row.to} onChange={(e) => { const hours = [...data.hours]; hours[index] = { ...row, to: e.target.value }; setData({ ...data, hours }); }} /></> : <span className="closed">Fermé</span>}
-                  </div>
-                ))}
-              </div>
-            </Card>
-          )}
-
-          {section === 'info' && (
-            <Card>
-              <div className="section-heading"><div><p className="eyebrow">Coordonnées publiques</p><h2>Informations du restaurant</h2></div></div>
-              <div className="form-grid">
-                <TextField label="Nom du restaurant" value={data.restaurant.name} onChange={(value) => setData({ ...data, restaurant: { ...data.restaurant, name: value } })} />
-                <TextField label="Téléphone" value={data.restaurant.phone} onChange={(value) => setData({ ...data, restaurant: { ...data.restaurant, phone: value } })} />
-                <TextField label="Adresse e-mail" type="email" value={data.restaurant.email} onChange={(value) => setData({ ...data, restaurant: { ...data.restaurant, email: value } })} />
-                <TextField label="Adresse" value={data.restaurant.address} onChange={(value) => setData({ ...data, restaurant: { ...data.restaurant, address: value } })} />
-                <div className="full-width"><TextField label="Texte de présentation" multiline value={data.restaurant.slogan} onChange={(value) => setData({ ...data, restaurant: { ...data.restaurant, slogan: value } })} /></div>
-              </div>
-            </Card>
-          )}
-
-          {section === 'gallery' && (
-            <Card>
-              <div className="section-heading"><div><p className="eyebrow">Images du site</p><h2>Galerie photos</h2></div><button className="secondary-button" onClick={() => setData({ ...data, gallery: [...data.gallery, { id: Date.now(), title: 'Nouvelle photo', url: '' }] })}><PlusIcon />Ajouter</button></div>
-              <div className="gallery-grid">
-                {data.gallery.map((photo, index) => (
-                  <div className="photo-card" key={photo.id}>
-                    <div className="photo-placeholder"><PhotoIcon /><span>Aperçu photo</span></div>
-                    <input value={photo.title} onChange={(e) => { const gallery = [...data.gallery]; gallery[index] = { ...photo, title: e.target.value }; setData({ ...data, gallery }); }} />
-                    <input placeholder="URL de l’image" value={photo.url} onChange={(e) => { const gallery = [...data.gallery]; gallery[index] = { ...photo, url: e.target.value }; setData({ ...data, gallery }); }} />
-                    <button className="danger-link" onClick={() => setData({ ...data, gallery: data.gallery.filter((item) => item.id !== photo.id) })}>Supprimer</button>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          )}
-
-          {section === 'settings' && (
-            <div className="two-columns">
-              <Card>
-                <div className="section-heading"><div><p className="eyebrow">Publication</p><h2>Paramètres du site</h2></div></div>
-                <div className="publish-row"><div><strong>Site internet en ligne</strong><small>Rendre le site accessible au public</small></div><button className={`switch ${data.settings.siteOnline ? 'on' : ''}`} onClick={() => setData({ ...data, settings: { ...data.settings, siteOnline: !data.settings.siteOnline } })}><i /></button></div>
-                <div className="publish-row"><div><strong>Publier le menu du jour</strong><small>Afficher le menu actuellement préparé</small></div><button className={`switch ${data.settings.menuPublished ? 'on' : ''}`} onClick={() => setData({ ...data, settings: { ...data.settings, menuPublished: !data.settings.menuPublished } })}><i /></button></div>
-              </Card>
-              <Card>
-                <div className="section-heading"><div><p className="eyebrow">Maintenance</p><h2>Données locales</h2></div></div>
-                <p className="muted">Cette première version conserve les modifications dans le navigateur. La prochaine étape connectera l’application à une base de données sécurisée et au véritable site.</p>
-                <button className="danger-button" onClick={() => { localStorage.removeItem('lbdc-admin-data'); setData(defaultData); }}>Réinitialiser les données</button>
-              </Card>
-            </div>
-          )}
-        </div>
-      </section>
-    </main>
-  );
+    </section>
+  </main>;
 }
