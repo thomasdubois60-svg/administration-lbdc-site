@@ -1,0 +1,2 @@
+import {NextResponse} from 'next/server';import {COOKIE_NAME,makeSession,sessionCookie} from '../../../../lib/auth';
+export async function POST(request){const {password}=await request.json();const expected=process.env.ADMIN_PASSWORD;if(!expected)return NextResponse.json({error:'ADMIN_PASSWORD manque dans Vercel.'},{status:500});if(password!==expected)return NextResponse.json({error:'Mot de passe incorrect.'},{status:401});const r=NextResponse.json({ok:true});r.cookies.set(COOKIE_NAME,makeSession(),sessionCookie);return r;}

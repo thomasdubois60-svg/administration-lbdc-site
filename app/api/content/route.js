@@ -1,3 +1,4 @@
+import { validSession } from '../../../lib/auth';
 import { NextResponse } from 'next/server';
 
 const owner = process.env.GITHUB_OWNER || 'thomasdubois60-svg';
@@ -5,11 +6,7 @@ const repo = process.env.GITHUB_REPO || 'lebistrotducoin';
 const branch = process.env.GITHUB_BRANCH || 'main';
 const path = 'data/site-content.json';
 
-function authorized(request) {
-  const expected = process.env.ADMIN_PASSWORD;
-  if (!expected) return true;
-  return request.headers.get('x-admin-password') === expected;
-}
+function authorized(request) { return validSession(request); }
 
 export async function GET(request) {
   if (!authorized(request)) return NextResponse.json({ error: 'Mot de passe incorrect.' }, { status: 401 });
