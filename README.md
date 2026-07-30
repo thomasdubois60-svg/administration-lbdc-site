@@ -1,13 +1,12 @@
-# Administration LBDC connectée au site
+# Administration LBDC V4
 
-Cette application charge et modifie directement `data/site-content.json` dans le dépôt `thomasdubois60-svg/lebistrotducoin`.
+Cette version ajoute :
+- prix à emporter dans le menu du jour ;
+- ajout et suppression sans limite des entrées, plats et desserts ;
+- réorganisation des catégories et produits avec Monter / Descendre ;
+- envoi réel de photos vers `public/photos` du dépôt du site ;
+- aperçu des photos existantes ;
+- espace Club LBDC ;
+- suppression de l’onglet Connexion.
 
-## Variables Vercel obligatoires
-
-- `ADMIN_PASSWORD`
-- `GITHUB_TOKEN` : jeton GitHub fin avec accès au dépôt `lebistrotducoin` et permission **Contents: Read and write**
-- `GITHUB_OWNER=thomasdubois60-svg`
-- `GITHUB_REPO=lebistrotducoin`
-- `GITHUB_BRANCH=main`
-
-Après ajout des variables, redéployer l’application Administration LBDC.
+Variables Vercel : `GITHUB_TOKEN`, `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_BRANCH`. `ADMIN_PASSWORD` reste facultatif.
