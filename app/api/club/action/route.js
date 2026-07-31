@@ -1,2 +1,18 @@
-import {NextResponse} from 'next/server';import {validSession} from '../../../../lib/auth';import {sb,tables} from '../../../../lib/supabase';
-export async function POST(request){if(!validSession(request))return NextResponse.json({error:'Non autorisé'},{status:401});try{const {memberId,action,value=1,note=''}=await request.json();if(!memberId)return NextResponse.json({error:'Membre manquant'},{status:400});const members=await sb(`${tables.members}?id=eq.${encodeURIComponent(memberId)}&select=*`);const m=members[0];if(!m)throw new Error('Membre introuvable');let stamps=Number(m.stamps)||0;if(action==='add')stamps+=Number(value)||1;if(action==='remove')stamps=Math.max(0,stamps-(Number(value)||1));if(action==='reward')stamps=0;const updated=(await sb(`${tables.members}?id=eq.${encodeURIComponent(memberId)}`,{method:'PATCH',body:{stamps,updated_at:new Date().toISOString()}}))[0];await sb(tables.history,{method:'POST',body:{member_id:memberId,action,value:Number(value)||1,note,created_at:new Date().toISOString()}});return NextResponse.json({member:updated});}catch(e){return NextResponse.json({error:e.message},{status:500})}}
+import { NextResponse } from 'next/server';
+import { hasAnyRole, ROLES } from '../../../../lib/auth';
+import { loyalty, rpc } from '../../../../lib/supabase';
+
+const allowed = [ROLES.FIDELITY, ROLES.EMPLOYEE, ROLES.MANAGER, ROLES.ADMIN];
+export async function POST(request) {
+  if (!hasAnyRole(request, allowed)) return NextResponse.json({ error: 'Accès Fidélité requis' }, { status: 403 });
+  try {
+    const { memberId, action, note = '', couponId } = await request.json();
+    if (!memberId) return NextResponse.json({ error: 'Membre manquant' }, { status: 400 });
+    let member;
+    if (action === 'stamp' || action === 'add') member = await rpc('club_add_stamp', { p_member_id: memberId, p_note: note });
+    else if (action === 'reward') member = await rpc('club_validate_reward', { p_member_id: memberId, p_required: loyalty.stampsRequired, p_note: note });
+    else if (action === 'coupon') member = await rpc('club_redeem_coupon', { p_member_id: memberId, p_coupon_id: couponId });
+    else return NextResponse.json({ error: 'Action inconnue' }, { status: 400 });
+    return NextResponse.json({ member, stampsRequired: loyalty.stampsRequired });
+  } catch (error) { return NextResponse.json({ error: error.message }, { status: 500 }); }
+}

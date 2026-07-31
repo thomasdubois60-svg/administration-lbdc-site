@@ -9,7 +9,7 @@ const path = 'data/site-content.json';
 function authorized(request) { return validSession(request); }
 
 export async function GET(request) {
-  if (!authorized(request)) return NextResponse.json({ error: 'Mot de passe incorrect.' }, { status: 401 });
+  if (!hasRole(request, ROLES.EMPLOYEE)) return NextResponse.json({ error: 'Accès Administration requis.' }, { status: 403 });
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
   const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'LBDC-Administration' };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
