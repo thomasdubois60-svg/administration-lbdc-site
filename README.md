@@ -36,7 +36,7 @@ Les noms des tables sont configurables avec les variables `CLUB_MEMBERS_TABLE`, 
 
 Les identifiants prennent par défaut les valeurs `fidelite`, `employe`, `responsable` et `administrateur` si les variables `*_USERNAME` sont omises. Les quatre mots de passe doivent être différents et rester uniquement dans les variables d'environnement Vercel.
 
-Le seuil d'une récompense se règle avec `LOYALTY_STAMPS_REQUIRED` (10 par défaut) et son libellé avec `LOYALTY_REWARD_LABEL`. Le Bloc 2 utilise `club_members`, `club_history`, `club_coupons` et `promotions`; la migration ajoute notamment `code`, `visits`, `stamps`, `rewards_count` et `coupons_available` lorsqu'ils manquent.
+Le seuil d'une récompense se règle avec `LOYALTY_STAMPS_REQUIRED` (10 par défaut) et son libellé avec `LOYALTY_REWARD_LABEL`. Le Club conserve le schéma historique du site public : `club_members.personal_code`, `club_members.loyalty_points`, `club_members.reward_available`, `club_loyalty_events` et `club_promotion_coupons`. Les anciennes données restent prioritaires; les colonnes de compatibilité `code`, `stamps`, `visits`, `rewards_count` et `coupons_available` sont recalculées depuis cet historique et ne remettent jamais la fidélité à zéro.
 
 ## Sécurité
 
