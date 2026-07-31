@@ -1,11 +1,9 @@
-import { validSession } from '../../../lib/auth';
+import { hasRole, ROLES } from '../../../lib/auth';
 import { NextResponse } from 'next/server';
 
 const owner = process.env.GITHUB_OWNER || 'thomasdubois60-svg';
 const repo = process.env.GITHUB_REPO || 'lebistrotducoin';
 const branch = process.env.GITHUB_BRANCH || 'main';
-
-function authorized(request) { return validSession(request); }
 
 function safeName(name) {
   const ext = (name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
@@ -14,7 +12,7 @@ function safeName(name) {
 }
 
 export async function POST(request) {
-  if (!authorized(request)) return NextResponse.json({ error: 'Mot de passe incorrect.' }, { status: 401 });
+  if (!hasRole(request, ROLES.MANAGER)) return NextResponse.json({ error: 'Droits Responsable requis.' }, { status: 403 });
   if (!process.env.GITHUB_TOKEN) return NextResponse.json({ error: 'La variable GITHUB_TOKEN manque dans Vercel.' }, { status: 500 });
   const form = await request.formData();
   const file = form.get('file');

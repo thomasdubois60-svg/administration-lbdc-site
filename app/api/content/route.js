@@ -1,4 +1,4 @@
-import { validSession } from '../../../lib/auth';
+import { hasRole, ROLES, validSession } from '../../../lib/auth';
 import { NextResponse } from 'next/server';
 
 const owner = process.env.GITHUB_OWNER || 'thomasdubois60-svg';
@@ -21,7 +21,7 @@ export async function GET(request) {
 }
 
 export async function PUT(request) {
-  if (!authorized(request)) return NextResponse.json({ error: 'Mot de passe incorrect.' }, { status: 401 });
+  if (!hasRole(request, ROLES.MANAGER)) return NextResponse.json({ error: 'Droits Responsable requis.' }, { status: 403 });
   if (!process.env.GITHUB_TOKEN) return NextResponse.json({ error: 'La variable GITHUB_TOKEN manque dans Vercel.' }, { status: 500 });
   const body = await request.json();
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
