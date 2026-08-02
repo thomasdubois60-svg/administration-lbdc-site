@@ -155,11 +155,20 @@ declare result public.club_members; new_points integer;
 begin
   select * into result from public.club_members where id=p_member_id for update;
   if result.id is null then raise exception 'Membre introuvable'; end if;
-  insert into public.club_loyalty_events(member_id,event_type,event_day,note)
-  values(p_member_id,'passage',current_date,nullif(p_note,''));
-  new_points:=least(10,coalesce(result.loyalty_points,0)+1);
+  new_points:=coalesce(result.loyalty_points,0)+1;
   update public.club_members set loyalty_points=new_points,reward_available=(new_points>=10),updated_at=now(),visits=coalesce(visits,0)+1
   where id=p_member_id returning * into result;
+  if result.loyalty_points is distinct from new_points then raise exception 'Incrémentation du tampon non confirmée'; end if;
+  if exists (
+    select 1 from information_schema.columns
+    where table_schema='public' and table_name='club_loyalty_events' and column_name='stamps_after'
+  ) then
+    execute 'insert into public.club_loyalty_events(member_id,event_type,event_day,note,stamps_after) values ($1,''passage'',current_date,nullif($2,''''),$3)'
+    using p_member_id,p_note,new_points;
+  else
+    insert into public.club_loyalty_events(member_id,event_type,event_day,note)
+    values(p_member_id,'passage',current_date,nullif(p_note,''));
+  end if;
   return result;
 end $$;
 
