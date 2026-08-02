@@ -36,7 +36,7 @@ Cette version reprend directement la V4 déjà en place. Elle conserve la gestio
 
 Le projet Vercel du site public doit rester connecté à la branche `main` du dépôt `lebistrotducoin`. Chaque mise à jour de `data/site-content.json` déclenche ainsi un seul déploiement Git Vercel. L’administration ne lance pas un second déploiement par webhook.
 
-Les noms des tables sont configurables avec les variables `CLUB_MEMBERS_TABLE`, `CLUB_HISTORY_TABLE`, `PROMOTIONS_TABLE` et `PUSH_SUBSCRIPTIONS_TABLE`. Cela permet de raccorder cette administration aux tables déjà présentes sans réécrire le reste du projet.
+Les noms des tables Club sont configurables avec les variables `CLUB_MEMBERS_TABLE`, `CLUB_HISTORY_TABLE` et `PROMOTIONS_TABLE`. Les notifications utilisent toujours la table existante `push_subscriptions` afin de conserver les abonnements du site public.
 
 Les identifiants prennent par défaut les valeurs `fidelite`, `employe`, `responsable` et `administrateur` si les variables `*_USERNAME` sont omises. Les quatre mots de passe doivent être différents et rester uniquement dans les variables d'environnement Vercel.
 
