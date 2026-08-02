@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import { hasAnyRole, ROLES } from '../../../../lib/auth';
+import { loyalty, sb, tables } from '../../../../lib/supabase';
 import { rpc, sb, tables } from '../../../../lib/supabase';
 
 const allowed = [ROLES.FIDELITY, ROLES.EMPLOYEE, ROLES.MANAGER, ROLES.ADMIN];

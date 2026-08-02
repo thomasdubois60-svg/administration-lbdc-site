@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
+
 import { hasAnyRole, ROLES } from '../../../../lib/auth';
 import { loyalty, sb, tables } from '../../../../lib/supabase';
-
 const allowed = [ROLES.FIDELITY, ROLES.EMPLOYEE, ROLES.MANAGER, ROLES.ADMIN];
 const clean = (value) => String(value || '').replace(/[,*()]/g, ' ').trim();
 const memberName = (member) => [member.first_name, member.last_name].filter(Boolean).join(' ') || member.email || member.personal_code;
