@@ -5,6 +5,13 @@ import { sb, tables } from '../../../../lib/supabase';
 const allowed = [ROLES.FIDELITY, ROLES.EMPLOYEE, ROLES.MANAGER, ROLES.ADMIN];
 const isUuid = (value) => /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(value);
 const qrParameters = ['id', 'code', 'member', 'memberId', 'personal_code'];
+const genericSegments = new Set(['club', 'fidélité', 'fidelite', 'membre', 'member', 'carte']);
+const decode = (value) => { try { return decodeURIComponent(value); } catch { return value; } };
+const usableCode = (value) => {
+  const code = decode(String(value || '')).trim();
+  return code && !genericSegments.has(code.toLocaleLowerCase('fr-FR')) ? code : '';
+};
+const lastPathCode = (value) => usableCode(String(value || '').split('?')[0].split('/').filter(Boolean).pop());
 
 function extractCode(value) {
   const raw = String(value || '').trim();
@@ -12,12 +19,25 @@ function extractCode(value) {
   try {
     const url = new URL(raw);
     for (const parameter of qrParameters) {
-      const code = url.searchParams.get(parameter)?.trim();
+      const code = usableCode(url.searchParams.get(parameter));
       if (code) return code;
     }
-    return '';
+    const hash = decode(url.hash.slice(1)).trim();
+    if (hash) {
+      const hashQuery = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : hash.replace(/^\?/, '');
+      if (hashQuery.includes('=')) {
+        const hashParameters = new URLSearchParams(hashQuery);
+        for (const parameter of qrParameters) {
+          const code = usableCode(hashParameters.get(parameter));
+          if (code) return code;
+        }
+      }
+      const hashCode = lastPathCode(hash);
+      if (hashCode && !hashCode.includes('=')) return hashCode;
+    }
+    return lastPathCode(url.pathname);
   } catch {
-    return raw;
+    return usableCode(raw);
   }
 }
 
