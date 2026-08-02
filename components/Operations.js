@@ -5,6 +5,7 @@ const Field=({label,value,onChange,multi=false,type='text',placeholder=''})=><la
 const Card=({children,className=''})=><section className={`card ${className}`}>{children}</section>;
 async function json(url,options={}){const response=await fetch(url,{...options,headers:{'Content-Type':'application/json',...(options.headers||{})}});const data=await response.json();if(!response.ok)throw new Error(data.error||'Erreur');return data}
 const identity=(member)=>member.name||member.email||member.code||member.id;
+const scannedValue=(result)=>{if(typeof result==='string')return result;const text=typeof result?.getText==='function'?result.getText():result?.text??result?.rawValue??result?.data;return typeof text==='string'?text:''};
 const actionLabel={stamp:'Tampon ajouté',reward:'Récompense validée',coupon:'Coupon utilisé',add:'Tampon ajouté',remove:'Tampon retiré'};
 const date=(value)=>value?new Intl.DateTimeFormat('fr-FR',{dateStyle:'short',timeStyle:'short'}).format(new Date(value)):'—';
 
@@ -19,7 +20,7 @@ export function ClubOperations(){
  const stop=useCallback(()=>{scannerControls.current?.stop?.();scannerControls.current=null;if(video.current?.srcObject)video.current.srcObject.getTracks().forEach(track=>track.stop());setScanning(false);handled.current=false},[]);
  useEffect(()=>()=>stop(),[stop]);
  async function scanValue(value){if(handled.current)return;handled.current=true;setStatus('QR Code reconnu, ajout du tampon…');try{const data=await json('/api/club/scan',{method:'POST',body:JSON.stringify({value})});stop();await loadMembers(q);await select(data.member);setStatus(`Tampon ajouté automatiquement pour ${identity(data.member)}`)}catch(e){handled.current=false;setStatus(e.message)}}
- async function scan(){stop();setScanning(true);setStatus('Autorise la caméra puis présente le QR Code.');try{const {BrowserQRCodeReader}=await import('@zxing/browser');const reader=new BrowserQRCodeReader();scannerControls.current=await reader.decodeFromVideoDevice(undefined,video.current,(result,error,controls)=>{scannerControls.current=controls;if(result)scanValue(result.getText())})}catch(e){stop();setStatus(`Caméra indisponible : ${e.message}. Utilise la recherche par code.`)}}
+ async function scan(){stop();setScanning(true);setStatus('Autorise la caméra puis présente le QR Code.');try{const {BrowserQRCodeReader}=await import('@zxing/browser');const reader=new BrowserQRCodeReader();scannerControls.current=await reader.decodeFromVideoDevice(undefined,video.current,(result,error,controls)=>{scannerControls.current=controls;const value=scannedValue(result);if(value)scanValue(value)})}catch(e){stop();setStatus(`Caméra indisponible : ${e.message}. Utilise la recherche par code.`)}}
  async function action(type){if(!detail?.member)return;setBusy(true);try{await json('/api/club/action',{method:'POST',body:JSON.stringify({memberId:detail.member.id,action:type})});await select(detail.member);await loadMembers(q);setStatus(type==='reward'?'Récompense validée':'Tampon ajouté')}catch(e){setStatus(e.message)}finally{setBusy(false)}}
  async function search(){setDetail(null);await loadMembers(q,0,false)}
  const member=detail?.member;
