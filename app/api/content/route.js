@@ -38,12 +38,12 @@ async function verifyPublicContent(expected) {
     return value;
   };
   const expectedText = JSON.stringify(canonical(expected));
-  for (let attempt = 0; attempt < 4; attempt += 1) {
+  for (let attempt = 0; attempt < 12; attempt += 1) {
     try {
       const response = await fetch(`${publicSite}/api/content?publication=${Date.now()}`, { cache: 'no-store' });
       if (response.ok && JSON.stringify(canonical(await response.json())) === expectedText) return true;
     } catch {}
-    if (attempt < 3) await new Promise(resolve => setTimeout(resolve, 750));
+    if (attempt < 11) await new Promise(resolve => setTimeout(resolve, 1000));
   }
   return false;
 }
