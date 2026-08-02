@@ -43,23 +43,32 @@ function extractCodes(value) {
   }
 }
 
+const missingCodeColumn = (error) => /(?:column.*\bcode\b|\bcode\b.*column|schema cache)/i.test(error.message || '');
+async function findExact(field, identifier, optional = false) {
+  try {
+    const members = await sb(`${tables.members}?${field}=eq.${encodeURIComponent(identifier)}&select=id&limit=1`);
+    return members[0] || null;
+  } catch (error) {
+    if (optional && missingCodeColumn(error)) return null;
+    throw error;
+  }
+}
+
 export async function POST(request) {
   if (!hasAnyRole(request, allowed)) return NextResponse.json({ error: 'Accès Fidélité requis' }, { status: 403 });
   try {
     const { value } = await request.json();
     const identifiers = extractCodes(value);
-    const debugValue = identifiers[0] || usableCode(value);
-    if (!identifiers.length) return NextResponse.json({ error: 'QR Code ou code membre vide', debugValue }, { status: 400 });
+    if (!identifiers.length) return NextResponse.json({ error: 'QR Code ou code membre vide' }, { status: 400 });
     for (const identifier of identifiers) {
-      const encoded = encodeURIComponent(identifier);
-      const filter = isUuid(identifier)
-        ? `id=eq.${encoded}`
-        : isEmail(identifier)
-          ? `email=eq.${encoded}`
-          : `personal_code=eq.${encoded}`;
-      const members = await sb(`${tables.members}?${filter}&select=id&limit=1`);
-      if (members[0]) return NextResponse.json({ member: members[0], stamped: false });
+      const fields = isUuid(identifier)
+        ? ['id', 'personal_code', 'code']
+        : ['personal_code', 'code', ...(isEmail(identifier) ? ['email'] : [])];
+      for (const field of fields) {
+        const member = await findExact(field, identifier, field === 'code');
+        if (member) return NextResponse.json({ member, stamped: false });
+      }
     }
-    return NextResponse.json({ error: 'Aucun membre ne correspond à ce code', debugValue }, { status: 404 });
+    return NextResponse.json({ error: 'Aucun membre ne correspond à ce code' }, { status: 404 });
   } catch (error) { return NextResponse.json({ error: error.message }, { status: 500 }); }
 }
