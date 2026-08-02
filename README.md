@@ -31,6 +31,10 @@ Cette version reprend directement la V4 déjà en place. Elle conserve la gestio
 - `GITHUB_TOKEN` : token limité au dépôt `lebistrotducoin` avec `Contents: Read and write`.
 - `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` : accès serveur à Supabase.
 - `NEXT_PUBLIC_VAPID_PUBLIC_KEY` et `VAPID_PRIVATE_KEY` : clés du système de notifications déjà utilisé par le site.
+- `VAPID_SUBJECT` : identité VAPID, identique à celle du site public.
+- `PUBLIC_SITE_URL` : URL du site public utilisée pour confirmer que le contenu publié est réellement relu (`https://lebistrotducoin.vercel.app` par défaut).
+
+Le projet Vercel du site public doit rester connecté à la branche `main` du dépôt `lebistrotducoin`. Chaque mise à jour de `data/site-content.json` déclenche ainsi un seul déploiement Git Vercel. L’administration ne lance pas un second déploiement par webhook.
 
 Les noms des tables sont configurables avec les variables `CLUB_MEMBERS_TABLE`, `CLUB_HISTORY_TABLE`, `PROMOTIONS_TABLE` et `PUSH_SUBSCRIPTIONS_TABLE`. Cela permet de raccorder cette administration aux tables déjà présentes sans réécrire le reste du projet.
 

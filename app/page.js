@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Login, ClubOperations, Promotions, Notifications, LiveDashboard } from '../components/Operations';
 import { Bars3Icon, BuildingStorefrontIcon, CalendarDaysIcon, ClockIcon, HomeIcon, InformationCircleIcon, PhotoIcon, PlusIcon, Squares2X2Icon, XMarkIcon } from '../components/icons';
 
@@ -21,9 +21,11 @@ function ImagePicker({label,value,onChange,password,setStatus}){
 export default function Home(){
  const [session,setSession]=useState(null);
  const [data,setData]=useState(empty),[sha,setSha]=useState(''),[section,setSection]=useState('dashboard'),[open,setOpen]=useState(false),[status,setStatus]=useState('Chargement…'),[busy,setBusy]=useState(false);
+ const publishLocked=useRef(false);
  useEffect(()=>{fetch('/api/auth/session').then(r=>r.json()).then(j=>{setSession(j);if(j.authenticated){setSection(j.role==='fidelity'?'loyalty':'dashboard');if(j.role!=='fidelity')load()}}).catch(()=>setSession({authenticated:false}))},[]);
  async function load(){setBusy(true);setStatus('Chargement du site…');try{const r=await fetch('/api/content',{headers:{}});const j=await r.json();if(!r.ok)throw new Error(j.error);setData({...empty,...j.content,club:{...empty.club,...j.content?.club}});setSha(j.sha);setStatus('Contenu réel du site chargé');}catch(e){setStatus(e.message)}finally{setBusy(false)}}
- async function save(){setBusy(true);setStatus('Publication en cours…');try{const r=await fetch('/api/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:data,sha})});const j=await r.json();if(!r.ok)throw new Error(j.error);setSha(j.sha);setStatus('Enregistré dans GitHub — Vercel republie le site');}catch(e){setStatus(e.message)}finally{setBusy(false)}}
+ async function publish(notification=null){if(publishLocked.current)return null;publishLocked.current=true;setBusy(true);setStatus(notification?'Publication puis notification en cours…':'Publication en cours…');try{const r=await fetch('/api/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:data,sha,...(notification?{notification}:{})})});const j=await r.json();if(j.sha)setSha(j.sha);if(!r.ok)throw new Error(j.error);setStatus(j.changed?'Contenu publié et vérifié sur le site public.':'Le site public est déjà à jour.');return j}catch(e){setStatus(e.message);throw e}finally{publishLocked.current=false;setBusy(false)}}
+ async function save(){try{await publish()}catch{}}
  const patch=(key,val)=>setData(d=>({...d,[key]:val}));
  const count=useMemo(()=>data.menu.reduce((n,c)=>n+(c.items?.length||0),0),[data.menu]);
  const visibleNav=nav.filter(([id])=>(roleSections[session?.role]||[]).includes(id));
@@ -40,7 +42,7 @@ export default function Home(){
  {section==='events'&&<><Card><div className="section-heading"><h2>Événements</h2><button className="secondary-button" onClick={()=>patch('events',[...data.events,{title:'Nouvel événement',date:'',time:'',description:'',price:'',image:''}])}><PlusIcon/>Créer</button></div></Card>{data.events.map((e,i)=><Card className="top-gap" key={i}><div className="form-grid"><Field label="Titre" value={e.title} onChange={v=>{const a=[...data.events];a[i]={...e,title:v};patch('events',a)}}/><Field label="Date" value={e.date} onChange={v=>{const a=[...data.events];a[i]={...e,date:v};patch('events',a)}}/><Field label="Heure" value={e.time} onChange={v=>{const a=[...data.events];a[i]={...e,time:v};patch('events',a)}}/><Field label="Prix" value={e.price} onChange={v=>{const a=[...data.events];a[i]={...e,price:v};patch('events',a)}}/><Field label="Description" multi value={e.description} onChange={v=>{const a=[...data.events];a[i]={...e,description:v};patch('events',a)}}/><ImagePicker label="Photo" value={e.image} password={''} setStatus={setStatus} onChange={v=>{const a=[...data.events];a[i]={...e,image:v};patch('events',a)}}/></div><button className="danger-link" onClick={()=>patch('events',data.events.filter((_,x)=>x!==i))}>Supprimer</button></Card>)}</>}
  {section==='loyalty'&&<ClubOperations/>}
  {section==='promotions'&&<Promotions/>}
- {section==='notifications'&&<Notifications/>}
+ {section==='notifications'&&<Notifications onPublishAndNotify={notification=>publish(notification)}/>}
  {section==='club'&&<ClubOperations/>}
  {section==='club-settings'&&<Card><h2>Club LBDC</h2><div className="form-grid"><Field label="Titre" value={data.club.title} onChange={v=>patch('club',{...data.club,title:v})}/><Field label="Nombre d’achats nécessaires" type="number" value={data.club.stampsRequired} onChange={v=>patch('club',{...data.club,stampsRequired:Number(v)})}/><Field label="Récompense" value={data.club.reward} onChange={v=>patch('club',{...data.club,reward:v})}/><Field label="Introduction" multi value={data.club.intro} onChange={v=>patch('club',{...data.club,intro:v})}/><Field label="Conditions" multi value={data.club.conditions} onChange={v=>patch('club',{...data.club,conditions:v})}/></div><p className="muted">Les données du Club sont désormais enregistrées dans le fichier du site. L’affichage public du module sera raccordé dans la prochaine mise à jour du site.</p></Card>}
  {section==='privatization'&&<Card><h2>Privatisation</h2><div className="form-grid"><Field label="Titre" value={data.privatization.title} onChange={v=>patch('privatization',{...data.privatization,title:v})}/><Field label="Introduction" value={data.privatization.intro} onChange={v=>patch('privatization',{...data.privatization,intro:v})}/><Field label="Texte" multi value={data.privatization.text} onChange={v=>patch('privatization',{...data.privatization,text:v})}/></div></Card>}
