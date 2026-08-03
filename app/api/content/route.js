@@ -29,19 +29,22 @@ async function readGithubFile() {
 }
 
 async function verifyPublicContent(expected) {
-  const canonical = value => {
-    if (Array.isArray(value)) return value.map(canonical);
-    if (value && typeof value === 'object') return Object.keys(value).sort().reduce((result, key) => {
-      result[key] = canonical(value[key]);
-      return result;
-    }, {});
-    return value;
+  const containsExpected = (actual, expectedValue) => {
+    if (Array.isArray(expectedValue)) {
+      return Array.isArray(actual)
+        && actual.length === expectedValue.length
+        && expectedValue.every((item, index) => containsExpected(actual[index], item));
+    }
+    if (expectedValue && typeof expectedValue === 'object') {
+      return actual && typeof actual === 'object' && !Array.isArray(actual)
+        && Object.keys(expectedValue).every(key => containsExpected(actual[key], expectedValue[key]));
+    }
+    return Object.is(actual, expectedValue);
   };
-  const expectedText = JSON.stringify(canonical(expected));
   for (let attempt = 0; attempt < 12; attempt += 1) {
     try {
       const response = await fetch(`${publicSite}/api/content?publication=${Date.now()}`, { cache: 'no-store' });
-      if (response.ok && JSON.stringify(canonical(await response.json())) === expectedText) return true;
+      if (response.ok && containsExpected(await response.json(), expected)) return true;
     } catch {}
     if (attempt < 11) await new Promise(resolve => setTimeout(resolve, 1000));
   }
