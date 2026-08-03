@@ -17,6 +17,20 @@ const addCandidate = (candidates, value) => {
   const candidate = usableCode(value);
   if (candidate && !candidates.includes(candidate)) candidates.push(candidate);
 };
+function extractLoyaltyUuid(value) {
+  const trimmed = String(value || '').trim();
+  if (!trimmed) return '';
+  try {
+    const url = new URL(trimmed);
+    const segments = url.pathname.split('/').filter(Boolean);
+    const fideliteIndex = segments.findIndex((segment) => segment.toLocaleLowerCase('fr-FR') === 'fidelite' || segment.toLocaleLowerCase('fr-FR') === 'fidélité');
+    if (fideliteIndex === -1) return '';
+    const candidate = segments[fideliteIndex + 1] || '';
+    return isUuid(candidate) ? candidate : '';
+  } catch {
+    return '';
+  }
+}
 
 function extractCodes(value) {
   const raw = String(value || '').trim();
@@ -41,6 +55,8 @@ function extractCodes(value) {
 
   addCandidateValue(raw);
   addCandidateValue(decode(raw));
+  const loyaltyUuid = extractLoyaltyUuid(raw);
+  if (loyaltyUuid) addCandidateValue(loyaltyUuid);
   tryParseUrl(raw);
 
   const plainSegments = decode(raw)
