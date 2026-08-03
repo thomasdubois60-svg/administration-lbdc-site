@@ -170,7 +170,7 @@ function getValueByPath(value, path) {
   return path.split('.').reduce((current, key) => (current && current[key] !== undefined ? current[key] : undefined), value);
 }
 
-async function verifyPublicContent(expected) {
+function buildSuccessSummary(actual, expected) {
   const normalizedExpected = normalizeContent(expected);
   const checks = [
     ['heroImage', normalizedExpected.heroImage],
@@ -180,21 +180,28 @@ async function verifyPublicContent(expected) {
     ['menu', normalizedExpected.menu],
     ['story.paragraphs', normalizedExpected.story.paragraphs]
   ];
+  const matched = checks.filter(([path, expectedValue]) => {
+    const actualValue = getValueByPath(actual, path);
+    return JSON.stringify(actualValue) === JSON.stringify(expectedValue);
+  }).length;
+  return {
+    matched,
+    total: checks.length,
+    success: matched === checks.length
+  };
+}
+
+async function verifyPublicContent(expected) {
   for (let attempt = 0; attempt < 12; attempt += 1) {
     try {
       const response = await fetch(`${publicSite}/api/content?publication=${Date.now()}`, { cache: 'no-store' });
-      if (response.ok) {
-        const actual = await response.json();
-        const matches = checks.every(([path, expectedValue]) => {
-          const actualValue = getValueByPath(actual, path);
-          return JSON.stringify(actualValue) === JSON.stringify(expectedValue);
-        });
-        if (matches) return true;
-      }
+      if (!response.ok) continue;
+      const actual = await response.json();
+      if (buildSuccessSummary(actual, expected).success) return { success: true, summary: buildSuccessSummary(actual, expected) };
     } catch {}
     if (attempt < 11) await new Promise(resolve => setTimeout(resolve, 1000));
   }
-  return false;
+  return { success: false, summary: null };
 }
 
 export async function GET(request) {
@@ -244,18 +251,19 @@ export async function PUT(request) {
     }
 
     const published = await verifyPublicContent(normalizedContent);
-    if (!published) {
+    if (!published.success) {
       return NextResponse.json({
-        error: 'Le contenu est enregistré dans GitHub, mais sa lecture par le site public n’a pas pu être confirmée. Vérifie le déploiement Vercel avant de recommencer.',
+        error: 'La publication GitHub a bien été enregistrée, mais la vérification de lecture sur le site public n’a pas encore confirmé l’affichage. Le contenu peut déjà être disponible après quelques secondes.',
         saved: true,
         changed,
-        sha
+        sha,
+        published: false
       }, { status: 502 });
     }
 
     let notification = null;
     if (body.notification) notification = await sendNotification(body.notification);
-    return NextResponse.json({ ok: true, saved: true, published: true, changed, sha, notification });
+    return NextResponse.json({ ok: true, saved: true, published: true, changed, sha, notification, verification: published.summary });
   } catch (error) {
     return NextResponse.json({ error: error.message || 'Publication impossible.' }, { status: 500 });
   }
