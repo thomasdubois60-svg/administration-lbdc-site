@@ -21,26 +21,35 @@ const addCandidate = (candidates, value) => {
 function extractCodes(value) {
   const raw = String(value || '').trim();
   if (!raw) return [];
-  try {
-    const url = new URL(raw);
-    const candidates = [];
-    const hash = decode(url.hash.slice(1)).trim();
-    const hashQuery = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : hash.replace(/^\?/, '');
-    const hashParameters = hashQuery.includes('=') ? new URLSearchParams(hashQuery) : null;
-    for (const parameter of qrParameters) {
-      addCandidate(candidates, url.searchParams.get(parameter));
-      addCandidate(candidates, hashParameters?.get(parameter));
-    }
-    if (hash) {
-      const hashCode = lastPathCode(hash);
-      if (hashCode && !hashCode.includes('=')) addCandidate(candidates, hashCode);
-    }
-    addCandidate(candidates, lastPathCode(url.pathname));
-    return candidates;
-  } catch {
-    const candidate = usableCode(raw);
-    return candidate ? [candidate] : [];
-  }
+
+  const candidates = [];
+  const addCandidateValue = (candidate) => addCandidate(candidates, candidate);
+  const tryParseUrl = (input) => {
+    try {
+      const url = new URL(input);
+      const hash = decode(url.hash.slice(1)).trim();
+      const hashQuery = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : hash.replace(/^\?/, '');
+      const hashParameters = hashQuery.includes('=') ? new URLSearchParams(hashQuery) : null;
+      for (const [_, paramValue] of url.searchParams.entries()) addCandidateValue(paramValue);
+      for (const [_, paramValue] of hashParameters?.entries() || []) addCandidateValue(paramValue);
+      addCandidateValue(hash);
+      addCandidateValue(lastPathCode(hash));
+      addCandidateValue(lastPathCode(url.pathname));
+      url.pathname.split('/').filter(Boolean).forEach(addCandidateValue);
+    } catch {}
+  };
+
+  addCandidateValue(raw);
+  addCandidateValue(decode(raw));
+  tryParseUrl(raw);
+
+  const plainSegments = decode(raw)
+    .split(/[/?#=&]+/)
+    .map((segment) => segment.trim())
+    .filter(Boolean);
+  plainSegments.forEach(addCandidateValue);
+
+  return candidates;
 }
 
 function buildMemberSearchFilter(identifier) {
