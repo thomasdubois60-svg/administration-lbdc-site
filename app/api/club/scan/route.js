@@ -52,28 +52,38 @@ function extractCodes(value) {
   return candidates;
 }
 
-function buildMemberSearchFilter(identifier) {
-  const encoded = encodeURIComponent(identifier);
-  if (isUuid(identifier)) return `id=eq.${encoded}`;
-  const clauses = [
-    `personal_code.eq.${encoded}`,
-    `personal_code.ilike.*${encoded}*`,
-    `email.ilike.*${encoded}*`,
-    `first_name.ilike.*${encoded}*`,
-    `last_name.ilike.*${encoded}*`
+function buildIdentifierCandidates(identifier) {
+  const trimmed = String(identifier || '').trim();
+  if (!trimmed) return [];
+  if (isUuid(trimmed)) return [{ field: 'id', value: trimmed }];
+
+  const candidates = [
+    { field: 'personal_code', value: trimmed },
+    { field: 'code', value: trimmed },
+    { field: 'email', value: trimmed }
   ];
-  const tokens = identifier.split(/\s+/).filter(Boolean);
-  tokens.forEach((token) => {
-    const tokenEncoded = encodeURIComponent(token);
-    clauses.push(`first_name.ilike.*${tokenEncoded}*`, `last_name.ilike.*${tokenEncoded}*`);
-  });
-  return `or=(${clauses.join(',')})`;
+
+  const tokens = trimmed.split(/\s+/).filter(Boolean);
+  if (tokens.length > 1) {
+    candidates.push({ field: 'first_name', value: tokens[0] });
+    candidates.push({ field: 'last_name', value: tokens[tokens.length - 1] });
+  } else {
+    candidates.push({ field: 'first_name', value: trimmed });
+    candidates.push({ field: 'last_name', value: trimmed });
+  }
+
+  return candidates;
 }
 
 async function findMember(identifier) {
-  const filter = buildMemberSearchFilter(identifier);
-  const members = await sb(`${tables.members}?${filter}&select=id&limit=1`);
-  return members[0] || null;
+  const candidates = buildIdentifierCandidates(identifier);
+  for (const candidate of candidates) {
+    const encoded = encodeURIComponent(candidate.value);
+    const filter = `${candidate.field}=eq.${encoded}`;
+    const members = await sb(`${tables.members}?${filter}&select=id&limit=1`);
+    if (members[0]) return members[0];
+  }
+  return null;
 }
 
 export async function POST(request) {

@@ -12,16 +12,10 @@ function buildSearchFilter(query) {
   if (isUuid(query)) return `&id=eq.${encoded}`;
   const clauses = [
     `personal_code.eq.${encoded}`,
-    `personal_code.ilike.*${encoded}*`,
-    `email.ilike.*${encoded}*`,
-    `first_name.ilike.*${encoded}*`,
-    `last_name.ilike.*${encoded}*`
+    `email.eq.${encoded}`,
+    `first_name.eq.${encoded}`,
+    `last_name.eq.${encoded}`
   ];
-  const tokens = query.split(/\s+/).filter(Boolean);
-  tokens.forEach((token) => {
-    const tokenEncoded = encodeURIComponent(token);
-    clauses.push(`first_name.ilike.*${tokenEncoded}*`, `last_name.ilike.*${tokenEncoded}*`);
-  });
   return `&or=(${clauses.join(',')})`;
 }
 
