@@ -43,15 +43,28 @@ function extractCodes(value) {
   }
 }
 
-const missingCodeColumn = (error) => /(?:column.*\bcode\b|\bcode\b.*column|schema cache)/i.test(error.message || '');
-async function findExact(field, identifier, optional = false) {
-  try {
-    const members = await sb(`${tables.members}?${field}=eq.${encodeURIComponent(identifier)}&select=id&limit=1`);
-    return members[0] || null;
-  } catch (error) {
-    if (optional && missingCodeColumn(error)) return null;
-    throw error;
-  }
+function buildMemberSearchFilter(identifier) {
+  const encoded = encodeURIComponent(identifier);
+  if (isUuid(identifier)) return `id=eq.${encoded}`;
+  const clauses = [
+    `personal_code.eq.${encoded}`,
+    `personal_code.ilike.*${encoded}*`,
+    `email.ilike.*${encoded}*`,
+    `first_name.ilike.*${encoded}*`,
+    `last_name.ilike.*${encoded}*`
+  ];
+  const tokens = identifier.split(/\s+/).filter(Boolean);
+  tokens.forEach((token) => {
+    const tokenEncoded = encodeURIComponent(token);
+    clauses.push(`first_name.ilike.*${tokenEncoded}*`, `last_name.ilike.*${tokenEncoded}*`);
+  });
+  return `or=(${clauses.join(',')})`;
+}
+
+async function findMember(identifier) {
+  const filter = buildMemberSearchFilter(identifier);
+  const members = await sb(`${tables.members}?${filter}&select=id&limit=1`);
+  return members[0] || null;
 }
 
 export async function POST(request) {
@@ -61,13 +74,8 @@ export async function POST(request) {
     const identifiers = extractCodes(value);
     if (!identifiers.length) return NextResponse.json({ error: 'QR Code ou code membre vide' }, { status: 400 });
     for (const identifier of identifiers) {
-      const fields = isUuid(identifier)
-        ? ['id', 'personal_code', 'code']
-        : ['personal_code', 'code', ...(isEmail(identifier) ? ['email'] : [])];
-      for (const field of fields) {
-        const member = await findExact(field, identifier, field === 'code');
-        if (member) return NextResponse.json({ member, stamped: false });
-      }
+      const member = await findMember(identifier);
+      if (member) return NextResponse.json({ member, stamped: false });
     }
     return NextResponse.json({ error: 'Aucun membre ne correspond à ce code' }, { status: 404 });
   } catch (error) { return NextResponse.json({ error: error.message }, { status: 500 }); }
