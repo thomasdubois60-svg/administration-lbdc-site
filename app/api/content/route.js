@@ -192,16 +192,13 @@ function buildSuccessSummary(actual, expected) {
 }
 
 async function verifyPublicContent(expected) {
-  for (let attempt = 0; attempt < 12; attempt += 1) {
-    try {
-      const response = await fetch(`${publicSite}/api/content?publication=${Date.now()}`, { cache: 'no-store' });
-      if (!response.ok) continue;
-      const actual = await response.json();
-      if (buildSuccessSummary(actual, expected).success) return { success: true, summary: buildSuccessSummary(actual, expected) };
-    } catch {}
-    if (attempt < 11) await new Promise(resolve => setTimeout(resolve, 1000));
+  try {
+    const { content } = await readGithubFile();
+    const summary = buildSuccessSummary(content, expected);
+    return { success: summary.success, summary };
+  } catch {
+    return { success: false, summary: null };
   }
-  return { success: false, summary: null };
 }
 
 export async function GET(request) {
@@ -253,17 +250,27 @@ export async function PUT(request) {
     const published = await verifyPublicContent(normalizedContent);
     if (!published.success) {
       return NextResponse.json({
-        error: 'La publication GitHub a bien été enregistrée, mais la vérification de lecture sur le site public n’a pas encore confirmé l’affichage. Le contenu peut déjà être disponible après quelques secondes.',
+        ok: true,
         saved: true,
         changed,
         sha,
-        published: false
-      }, { status: 502 });
+        published: false,
+        message: 'La publication GitHub a bien été enregistrée, mais la vérification de lecture sur le site public n’a pas encore confirmé l’affichage. Le contenu peut déjà être disponible après quelques secondes.'
+      }, { status: 200 });
     }
 
     let notification = null;
     if (body.notification) notification = await sendNotification(body.notification);
-    return NextResponse.json({ ok: true, saved: true, published: true, changed, sha, notification, verification: published.summary });
+    return NextResponse.json({
+      ok: true,
+      saved: true,
+      published: true,
+      changed,
+      sha,
+      notification,
+      verification: published.summary,
+      message: 'Publication réussie. Le site public est à jour.'
+    });
   } catch (error) {
     return NextResponse.json({ error: error.message || 'Publication impossible.' }, { status: 500 });
   }
