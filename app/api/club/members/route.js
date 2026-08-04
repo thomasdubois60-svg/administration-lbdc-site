@@ -6,6 +6,18 @@ const allowed = [ROLES.FIDELITY, ROLES.EMPLOYEE, ROLES.MANAGER, ROLES.ADMIN];
 const clean = (value) => String(value || '').replace(/[,*()]/g, ' ').trim();
 const isUuid = (value) => /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(value);
 const memberName = (member) => [member.first_name, member.last_name].filter(Boolean).join(' ') || member.email || member.personal_code;
+function buildSearchFilter(query) {
+  if (!query) return '';
+  const encoded = encodeURIComponent(query);
+  if (isUuid(query)) return `&id=eq.${encoded}`;
+  const clauses = [
+    `personal_code.eq.${encoded}`,
+    `email.eq.${encoded}`,
+    `first_name.eq.${encoded}`,
+    `last_name.eq.${encoded}`
+  ];
+  return `&or=(${clauses.join(',')})`;
+}
 
 export async function GET(request) {
   if (!hasAnyRole(request, allowed)) return NextResponse.json({ error: 'Accès Fidélité requis' }, { status: 403 });
@@ -13,12 +25,7 @@ export async function GET(request) {
   const page = Math.max(0, Number(request.nextUrl.searchParams.get('page')) || 0);
   const pageSize = Math.min(100, Math.max(1, Number(request.nextUrl.searchParams.get('limit')) || 50));
   try {
-    const encoded = encodeURIComponent(query);
-    const filter = !query
-      ? ''
-      : isUuid(query)
-        ? `&id=eq.${encoded}`
-        : `&or=(personal_code.ilike.*${encoded}*,email.ilike.*${encoded}*,first_name.ilike.*${encoded}*,last_name.ilike.*${encoded}*)`;
+    const filter = buildSearchFilter(query);
     const rows = await sb(`${tables.members}?select=id,personal_code,first_name,last_name,email,birthday,loyalty_points,reward_available,created_at,updated_at&order=created_at.desc&offset=${page * pageSize}&limit=${pageSize}${filter}`);
     const ids = rows.map((member) => member.id);
     let events = [], coupons = [];

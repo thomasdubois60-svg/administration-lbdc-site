@@ -1,13 +1,40 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Login, ClubOperations, Promotions, Notifications, LiveDashboard } from '../components/Operations';
 import { Bars3Icon, BuildingStorefrontIcon, CalendarDaysIcon, ClockIcon, HomeIcon, InformationCircleIcon, PhotoIcon, PlusIcon, Squares2X2Icon, XMarkIcon } from '../components/icons';
 
 const SITE='https://lebistrotducoin.vercel.app';
 const nav=[['dashboard','Tableau de bord',Squares2X2Icon],['daily','Menu du jour',CalendarDaysIcon],['menu','Carte',BuildingStorefrontIcon],['events','Événements',CalendarDaysIcon],['club','Club LBDC',InformationCircleIcon],['loyalty','Scanner fidélité',InformationCircleIcon],['promotions','Promotions',InformationCircleIcon],['notifications','Notifications',InformationCircleIcon],['club-settings','Réglages fidélité',InformationCircleIcon],['privatization','Privatisation',HomeIcon],['story','Notre histoire',InformationCircleIcon],['reviews','Avis et réseaux',InformationCircleIcon],['general','Informations et horaires',ClockIcon],['gallery','Galerie',PhotoIcon]];
 const roleSections={fidelity:['loyalty'],employee:['dashboard','club','loyalty'],manager:['dashboard','daily','menu','events','club','loyalty','promotions','club-settings','privatization','story','reviews','general','gallery'],admin:nav.map(([id])=>id)};
-const empty={general:{},pageTexts:{},daily:{formulas:[],starters:[],mains:[],desserts:[],suggestion:{}},menu:[],gallery:[],story:{paragraphs:[]},privatization:{photos:[]},events:[],reviews:{},socials:[],club:{title:'Club LBDC',intro:'',stampsRequired:10,reward:'La 11e formule offerte',conditions:'',enabled:true}};
+const publicContentShape={heroImage:'',general:{phone:'',phoneHref:'',email:'',address:'',hours:'',closureEnabled:false,closureMessage:'',analyticsUrl:''},pageTexts:{homeSlogan:'',todayIntro:'',menuIntro:'',galleryIntro:'',contactIntro:'',eventsIntro:'',reviewsIntro:''},daily:{dateLabel:'',startersTitle:'',mainsTitle:'',dessertsTitle:'',suggestionSupplementText:'',formulas:[],starters:[],mains:[],suggestion:{name:'',description:'',price:''},desserts:[]},menu:[],gallery:[],story:{eyebrow:'',title:'',intro:'',paragraphs:[],quote:'',image:'',imageAlt:''},privatization:{title:'',intro:'',text:'',photos:[]},events:[],reviews:{title:'',intro:'',googleReviewsUrl:'',googleReviewWriteUrl:''},socials:[]};
+const empty={...publicContentShape,club:{title:'Club LBDC',intro:'',stampsRequired:10,reward:'La 11e formule offerte',conditions:'',enabled:true}};
 const Field=({label,value,onChange,multi=false,type='text'})=><label className="field"><span>{label}</span>{multi?<textarea rows="4" value={value??''} onChange={e=>onChange(e.target.value)}/>:<input type={type} value={value??''} onChange={e=>onChange(e.target.value)}/>}</label>;
+function buildPublicContentPayload(source={}){
+ const value=source&&typeof source==='object'&&!Array.isArray(source)?source:{};
+ const {club,...rest}=value;
+ const dailySource=rest.daily&&typeof rest.daily==='object'&&!Array.isArray(rest.daily)?rest.daily:{};
+ return {
+  heroImage:typeof rest.heroImage==='string'?rest.heroImage:publicContentShape.heroImage,
+  general:{...publicContentShape.general,...(rest.general&&typeof rest.general==='object'&&!Array.isArray(rest.general)?rest.general:{})},
+  pageTexts:{...publicContentShape.pageTexts,...(rest.pageTexts&&typeof rest.pageTexts==='object'&&!Array.isArray(rest.pageTexts)?rest.pageTexts:{})},
+  daily:{
+   ...publicContentShape.daily,
+   ...dailySource,
+   formulas:Array.isArray(dailySource.formulas)&&dailySource.formulas.length?dailySource.formulas:publicContentShape.daily.formulas,
+   starters:Array.isArray(dailySource.starters)&&dailySource.starters.length?dailySource.starters:publicContentShape.daily.starters,
+   mains:Array.isArray(dailySource.mains)&&dailySource.mains.length?dailySource.mains:publicContentShape.daily.mains,
+   desserts:Array.isArray(dailySource.desserts)&&dailySource.desserts.length?dailySource.desserts:publicContentShape.daily.desserts,
+   suggestion:{...publicContentShape.daily.suggestion,...(dailySource.suggestion&&typeof dailySource.suggestion==='object'&&!Array.isArray(dailySource.suggestion)?dailySource.suggestion:{})}
+  },
+  menu:Array.isArray(rest.menu)?rest.menu:publicContentShape.menu,
+  gallery:Array.isArray(rest.gallery)?rest.gallery:publicContentShape.gallery,
+  story:{...publicContentShape.story,...(rest.story&&typeof rest.story==='object'&&!Array.isArray(rest.story)?rest.story:{}),paragraphs:Array.isArray(rest.story?.paragraphs)&&rest.story.paragraphs.length?rest.story.paragraphs:publicContentShape.story.paragraphs},
+  privatization:{...publicContentShape.privatization,...(rest.privatization&&typeof rest.privatization==='object'&&!Array.isArray(rest.privatization)?rest.privatization:{}),photos:Array.isArray(rest.privatization?.photos)&&rest.privatization.photos.length?rest.privatization.photos:publicContentShape.privatization.photos},
+  events:Array.isArray(rest.events)?rest.events:publicContentShape.events,
+  reviews:{...publicContentShape.reviews,...(rest.reviews&&typeof rest.reviews==='object'&&!Array.isArray(rest.reviews)?rest.reviews:{})},
+  socials:Array.isArray(rest.socials)?rest.socials:publicContentShape.socials
+ };
+}
 const Card=({children,className=''})=><section className={`card ${className}`}>{children}</section>;
 const move=(arr,from,to)=>{if(to<0||to>=arr.length)return arr;const copy=[...arr];const [x]=copy.splice(from,1);copy.splice(to,0,x);return copy};
 
@@ -21,9 +48,11 @@ function ImagePicker({label,value,onChange,password,setStatus}){
 export default function Home(){
  const [session,setSession]=useState(null);
  const [data,setData]=useState(empty),[sha,setSha]=useState(''),[section,setSection]=useState('dashboard'),[open,setOpen]=useState(false),[status,setStatus]=useState('Chargement…'),[busy,setBusy]=useState(false);
+ const publishLocked=useRef(false);
  useEffect(()=>{fetch('/api/auth/session').then(r=>r.json()).then(j=>{setSession(j);if(j.authenticated){setSection(j.role==='fidelity'?'loyalty':'dashboard');if(j.role!=='fidelity')load()}}).catch(()=>setSession({authenticated:false}))},[]);
  async function load(){setBusy(true);setStatus('Chargement du site…');try{const r=await fetch('/api/content',{headers:{}});const j=await r.json();if(!r.ok)throw new Error(j.error);setData({...empty,...j.content,club:{...empty.club,...j.content?.club}});setSha(j.sha);setStatus('Contenu réel du site chargé');}catch(e){setStatus(e.message)}finally{setBusy(false)}}
- async function save(){setBusy(true);setStatus('Publication en cours…');try{const r=await fetch('/api/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:data,sha})});const j=await r.json();if(!r.ok)throw new Error(j.error);setSha(j.sha);setStatus('Enregistré dans GitHub — Vercel republie le site');}catch(e){setStatus(e.message)}finally{setBusy(false)}}
+ async function publish(notification=null){if(publishLocked.current)return null;publishLocked.current=true;setBusy(true);setStatus(notification?'Publication puis notification en cours…':'Publication en cours…');try{const payload=buildPublicContentPayload(data);const r=await fetch('/api/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:payload,sha,...(notification?{notification}:{})})});const j=await r.json();if(j.sha)setSha(j.sha);if(!r.ok)throw new Error(j.error);setStatus(j.changed?'Contenu publié et vérifié sur le site public.':'Le site public est déjà à jour.');return j}catch(e){setStatus(e.message);throw e}finally{publishLocked.current=false;setBusy(false)}}
+ async function save(){try{await publish()}catch{}}
  const patch=(key,val)=>setData(d=>({...d,[key]:val}));
  const count=useMemo(()=>data.menu.reduce((n,c)=>n+(c.items?.length||0),0),[data.menu]);
  const visibleNav=nav.filter(([id])=>(roleSections[session?.role]||[]).includes(id));
@@ -40,7 +69,7 @@ export default function Home(){
  {section==='events'&&<><Card><div className="section-heading"><h2>Événements</h2><button className="secondary-button" onClick={()=>patch('events',[...data.events,{title:'Nouvel événement',date:'',time:'',description:'',price:'',image:''}])}><PlusIcon/>Créer</button></div></Card>{data.events.map((e,i)=><Card className="top-gap" key={i}><div className="form-grid"><Field label="Titre" value={e.title} onChange={v=>{const a=[...data.events];a[i]={...e,title:v};patch('events',a)}}/><Field label="Date" value={e.date} onChange={v=>{const a=[...data.events];a[i]={...e,date:v};patch('events',a)}}/><Field label="Heure" value={e.time} onChange={v=>{const a=[...data.events];a[i]={...e,time:v};patch('events',a)}}/><Field label="Prix" value={e.price} onChange={v=>{const a=[...data.events];a[i]={...e,price:v};patch('events',a)}}/><Field label="Description" multi value={e.description} onChange={v=>{const a=[...data.events];a[i]={...e,description:v};patch('events',a)}}/><ImagePicker label="Photo" value={e.image} password={''} setStatus={setStatus} onChange={v=>{const a=[...data.events];a[i]={...e,image:v};patch('events',a)}}/></div><button className="danger-link" onClick={()=>patch('events',data.events.filter((_,x)=>x!==i))}>Supprimer</button></Card>)}</>}
  {section==='loyalty'&&<ClubOperations/>}
  {section==='promotions'&&<Promotions/>}
- {section==='notifications'&&<Notifications/>}
+ {section==='notifications'&&<Notifications onPublishAndNotify={notification=>publish(notification)}/>}
  {section==='club'&&<ClubOperations/>}
  {section==='club-settings'&&<Card><h2>Club LBDC</h2><div className="form-grid"><Field label="Titre" value={data.club.title} onChange={v=>patch('club',{...data.club,title:v})}/><Field label="Nombre d’achats nécessaires" type="number" value={data.club.stampsRequired} onChange={v=>patch('club',{...data.club,stampsRequired:Number(v)})}/><Field label="Récompense" value={data.club.reward} onChange={v=>patch('club',{...data.club,reward:v})}/><Field label="Introduction" multi value={data.club.intro} onChange={v=>patch('club',{...data.club,intro:v})}/><Field label="Conditions" multi value={data.club.conditions} onChange={v=>patch('club',{...data.club,conditions:v})}/></div><p className="muted">Les données du Club sont désormais enregistrées dans le fichier du site. L’affichage public du module sera raccordé dans la prochaine mise à jour du site.</p></Card>}
  {section==='privatization'&&<Card><h2>Privatisation</h2><div className="form-grid"><Field label="Titre" value={data.privatization.title} onChange={v=>patch('privatization',{...data.privatization,title:v})}/><Field label="Introduction" value={data.privatization.intro} onChange={v=>patch('privatization',{...data.privatization,intro:v})}/><Field label="Texte" multi value={data.privatization.text} onChange={v=>patch('privatization',{...data.privatization,text:v})}/></div></Card>}
