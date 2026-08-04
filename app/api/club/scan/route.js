@@ -4,71 +4,66 @@ import { sb, tables } from '../../../../lib/supabase';
 
 const allowed = [ROLES.FIDELITY, ROLES.EMPLOYEE, ROLES.MANAGER, ROLES.ADMIN];
 const isUuid = (value) => /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(value);
-const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-const qrParameters = ['id', 'memberId', 'member', 'code', 'personal_code', 'email'];
-const genericSegments = new Set(['club', 'fidélité', 'fidelite', 'membre', 'member', 'carte']);
 const decode = (value) => { try { return decodeURIComponent(value); } catch { return value; } };
-const usableCode = (value) => {
-  const code = decode(String(value || '')).trim();
-  return code && !genericSegments.has(code.toLocaleLowerCase('fr-FR')) ? code : '';
-};
-const lastPathCode = (value) => usableCode(String(value || '').split('?')[0].split('/').filter(Boolean).pop());
-const addCandidate = (candidates, value) => {
-  const candidate = usableCode(value);
-  if (candidate && !candidates.includes(candidate)) candidates.push(candidate);
-};
 
-function extractCodes(value) {
-  const raw = String(value || '').trim();
-  if (!raw) return [];
-  try {
-    const url = new URL(raw);
-    const candidates = [];
-    const hash = decode(url.hash.slice(1)).trim();
-    const hashQuery = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : hash.replace(/^\?/, '');
-    const hashParameters = hashQuery.includes('=') ? new URLSearchParams(hashQuery) : null;
-    for (const parameter of qrParameters) {
-      addCandidate(candidates, url.searchParams.get(parameter));
-      addCandidate(candidates, hashParameters?.get(parameter));
-    }
-    if (hash) {
-      const hashCode = lastPathCode(hash);
-      if (hashCode && !hashCode.includes('=')) addCandidate(candidates, hashCode);
-    }
-    addCandidate(candidates, lastPathCode(url.pathname));
-    return candidates;
-  } catch {
-    const candidate = usableCode(raw);
-    return candidate ? [candidate] : [];
-  }
+function extractIdentifier(value) {
+  const raw = decode(String(value || '')).trim();
+  if (!raw) return '';
+
+  const loyaltyPath = raw.match(/\/fid(?:e|é)lite\/(.+?)(?:[?#]|$)/i);
+  if (!loyaltyPath) return raw;
+
+  return decode(loyaltyPath[1]).split('/').filter(Boolean).pop()?.trim() || '';
 }
 
-const missingCodeColumn = (error) => /(?:column.*\bcode\b|\bcode\b.*column|schema cache)/i.test(error.message || '');
-async function findExact(field, identifier, optional = false) {
-  try {
-    const members = await sb(`${tables.members}?${field}=eq.${encodeURIComponent(identifier)}&select=id&limit=1`);
-    return members[0] || null;
-  } catch (error) {
-    if (optional && missingCodeColumn(error)) return null;
-    throw error;
+function buildIdentifierCandidates(identifier) {
+  const trimmed = String(identifier || '').trim();
+  if (!trimmed) return [];
+
+  const candidates = [
+    { field: 'personal_code', value: trimmed }
+  ];
+
+  if (isUuid(trimmed)) {
+    candidates.push({ field: 'code', value: trimmed });
+    candidates.push({ field: 'id', value: trimmed });
+    candidates.push({ field: 'email', value: trimmed });
+    return candidates;
   }
+
+  candidates.push({ field: 'email', value: trimmed });
+
+  const tokens = trimmed.split(/\s+/).filter(Boolean);
+  if (tokens.length > 1) {
+    candidates.push({ field: 'first_name', value: tokens[0] });
+    candidates.push({ field: 'last_name', value: tokens[tokens.length - 1] });
+  } else {
+    candidates.push({ field: 'first_name', value: trimmed });
+    candidates.push({ field: 'last_name', value: trimmed });
+  }
+
+  return candidates;
+}
+
+async function findMember(identifier) {
+  const candidates = buildIdentifierCandidates(identifier);
+  for (const candidate of candidates) {
+    const encoded = encodeURIComponent(candidate.value);
+    const filter = `${candidate.field}=eq.${encoded}`;
+    const members = await sb(`${tables.members}?${filter}&select=id&limit=1`);
+    if (members[0]) return members[0];
+  }
+  return null;
 }
 
 export async function POST(request) {
   if (!hasAnyRole(request, allowed)) return NextResponse.json({ error: 'Accès Fidélité requis' }, { status: 403 });
   try {
     const { value } = await request.json();
-    const identifiers = extractCodes(value);
-    if (!identifiers.length) return NextResponse.json({ error: 'QR Code ou code membre vide' }, { status: 400 });
-    for (const identifier of identifiers) {
-      const fields = isUuid(identifier)
-        ? ['id', 'personal_code', 'code']
-        : ['personal_code', 'code', ...(isEmail(identifier) ? ['email'] : [])];
-      for (const field of fields) {
-        const member = await findExact(field, identifier, field === 'code');
-        if (member) return NextResponse.json({ member, stamped: false });
-      }
-    }
+    const identifier = extractIdentifier(value);
+    if (!identifier) return NextResponse.json({ error: 'QR Code ou code membre vide' }, { status: 400 });
+    const member = await findMember(identifier);
+    if (member) return NextResponse.json({ member, stamped: false });
     return NextResponse.json({ error: 'Aucun membre ne correspond à ce code' }, { status: 404 });
   } catch (error) { return NextResponse.json({ error: error.message }, { status: 500 }); }
 }
