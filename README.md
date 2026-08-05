@@ -45,3 +45,4 @@ Le seuil d'une récompense se règle avec `LOYALTY_STAMPS_REQUIRED` (10 par déf
 ## Sécurité
 
 Ne jamais placer `GITHUB_TOKEN`, `SUPABASE_SERVICE_ROLE_KEY`, `VAPID_PRIVATE_KEY` ou `AUTH_SECRET` dans le code ou dans GitHub. Ils doivent rester uniquement dans les variables d'environnement Vercel.
+Déclenchement du déploiement Vercel
