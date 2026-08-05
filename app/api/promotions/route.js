@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { hasRole, ROLES } from '../../../lib/auth';
 import { sb, tables } from '../../../lib/supabase';
 import { ensurePromotionCoupons, listPromotionCoupons } from '../../../lib/promotion-coupons';
+import { decodeProductLabel, encodeProductLabel } from '../../../lib/product-pricing';
+
+const publicPromotion=promotion=>{const product=decodeProductLabel(promotion?.product_label);return{...promotion,product_label:product.label,reference_price_ttc:product.referencePrice,price_customized:product.customPrice}};
 
 function cleanPromotion(value) {
   const title = String(value?.title || '').trim();
@@ -23,7 +26,7 @@ function cleanPromotion(value) {
     end_at: endAt.toISOString(),
     discount_rate: discountRate,
     discount_label: String(value?.discount_label || value?.discountLabel || '').trim(),
-    product_label: String(value?.product_label || value?.productLabel || '').trim(),
+    product_label: encodeProductLabel(value?.product_label || value?.productLabel,value?.reference_price_ttc??value?.referencePrice,Boolean(value?.price_customized??value?.customPrice)),
     active: Boolean(value?.active),
     coupon_enabled: Boolean(value?.coupon_enabled ?? value?.couponEnabled)
   };
@@ -36,7 +39,7 @@ export async function GET(request) {
       sb(`${tables.promotions}?select=*&order=created_at.desc`),
       listPromotionCoupons()
     ]);
-    return NextResponse.json({ promotions, coupons });
+    return NextResponse.json({ promotions:promotions.map(publicPromotion), coupons });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -50,9 +53,9 @@ export async function POST(request) {
     const promotion = rows[0];
     try {
       const coupons = await ensurePromotionCoupons(promotion);
-      return NextResponse.json({ ok: true, promotion, coupons });
+      return NextResponse.json({ ok: true, promotion:publicPromotion(promotion), coupons });
     } catch (error) {
-      return NextResponse.json({ ok: false, reason: 'coupon_sync_failed', promotion, error: error.message }, { status: 207 });
+      return NextResponse.json({ ok: false, reason: 'coupon_sync_failed', promotion:publicPromotion(promotion), error: error.message }, { status: 207 });
     }
   } catch (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 400 });
@@ -73,9 +76,9 @@ export async function PATCH(request) {
     if (!promotion) return NextResponse.json({ ok: false, error: 'Promotion introuvable.' }, { status: 404 });
     try {
       const coupons = await ensurePromotionCoupons(promotion);
-      return NextResponse.json({ ok: true, promotion, coupons });
+      return NextResponse.json({ ok: true, promotion:publicPromotion(promotion), coupons });
     } catch (error) {
-      return NextResponse.json({ ok: false, reason: 'coupon_sync_failed', promotion, error: error.message }, { status: 207 });
+      return NextResponse.json({ ok: false, reason: 'coupon_sync_failed', promotion:publicPromotion(promotion), error: error.message }, { status: 207 });
     }
   } catch (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 400 });
