@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { hasAnyRole, ROLES } from '../../../../../lib/auth';
+import { hasAnyRole, hasRole, ROLES } from '../../../../../lib/auth';
 import { loyalty, sb, tables } from '../../../../../lib/supabase';
 
 const allowed = [ROLES.FIDELITY, ROLES.EMPLOYEE, ROLES.MANAGER, ROLES.ADMIN];
@@ -14,8 +14,8 @@ export async function GET(request, { params }) {
     ]);
     const source = members[0];
     if (!source) return NextResponse.json({ error: 'Membre introuvable' }, { status: 404 });
-    const history = events.slice(0,100).map((event) => ({ ...event, action: event.event_type === 'passage' ? 'stamp' : 'reward' }));
     const coupons = rawCoupons.map((coupon) => ({ ...coupon, code: coupon.token, label: coupon.club_promotions?.title || coupon.product_label || 'Coupon promotionnel', status: coupon.used_at ? 'redeemed' : coupon.expires_at && new Date(coupon.expires_at).getTime() < Date.now() ? 'expired' : 'available', issued_at: coupon.created_at, redeemed_at: coupon.used_at }));
+    const history = [...events.map((event) => ({ ...event, action: event.event_type === 'passage' ? 'stamp' : 'reward' })),...coupons.filter(coupon=>coupon.used_at).map(coupon=>({id:`coupon-${coupon.id}`,action:'coupon',created_at:coupon.used_at,note:coupon.label}))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,100);
     const passages=events.filter((event)=>event.event_type==='passage'),usedCoupons=coupons.filter((coupon)=>coupon.used_at),lastUsedCoupon=usedCoupons.reduce((latest,coupon)=>new Date(coupon.used_at)>new Date(latest?.used_at||0)?coupon:latest,null);
     const member = {
       ...source,
@@ -33,4 +33,9 @@ export async function GET(request, { params }) {
     };
     return NextResponse.json({ member, history, coupons, stampsRequired: loyalty.stampsRequired, rewardLabel: loyalty.rewardLabel });
   } catch (error) { return NextResponse.json({ error: error.message }, { status: 500 }); }
+}
+
+export async function PATCH(request,{params}){
+ if(!hasRole(request,ROLES.MANAGER))return NextResponse.json({error:'Droits Responsable requis'},{status:403});
+ try{const input=await request.json(),birthday=input.birthday?String(input.birthday):null,parsed=birthday?new Date(`${birthday}T12:00:00Z`):null;if(birthday&&(!/^\d{4}-\d{2}-\d{2}$/.test(birthday)||Number.isNaN(parsed.getTime())||parsed.toISOString().slice(0,10)!==birthday))return NextResponse.json({error:'Date de naissance invalide.'},{status:400});const rows=await sb(`${tables.members}?id=eq.${encodeURIComponent(params.id)}`,{method:'PATCH',body:{birthday}});if(!rows[0])return NextResponse.json({error:'Membre introuvable'},{status:404});return NextResponse.json({ok:true,member:rows[0]})}catch(error){return NextResponse.json({error:error.message},{status:400})}
 }

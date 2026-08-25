@@ -1,0 +1,9 @@
+import { NextResponse } from 'next/server';
+import { hasRole, ROLES } from '../../../../lib/auth';
+import { createBirthdayOffer, getBirthdaySettings, saveBirthdaySettings } from '../../../../lib/birthday-offers';
+import { sendMemberNotification } from '../../../../lib/notifications';
+import { sb, tables } from '../../../../lib/supabase';
+
+export async function GET(request){if(!hasRole(request,ROLES.MANAGER))return NextResponse.json({error:'Droits Responsable requis'},{status:403});try{return NextResponse.json({settings:await getBirthdaySettings()})}catch(error){return NextResponse.json({error:error.message},{status:500})}}
+export async function PATCH(request){if(!hasRole(request,ROLES.MANAGER))return NextResponse.json({error:'Droits Responsable requis'},{status:403});try{return NextResponse.json({ok:true,settings:await saveBirthdaySettings(await request.json())})}catch(error){return NextResponse.json({error:error.message},{status:400})}}
+export async function POST(request){if(!hasRole(request,ROLES.MANAGER))return NextResponse.json({error:'Droits Responsable requis'},{status:403});try{const input=await request.json(),memberId=String(input.memberId||''),members=await sb(`${tables.members}?id=eq.${encodeURIComponent(memberId)}&select=id,first_name,last_name,email,birthday&limit=1`),member=members[0];if(!member)return NextResponse.json({error:'Membre introuvable.'},{status:404});const result=await createBirthdayOffer(member,input);let notification=null;if(input.notify&&hasRole(request,ROLES.ADMIN)&&result.created)notification=await sendMemberNotification(member.id,{title:`Joyeux anniversaire ${member.first_name||''} 🎂`,body:'Votre cadeau anniversaire vous attend au Bistrot 🎁',url:'/club/espace',tag:`birthday-${member.id}-${new Date(input.startAt||Date.now()).getFullYear()}`});return NextResponse.json({ok:true,...result,notification})}catch(error){return NextResponse.json({error:error.message},{status:400})}}

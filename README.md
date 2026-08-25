@@ -32,6 +32,7 @@ Cette version reprend directement la V4 déjà en place. Elle conserve la gestio
 - `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` : accès serveur à Supabase.
 - `NEXT_PUBLIC_VAPID_PUBLIC_KEY` et `VAPID_PRIVATE_KEY` : clés du système de notifications déjà utilisé par le site.
 - `VAPID_SUBJECT` : identité VAPID, identique à celle du site public.
+- `CRON_SECRET` : secret aléatoire d’au moins 16 caractères protégeant la création quotidienne des cadeaux anniversaire.
 - `PUBLIC_SITE_URL` : URL du site public utilisée pour confirmer que le contenu publié est réellement relu (`https://lebistrotducoin.vercel.app` par défaut).
 
 Le projet Vercel du site public doit rester connecté à la branche `main` du dépôt `lebistrotducoin`. Chaque mise à jour de `data/site-content.json` déclenche ainsi un seul déploiement Git Vercel. L’administration ne lance pas un second déploiement par webhook.
@@ -41,6 +42,8 @@ Les noms des tables Club sont configurables avec les variables `CLUB_MEMBERS_TAB
 Les identifiants prennent par défaut les valeurs `fidelite`, `employe`, `responsable` et `administrateur` si les variables `*_USERNAME` sont omises. Les quatre mots de passe doivent être différents et rester uniquement dans les variables d'environnement Vercel.
 
 Le seuil d'une récompense se règle avec `LOYALTY_STAMPS_REQUIRED` (10 par défaut) et son libellé avec `LOYALTY_REWARD_LABEL`. Le Club conserve le schéma historique du site public : `club_members.personal_code`, `club_members.loyalty_points`, `club_members.reward_available`, `club_loyalty_events` et `club_promotion_coupons`. Les anciennes données restent prioritaires; les colonnes de compatibilité `code`, `stamps`, `visits`, `rewards_count` et `coupons_available` sont recalculées depuis cet historique et ne remettent jamais la fidélité à zéro.
+
+Le Cron Vercel `/api/cron/birthday-offers` s’exécute chaque jour à 06:00 UTC. Il crée au maximum un coupon anniversaire standard par membre et par année, ciblé par `member_id`. Exécuter la migration `supabase/admin-v5.sql` avant d’activer cette automatisation.
 
 ## Sécurité
 
