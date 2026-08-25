@@ -17,6 +17,8 @@ const defaultContent = Object.freeze({
     hours: 'Lundi au jeudi : 7h–20h\nVendredi : 7h–15h\nRestauration : 11h45–14h',
     closureEnabled: false,
     closureMessage: 'Le Bistrot est exceptionnellement fermé.',
+    closureStart: '',
+    closureEnd: '',
     analyticsUrl: 'https://vercel.com/dashboard'
   },
   pageTexts: {
