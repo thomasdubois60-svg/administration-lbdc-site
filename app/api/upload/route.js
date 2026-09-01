@@ -11,23 +11,46 @@ function safeName(name) {
   return `${Date.now()}-${stem}.${ext}`;
 }
 
-export async function POST(request) {
-  if (!hasRole(request, ROLES.MANAGER)) return NextResponse.json({ error: 'Droits Responsable requis.' }, { status: 403 });
-  if (!process.env.GITHUB_TOKEN) return NextResponse.json({ error: 'La variable GITHUB_TOKEN manque dans Vercel.' }, { status: 500 });
-  const form = await request.formData();
-  const file = form.get('file');
-  if (!file || typeof file === 'string') return NextResponse.json({ error: 'Aucune photo reçue.' }, { status: 400 });
-  if (!file.type?.startsWith('image/')) return NextResponse.json({ error: 'Le fichier doit être une image.' }, { status: 400 });
-  if (file.size > 8 * 1024 * 1024) return NextResponse.json({ error: 'Photo trop lourde (8 Mo maximum).' }, { status: 400 });
-  const filename = safeName(file.name || 'photo.jpg');
+async function storeImage(bytes, name) {
+  const filename = safeName(name);
   const path = `public/photos/${filename}`;
-  const bytes = Buffer.from(await file.arrayBuffer());
   const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
     method: 'PUT',
     headers: { Accept: 'application/vnd.github+json', Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, 'Content-Type': 'application/json', 'User-Agent': 'LBDC-Administration' },
     body: JSON.stringify({ message: `Ajout photo depuis Administration LBDC - ${filename}`, content: bytes.toString('base64'), branch })
   });
   const result = await response.json();
-  if (!response.ok) return NextResponse.json({ error: result.message || 'Échec de l’envoi de la photo.' }, { status: response.status });
-  return NextResponse.json({ ok: true, path: `/photos/${filename}` });
+  if (!response.ok) return { error: result.message || 'Échec de l’envoi de la photo.', status: response.status };
+  return { path: `/photos/${filename}` };
+}
+
+export async function POST(request) {
+  if (!hasRole(request, ROLES.MANAGER)) return NextResponse.json({ error: 'Droits Responsable requis.' }, { status: 403 });
+  if (!process.env.GITHUB_TOKEN) return NextResponse.json({ error: 'La variable GITHUB_TOKEN manque dans Vercel.' }, { status: 500 });
+  if (request.headers.get('content-type')?.includes('application/json')) {
+    const { sourceUrl, title } = await request.json();
+    let url;
+    try { url = new URL(sourceUrl); } catch { return NextResponse.json({ error: 'Adresse de photo invalide.' }, { status: 400 }); }
+    const allowed = url.protocol === 'https:' && (url.hostname.endsWith('.wikimedia.org') || url.hostname.endsWith('.wikimediausercontent.org'));
+    if (!allowed) return NextResponse.json({ error: 'Seules les images Wikimedia Commons peuvent être importées.' }, { status: 400 });
+    const remote = await fetch(url, { headers: { 'User-Agent': 'LBDC-Administration/1.0 image-import' } });
+    if (!remote.ok) return NextResponse.json({ error: 'Téléchargement de la photo impossible.' }, { status: 502 });
+    const type = remote.headers.get('content-type') || '';
+    if (!type.startsWith('image/')) return NextResponse.json({ error: 'La ressource choisie n’est pas une image.' }, { status: 400 });
+    const bytes = Buffer.from(await remote.arrayBuffer());
+    if (bytes.length > 8 * 1024 * 1024) return NextResponse.json({ error: 'Photo trop lourde (8 Mo maximum).' }, { status: 400 });
+    const extension = type.split('/')[1]?.replace('jpeg', 'jpg').replace(/[^a-z0-9]/g, '') || 'jpg';
+    const stored = await storeImage(bytes, `${title || 'wikimedia'}.${extension}`);
+    if (stored.error) return NextResponse.json({ error: stored.error }, { status: stored.status });
+    return NextResponse.json({ ok: true, path: stored.path });
+  }
+  const form = await request.formData();
+  const file = form.get('file');
+  if (!file || typeof file === 'string') return NextResponse.json({ error: 'Aucune photo reçue.' }, { status: 400 });
+  if (!file.type?.startsWith('image/')) return NextResponse.json({ error: 'Le fichier doit être une image.' }, { status: 400 });
+  if (file.size > 8 * 1024 * 1024) return NextResponse.json({ error: 'Photo trop lourde (8 Mo maximum).' }, { status: 400 });
+  const bytes = Buffer.from(await file.arrayBuffer());
+  const stored = await storeImage(bytes, file.name || 'photo.jpg');
+  if (stored.error) return NextResponse.json({ error: stored.error }, { status: stored.status });
+  return NextResponse.json({ ok: true, path: stored.path });
 }

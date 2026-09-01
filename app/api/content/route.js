@@ -19,6 +19,14 @@ const defaultContent = Object.freeze({
     closureMessage: 'Le Bistrot est exceptionnellement fermé.',
     closureStart: '',
     closureEnd: '',
+    reopeningPushEnabled: false,
+    reopeningBannerEnabled: false,
+    reopeningNotificationTitle: 'Le Bistrot est de retour 🎉',
+    reopeningNotificationMessage: 'Nous sommes de nouveau ouverts. À très vite au Bistrot Du Coin !',
+    reopeningBannerMessage: 'Le Bistrot Du Coin est de retour — Nous vous attendons !',
+    reopeningProcessedClosureEnd: '',
+    reopeningBannerStart: '',
+    reopeningBannerEnd: '',
     analyticsUrl: 'https://vercel.com/dashboard'
   },
   pageTexts: {
