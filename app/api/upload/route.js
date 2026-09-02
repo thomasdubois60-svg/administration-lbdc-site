@@ -21,7 +21,8 @@ async function storeImage(bytes, name) {
   });
   const result = await response.json();
   if (!response.ok) return { error: result.message || 'Échec de l’envoi de la photo.', status: response.status };
-  return { path: `/photos/${filename}` };
+  const rawUrl = result.content?.download_url || `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path.split('/').map(encodeURIComponent).join('/')}`;
+  return { path: `/photos/${filename}`, rawUrl };
 }
 
 export async function POST(request) {
@@ -33,16 +34,21 @@ export async function POST(request) {
     try { url = new URL(sourceUrl); } catch { return NextResponse.json({ error: 'Adresse de photo invalide.' }, { status: 400 }); }
     const allowed = url.protocol === 'https:' && (url.hostname.endsWith('.wikimedia.org') || url.hostname.endsWith('.wikimediausercontent.org'));
     if (!allowed) return NextResponse.json({ error: 'Seules les images Wikimedia Commons peuvent être importées.' }, { status: 400 });
-    const remote = await fetch(url, { headers: { 'User-Agent': 'LBDC-Administration/1.0 image-import' } });
+    const remote = await fetch(url, { headers: { Accept: 'image/avif,image/webp,image/png,image/jpeg,image/gif,*/*;q=0.8', 'User-Agent': 'LBDC-Administration/1.0 image-import' }, redirect: 'follow' });
     if (!remote.ok) return NextResponse.json({ error: 'Téléchargement de la photo impossible.' }, { status: 502 });
-    const type = remote.headers.get('content-type') || '';
-    if (!type.startsWith('image/')) return NextResponse.json({ error: 'La ressource choisie n’est pas une image.' }, { status: 400 });
+    let finalUrl;
+    try { finalUrl = new URL(remote.url); } catch { return NextResponse.json({ error: 'La redirection Wikimedia est invalide.' }, { status: 502 }); }
+    const finalAllowed = finalUrl.protocol === 'https:' && (finalUrl.hostname.endsWith('.wikimedia.org') || finalUrl.hostname.endsWith('.wikimediausercontent.org'));
+    if (!finalAllowed) return NextResponse.json({ error: 'La redirection de la photo quitte Wikimedia Commons.' }, { status: 400 });
+    const type = (remote.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
+    const extensions = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif', 'image/avif': 'avif' };
+    if (!extensions[type]) return NextResponse.json({ error: `Format d’image non pris en charge (${type || 'type inconnu'}).` }, { status: 400 });
     const bytes = Buffer.from(await remote.arrayBuffer());
     if (bytes.length > 8 * 1024 * 1024) return NextResponse.json({ error: 'Photo trop lourde (8 Mo maximum).' }, { status: 400 });
-    const extension = type.split('/')[1]?.replace('jpeg', 'jpg').replace(/[^a-z0-9]/g, '') || 'jpg';
+    const extension = extensions[type];
     const stored = await storeImage(bytes, `${title || 'wikimedia'}.${extension}`);
     if (stored.error) return NextResponse.json({ error: stored.error }, { status: stored.status });
-    return NextResponse.json({ ok: true, path: stored.path });
+    return NextResponse.json({ ok: true, path: stored.path, rawUrl: stored.rawUrl });
   }
   const form = await request.formData();
   const file = form.get('file');
