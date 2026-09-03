@@ -11,6 +11,20 @@ function safeName(name) {
   return `${Date.now()}-${stem}.${ext}`;
 }
 
+async function waitForRawImage(url) {
+  for (let attempt = 0; attempt < 4; attempt += 1) {
+    const response = await fetch(url, { cache: 'no-store', headers: { Accept: 'image/*', 'User-Agent': 'LBDC-Administration/1.0 image-check' } });
+    const type = (response.headers.get('content-type') || '').toLowerCase();
+    if (response.ok && type.startsWith('image/')) {
+      await response.body?.cancel();
+      return true;
+    }
+    await response.body?.cancel();
+    if (attempt < 3) await new Promise((resolve) => setTimeout(resolve, 250 * (attempt + 1)));
+  }
+  return false;
+}
+
 async function storeImage(bytes, name) {
   const filename = safeName(name);
   const path = `public/photos/${filename}`;
@@ -21,7 +35,9 @@ async function storeImage(bytes, name) {
   });
   const result = await response.json();
   if (!response.ok) return { error: result.message || 'Échec de l’envoi de la photo.', status: response.status };
-  const rawUrl = result.content?.download_url || `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path.split('/').map(encodeURIComponent).join('/')}`;
+  const rawBaseUrl = result.content?.download_url || `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path.split('/').map(encodeURIComponent).join('/')}`;
+  const rawUrl = `${rawBaseUrl}${rawBaseUrl.includes('?') ? '&' : '?'}v=${encodeURIComponent(result.commit?.sha || Date.now())}`;
+  if (!await waitForRawImage(rawUrl)) return { error: 'La photo a été enregistrée dans GitHub, mais son URL Raw ne renvoie pas encore une image.', status: 502 };
   return { path: `/photos/${filename}`, rawUrl };
 }
 
