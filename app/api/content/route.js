@@ -1,6 +1,9 @@
 import { hasRole, ROLES } from '../../../lib/auth';
 import { sendNotification } from '../../../lib/notifications';
+import { confirmPublishedEvents } from '../../../lib/event-publication';
 import { NextResponse } from 'next/server';
+
+export const maxDuration = 60;
 
 const owner = process.env.GITHUB_OWNER || 'thomasdubois60-svg';
 const repo = process.env.GITHUB_REPO || 'lebistrotducoin';
@@ -203,26 +206,11 @@ function buildSuccessSummary(actual, expected) {
 }
 
 async function verifyPublicContent(expected, verifyEvents = false) {
+  if (verifyEvents) return confirmPublishedEvents(expected.events, publicSite);
   try {
     const { content } = await readGithubFile();
     const summary = buildSuccessSummary(content, expected);
-    if (!summary.success || !verifyEvents) return { success: summary.success, summary };
-    // A GitHub write does not prove that clients can read the new events yet.
-    for (let attempt = 0; attempt < 4; attempt += 1) {
-      try {
-        const response = await fetch(`${publicSite}/api/content?publication=${Date.now()}`, {
-          cache: 'no-store', signal: AbortSignal.timeout(3000)
-        });
-        if (response.ok) {
-          const actual = await response.json();
-          if (JSON.stringify(actual.events) === JSON.stringify(expected.events)) {
-            return { success: true, summary };
-          }
-        }
-      } catch {}
-      if (attempt < 3) await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-    return { success: false, summary };
+    return { success: summary.success, summary };
   } catch {
     return { success: false, summary: null };
   }
@@ -284,7 +272,10 @@ export async function PUT(request) {
         changed,
         sha,
         published: false,
-        message: 'La publication GitHub a bien été enregistrée, mais la vérification de lecture sur le site public n’a pas encore confirmé l’affichage. Le contenu peut déjà être disponible après quelques secondes.'
+        ...(verifyEvents ? { verification: published } : {}),
+        message: verifyEvents
+          ? `Événement enregistré dans GitHub, mais confirmation publique impossible après ${Math.round(published.elapsedMs / 1000)} secondes et ${published.attempts} vérifications : ${published.reason === 'events-not-visible' ? 'les dates et heures attendues ne sont pas encore toutes présentes dans l’API publique' : 'l’API publique ne répond pas correctement'}. Aucune notification envoyée. Réessayez « Publier et notifier ».`
+          : 'La publication GitHub a bien été enregistrée, mais la vérification de lecture sur le site public n’a pas encore confirmé l’affichage. Le contenu peut déjà être disponible après quelques secondes.'
       }, { status: 200 });
     }
 
@@ -298,7 +289,7 @@ export async function PUT(request) {
       sha,
       notification,
       verification: published.summary,
-      message: 'Publication réussie. Le site public est à jour.'
+      message: verifyEvents ? 'Événement publié et confirmé' : 'Publication réussie. Le site public est à jour.'
     });
   } catch (error) {
     return NextResponse.json({ error: error.message || 'Publication impossible.' }, { status: 500 });
