@@ -188,7 +188,8 @@ function buildSuccessSummary(actual, expected) {
     ['pageTexts.menuIntro', normalizedExpected.pageTexts.menuIntro],
     ['daily.formulas', normalizedExpected.daily.formulas],
     ['menu', normalizedExpected.menu],
-    ['story.paragraphs', normalizedExpected.story.paragraphs]
+    ['story.paragraphs', normalizedExpected.story.paragraphs],
+    ['events', normalizedExpected.events]
   ];
   const matched = checks.filter(([path, expectedValue]) => {
     const actualValue = getValueByPath(actual, path);
@@ -201,11 +202,27 @@ function buildSuccessSummary(actual, expected) {
   };
 }
 
-async function verifyPublicContent(expected) {
+async function verifyPublicContent(expected, verifyEvents = false) {
   try {
     const { content } = await readGithubFile();
     const summary = buildSuccessSummary(content, expected);
-    return { success: summary.success, summary };
+    if (!summary.success || !verifyEvents) return { success: summary.success, summary };
+    // A GitHub write does not prove that clients can read the new events yet.
+    for (let attempt = 0; attempt < 4; attempt += 1) {
+      try {
+        const response = await fetch(`${publicSite}/api/content?publication=${Date.now()}`, {
+          cache: 'no-store', signal: AbortSignal.timeout(3000)
+        });
+        if (response.ok) {
+          const actual = await response.json();
+          if (JSON.stringify(actual.events) === JSON.stringify(expected.events)) {
+            return { success: true, summary };
+          }
+        }
+      } catch {}
+      if (attempt < 3) await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    return { success: false, summary };
   } catch {
     return { success: false, summary: null };
   }
@@ -257,7 +274,9 @@ export async function PUT(request) {
       changed = true;
     }
 
-    const published = await verifyPublicContent(normalizedContent);
+    const verifyEvents = body.verifyEvents === true || body.notification?.url === '/evenements'
+      || JSON.stringify(current.content.events) !== JSON.stringify(normalizedContent.events);
+    const published = await verifyPublicContent(normalizedContent, verifyEvents);
     if (!published.success) {
       return NextResponse.json({
         ok: true,
