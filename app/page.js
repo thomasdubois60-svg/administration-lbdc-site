@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { photoRequest, preparePhoto } from '../lib/photo-client';
 import { Login, ClubOperations, Promotions, Notifications, LiveDashboard } from '../components/Operations';
 import { Bars3Icon, BuildingStorefrontIcon, CalendarDaysIcon, ClockIcon, HomeIcon, InformationCircleIcon, PhotoIcon, PlusIcon, Squares2X2Icon, XMarkIcon } from '../components/icons';
 
@@ -83,15 +84,35 @@ const move=(arr,from,to)=>{if(to<0||to>=arr.length)return arr;const copy=[...arr
 const idempotencyKey=()=>globalThis.crypto?.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 function OrderButtons({index,total,onMove}){return <div className="order-buttons"><button disabled={index===0} onClick={()=>onMove(index-1)}>↑ Monter</button><button disabled={index===total-1} onClick={()=>onMove(index+1)}>↓ Descendre</button></div>}
-async function uploadImage(file,setStatus){if(!file)return'';setStatus('Envoi de la photo…');const fd=new FormData();fd.append('file',file);const r=await fetch('/api/upload',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||'Envoi de la photo impossible.');const path=j.path||j.src;if(!path)throw new Error('Le serveur n’a pas retourné le chemin de la photo.');return path}
+async function uploadImage(file,setStatus,onPrepared){
+ if(!file)return'';
+ setStatus('Préparation de la photo…');
+ const prepared=await preparePhoto(file);
+ onPrepared?.(prepared);
+ setStatus('Envoi de la photo…');
+ const fd=new FormData();fd.append('file',prepared);
+ const data=await photoRequest('/api/upload',{method:'POST',body:fd});
+ if(!/^https:\/\/raw\.githubusercontent\.com\//i.test(data.rawUrl||''))throw new Error('GitHub n’a pas retourné l’adresse publique de la photo. Réessayez.');
+ return data.rawUrl;
+}
 function ImagePicker({label,value,onChange,setStatus}){
- const [busy,setBusy]=useState(false),[preview,setPreview]=useState(''),[webOpen,setWebOpen]=useState(false),[query,setQuery]=useState(''),[results,setResults]=useState([]),[searching,setSearching]=useState(false),[searchError,setSearchError]=useState('');
+ const [busy,setBusy]=useState(false),[photoError,setPhotoError]=useState(''),[preview,setPreview]=useState(''),[webOpen,setWebOpen]=useState(false),[query,setQuery]=useState(''),[results,setResults]=useState([]),[searching,setSearching]=useState(false),[searchError,setSearchError]=useState('');
  useEffect(()=>()=>{if(preview)URL.revokeObjectURL(preview)},[preview]);
- async function upload(file){if(!file)return;const localPreview=URL.createObjectURL(file);setPreview(localPreview);setBusy(true);try{const path=await uploadImage(file,setStatus);onChange(path);setStatus('Photo envoyée. L’aperçu est disponible ; clique sur Publier pour enregistrer son emplacement.')}catch(e){setPreview('');setStatus(e.message)}finally{setBusy(false)}}
- async function searchWeb(event){event.preventDefault();const value=query.trim();if(value.length<2){setSearchError('Saisissez au moins 2 caractères.');return}setSearching(true);setSearchError('');try{const response=await fetch(`/api/image-search?q=${encodeURIComponent(value)}`);const data=await response.json();if(!response.ok)throw new Error(data.error||'Recherche impossible.');setResults(data.results||[]);if(!data.results?.length)setSearchError('Aucune image trouvée.')}catch(error){setResults([]);setSearchError(error.message)}finally{setSearching(false)}}
- async function useWebImage(image){setBusy(true);setSearchError('');setPreview(image.thumbnail);try{const response=await fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sourceUrl:image.imageUrl,title:image.title})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Import impossible.');if(!/^https:\/\/raw\.githubusercontent\.com\//i.test(data.rawUrl||''))throw new Error('GitHub n’a pas retourné une URL Raw valide. Aucune photo n’a été enregistrée.');onChange(data.rawUrl);setPreview(data.rawUrl);setWebOpen(false);setStatus('Photo web importée dans GitHub. Son aperçu est affiché ; clique sur Publier pour enregistrer cette URL.')}catch(error){setPreview('');setSearchError(error.message);setStatus(`Import de la photo impossible : ${error.message}`)}finally{setBusy(false)}}
+ async function upload(file){
+  if(!file||busy)return;
+  setBusy(true);setPhotoError('');setPreview(URL.createObjectURL(file));
+  try{const path=await uploadImage(file,setStatus,prepared=>setPreview(URL.createObjectURL(prepared)));onChange(path);setStatus('Photo envoyée. L’aperçu est disponible ; clique sur Publier pour enregistrer son emplacement.')}
+  catch(e){setPreview('');setPhotoError(e.message);setStatus(e.message)}finally{setBusy(false)}
+ }
+ async function searchWeb(event){event.preventDefault();const value=query.trim();if(value.length<2){setSearchError('Saisissez au moins 2 caractères.');return}setSearching(true);setSearchError('');try{const data=await photoRequest(`/api/image-search?q=${encodeURIComponent(value)}`,{},20000);setResults(data.results||[]);if(!data.results?.length)setSearchError('Aucune image trouvée. Essayez un autre terme.')}catch(error){setResults([]);setSearchError(error.message)}finally{setSearching(false)}}
+ async function useWebImage(image){
+  if(busy)return;
+  setBusy(true);setPhotoError('');setSearchError('');setPreview(image.thumbnail);
+  try{const data=await photoRequest('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sourceUrl:image.imageUrl,title:image.title})});if(!/^https:\/\/raw\.githubusercontent\.com\//i.test(data.rawUrl||''))throw new Error('GitHub n’a pas retourné une URL Raw valide. Réessayez.');onChange(data.rawUrl);setPreview(data.rawUrl);setWebOpen(false);setStatus('Photo web importée dans GitHub. Son aperçu est affiché ; clique sur Publier pour enregistrer cette URL.')}
+  catch(error){setPreview('');setSearchError(error.message);setStatus(`Import de la photo impossible : ${error.message}`)}finally{setBusy(false)}
+ }
  const source=preview||(value?(value.startsWith('http')?value:`${SITE}${value}`):'');
- return <div className="image-picker"><span>{label}</span>{source?<img src={source} onError={e=>{if(!preview&&value?.startsWith('/photos/')&&!e.currentTarget.dataset.fallback){e.currentTarget.dataset.fallback='true';e.currentTarget.src=`${RAW_PHOTOS}${value}`}}} alt="Aperçu"/>:<div className="photo-placeholder"><PhotoIcon/><small>Aucune photo</small></div>}<div className="image-picker-actions"><label className="upload-button">{busy?'Envoi…':'Choisir une photo'}<input type="file" accept="image/*" onChange={e=>upload(e.currentTarget.files?.[0])} disabled={busy}/></label><button type="button" className="secondary-button" disabled={busy} onClick={()=>setWebOpen(open=>!open)}>Rechercher sur le web</button></div>{webOpen&&<div className="web-image-search"><form className="search-row" onSubmit={searchWeb}><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Ex. burger maison" aria-label="Recherche d’image Wikimedia Commons"/><button type="submit" className="primary-button" disabled={searching}>{searching?'Recherche…':'Rechercher'}</button></form>{searchError&&<p className="muted">{searchError}</p>}<div className="web-image-results">{results.map(image=><article key={image.imageUrl}><img src={image.thumbnail} alt={image.title}/><strong>{image.title}</strong><a href={image.sourceUrl} target="_blank" rel="noreferrer">Source Wikimedia Commons</a><button type="button" className="secondary-button" disabled={busy} onClick={()=>useWebImage(image)}>Utiliser cette image</button></article>)}</div></div>}{(value||preview)&&<button type="button" className="danger-link" onClick={()=>{setPreview('');onChange('')}}>Retirer la photo</button>}</div>
+ return <div className="image-picker"><span>{label}</span>{source?<img src={source} onError={e=>{if(!preview&&value?.startsWith('/photos/')&&!e.currentTarget.dataset.fallback){e.currentTarget.dataset.fallback='true';e.currentTarget.src=`${RAW_PHOTOS}${value}`}}} alt="Aperçu"/>:<div className="photo-placeholder"><PhotoIcon/><small>Aucune photo</small></div>}<div className="image-picker-actions"><label className="upload-button">{busy?'Envoi…':'Choisir une photo'}<input type="file" accept="image/*,.jpg,.jpeg,.png,.heic,.heif" onChange={e=>{const file=e.currentTarget.files?.[0];e.currentTarget.value='';upload(file)}} disabled={busy}/></label><button type="button" className="secondary-button" disabled={busy} onClick={()=>setWebOpen(open=>!open)}>Rechercher sur le web</button></div>{photoError&&<p role="alert" className="muted">{photoError}</p>}{webOpen&&<div className="web-image-search"><form className="search-row" onSubmit={searchWeb}><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Ex. burger maison" aria-label="Recherche d’image Wikimedia Commons"/><button type="submit" className="primary-button" disabled={searching}>{searching?'Recherche…':'Rechercher'}</button></form>{searchError&&<p className="muted">{searchError}</p>}<div className="web-image-results">{results.map(image=><article key={image.imageUrl}><img src={image.thumbnail} alt={image.title}/><strong>{image.title}</strong><a href={image.sourceUrl} target="_blank" rel="noreferrer">Source Wikimedia Commons</a><button type="button" className="secondary-button" disabled={busy} onClick={()=>useWebImage(image)}>Utiliser cette image</button></article>)}</div></div>}{(value||preview)&&<button type="button" className="danger-link" disabled={busy} onClick={()=>{setPreview('');setPhotoError('');onChange('')}}>Retirer la photo</button>}</div>
 }
 
 export default function Home(){
