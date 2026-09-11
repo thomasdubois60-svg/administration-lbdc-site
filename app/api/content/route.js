@@ -9,7 +9,6 @@ const owner = process.env.GITHUB_OWNER || 'thomasdubois60-svg';
 const repo = process.env.GITHUB_REPO || 'lebistrotducoin';
 const branch = process.env.GITHUB_BRANCH || 'main';
 const path = 'data/site-content.json';
-const publicSite = (process.env.PUBLIC_SITE_URL || 'https://lebistrotducoin.vercel.app').replace(/\/$/, '');
 const defaultContent = Object.freeze({
   heroImage: '/photos/facade.webp',
   general: {
@@ -168,10 +167,11 @@ function githubHeaders(authenticated = false) {
   return headers;
 }
 
-async function readGithubFile() {
-  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`, {
+async function readGithubFile(ref = branch, signal) {
+  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(ref)}`, {
     headers: githubHeaders(Boolean(process.env.GITHUB_TOKEN)),
-    cache: 'no-store'
+    cache: 'no-store',
+    signal
   });
   if (!response.ok) throw new Error('Impossible de charger le contenu du site.');
   const file = await response.json();
@@ -205,8 +205,8 @@ function buildSuccessSummary(actual, expected) {
   };
 }
 
-async function verifyPublicContent(expected, verifyEvents = false) {
-  if (verifyEvents) return confirmPublishedEvents(expected.events, publicSite);
+async function verifyPublicContent(expected, verifyEvents = false, savedSha, savedRef = branch) {
+  if (verifyEvents) return confirmPublishedEvents(expected.events, () => readGithubFile(savedRef, AbortSignal.timeout(3000)), savedSha);
   try {
     const { content } = await readGithubFile();
     const summary = buildSuccessSummary(content, expected);
@@ -240,6 +240,7 @@ export async function PUT(request) {
     const nextText = JSON.stringify(normalizedContent, null, 2) + '\n';
     const currentText = JSON.stringify(current.content, null, 2) + '\n';
     let sha = current.file.sha;
+    let savedRef = branch;
     let changed = false;
 
     if (nextText !== currentText) {
@@ -259,12 +260,13 @@ export async function PUT(request) {
       const result = await response.json();
       if (!response.ok) return NextResponse.json({ error: result.message || 'Échec de l’enregistrement GitHub.', sha }, { status: response.status });
       sha = result.content.sha;
+      savedRef = result.commit?.sha || branch;
       changed = true;
     }
 
     const verifyEvents = body.verifyEvents === true || body.notification?.url === '/evenements'
       || JSON.stringify(current.content.events) !== JSON.stringify(normalizedContent.events);
-    const published = await verifyPublicContent(normalizedContent, verifyEvents);
+    const published = await verifyPublicContent(normalizedContent, verifyEvents, sha, savedRef);
     if (!published.success) {
       return NextResponse.json({
         ok: true,
@@ -274,7 +276,7 @@ export async function PUT(request) {
         published: false,
         ...(verifyEvents ? { verification: published } : {}),
         message: verifyEvents
-          ? `Événement enregistré dans GitHub, mais confirmation publique impossible après ${Math.round(published.elapsedMs / 1000)} secondes et ${published.attempts} vérifications : ${published.reason === 'events-not-visible' ? 'les dates et heures attendues ne sont pas encore toutes présentes dans l’API publique' : 'l’API publique ne répond pas correctement'}. Aucune notification envoyée. Réessayez « Publier et notifier ».`
+          ? `Événement enregistré, mais relecture GitHub non confirmée après ${published.attempts} vérifications : ${published.reason === 'events-not-saved' ? 'les événements attendus ne correspondent pas au fichier enregistré' : published.reason === 'github-version-mismatch' ? 'la version relue ne correspond pas à la version enregistrée' : 'GitHub ne permet pas de relire le fichier enregistré'}. Aucune notification envoyée. Réessayez « Publier et notifier ».`
           : 'La publication GitHub a bien été enregistrée, mais la vérification de lecture sur le site public n’a pas encore confirmé l’affichage. Le contenu peut déjà être disponible après quelques secondes.'
       }, { status: 200 });
     }
