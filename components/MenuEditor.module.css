@@ -1,0 +1,32 @@
+.editor { min-width: 0; }
+.editor button, .editor select { min-height: 44px; }
+.editor input, .editor textarea, .editor select { min-width: 0; max-width: 100%; }
+.editor h2, .editor strong, .editor p, .editor span { overflow-wrap: anywhere; }
+.creation { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 12px; }
+.creation > label { flex: 1 1 220px; }
+.list { display: grid; gap: 12px; margin-top: 16px; }
+.category { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px !important; }
+.categoryName { flex: 1 1 240px; text-align: left; border: 0; background: transparent; display: grid; gap: 4px; min-width: 0; color: inherit; }
+.categoryName span { color: var(--muted); font-size: .88rem; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.actions button, .actions select { border-radius: 10px; padding: 8px 12px; }
+.actions select { font: inherit; flex: 0 1 240px; width: 240px; background: white; border: 1px solid #ccd7d0; }
+.productSummary { display: flex; align-items: center; gap: 12px; }
+.productSummary img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.productSummary strong { flex: 1; min-width: 0; }
+.productSummary > span { max-width: 35%; }
+.form { display: grid; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #dae1dc; }
+.introduction, .preview { margin-top: 16px; }
+.introduction summary { cursor: pointer; min-height: 44px; }
+.previewProduct { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; border-bottom: 1px solid #dae1dc; }
+.previewProduct img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; }
+.previewProduct div { flex: 1; min-width: 0; }
+.previewProduct > span { max-width: 30%; }
+@media(max-width: 600px) {
+ .creation { display: grid; }
+ .creation > button { width: 100%; }
+ .categoryName { flex-basis: 100%; }
+ .actions { width: 100%; }
+ .actions select { flex: 1 1 100%; width: 100%; }
+ .productSummary > span { max-width: 30%; }
+}
