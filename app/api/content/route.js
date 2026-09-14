@@ -122,9 +122,9 @@ function normalizeContent(value) {
     ...defaultContent.daily,
     ...dailySource,
     formulas: Array.isArray(dailySource.formulas) && dailySource.formulas.length ? dailySource.formulas : defaultContent.daily.formulas,
-    starters: Array.isArray(dailySource.starters) && dailySource.starters.length ? dailySource.starters : defaultContent.daily.starters,
-    mains: Array.isArray(dailySource.mains) && dailySource.mains.length ? dailySource.mains : defaultContent.daily.mains,
-    desserts: Array.isArray(dailySource.desserts) && dailySource.desserts.length ? dailySource.desserts : defaultContent.daily.desserts,
+    starters: Array.isArray(dailySource.starters) ? dailySource.starters : defaultContent.daily.starters,
+    mains: Array.isArray(dailySource.mains) ? dailySource.mains : defaultContent.daily.mains,
+    desserts: Array.isArray(dailySource.desserts) ? dailySource.desserts : defaultContent.daily.desserts,
     suggestion: {
       ...defaultContent.daily.suggestion,
       ...(dailySource.suggestion && typeof dailySource.suggestion === 'object' && !Array.isArray(dailySource.suggestion) ? dailySource.suggestion : {})
