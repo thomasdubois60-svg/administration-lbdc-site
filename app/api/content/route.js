@@ -1,3 +1,4 @@
+import { normalizeGalleryAlbums } from '../../../lib/gallery-albums';
 import { hasRole, ROLES } from '../../../lib/auth';
 import { sendNotification } from '../../../lib/notifications';
 import { confirmPublishedEvents } from '../../../lib/event-publication';
@@ -137,6 +138,7 @@ function normalizeContent(value) {
     pageTexts,
     daily,
     menu: Array.isArray(sanitizedSource.menu) && sanitizedSource.menu.length ? sanitizedSource.menu : defaultContent.menu,
+    galleryAlbums: normalizeGalleryAlbums({...sanitizedSource,gallery:Array.isArray(sanitizedSource.gallery)?sanitizedSource.gallery:defaultContent.gallery}),
     gallery: Array.isArray(sanitizedSource.gallery) && sanitizedSource.gallery.length ? sanitizedSource.gallery : defaultContent.gallery,
     story: {
       ...defaultContent.story,
@@ -190,6 +192,10 @@ function buildSuccessSummary(actual, expected) {
     ['general.phone', normalizedExpected.general.phone],
     ['pageTexts.menuIntro', normalizedExpected.pageTexts.menuIntro],
     ['daily.formulas', normalizedExpected.daily.formulas],
+    ['daily.starters', normalizedExpected.daily.starters],
+    ['daily.mains', normalizedExpected.daily.mains],
+    ['daily.desserts', normalizedExpected.daily.desserts],
+    ['galleryAlbums', normalizedExpected.galleryAlbums],
     ['menu', normalizedExpected.menu],
     ['story.paragraphs', normalizedExpected.story.paragraphs],
     ['events', normalizedExpected.events]
