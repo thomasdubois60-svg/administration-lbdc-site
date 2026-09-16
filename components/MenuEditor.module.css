@@ -30,3 +30,5 @@
  .actions select { flex: 1 1 100%; width: 100%; }
  .productSummary > span { max-width: 30%; }
 }
+
+.directPreview{margin-top:20px;max-height:340px;overflow:auto;border:1px solid #d9ccbc;border-radius:12px}.directPreview>div{pointer-events:none}.preview{overflow:hidden;border-radius:12px;border:1px solid #d9ccbc}

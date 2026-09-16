@@ -137,7 +137,7 @@ function normalizeContent(value) {
     general,
     pageTexts,
     daily,
-    menu: Array.isArray(sanitizedSource.menu) && sanitizedSource.menu.length ? sanitizedSource.menu : defaultContent.menu,
+    menu: Array.isArray(sanitizedSource.menu) ? sanitizedSource.menu : defaultContent.menu,
     galleryAlbums: normalizeGalleryAlbums({...sanitizedSource,gallery:Array.isArray(sanitizedSource.gallery)?sanitizedSource.gallery:defaultContent.gallery}),
     gallery: Array.isArray(sanitizedSource.gallery) && sanitizedSource.gallery.length ? sanitizedSource.gallery : defaultContent.gallery,
     story: {

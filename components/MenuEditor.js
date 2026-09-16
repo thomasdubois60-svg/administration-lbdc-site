@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import styles from './MenuEditor.module.css';
+import MenuExperience, {categoryKeys, menuStyles} from './MenuExperience';
 
 const photoUrl = value => value?.startsWith('/photos/') ? `https://lebistrotducoin.vercel.app${value}` : value;
 const photoFallback = event => {
@@ -42,7 +43,7 @@ export default function MenuEditor({menu, onChange, introduction, onIntroduction
      event.preventDefault();
      const categoryTitle = title.trim();
      if (!categoryTitle) return;
-     onChange(current => [{category:categoryTitle, items:[]}, ...current]);
+     onChange(current => [{id:crypto.randomUUID(), category:categoryTitle, items:[]}, ...current]);
      setTitle('');
     }}>
      <label className="field"><span>Nom de la nouvelle catégorie</span><input required value={title} onChange={event => setTitle(event.target.value)}/></label>
@@ -69,6 +70,10 @@ export default function MenuEditor({menu, onChange, introduction, onIntroduction
     <button type="button" className="secondary-button" onClick={() => open(null)}>← Retour aux catégories</button>
     <h2>{category.category || 'Sans titre'}</h2>
     <label className="field"><span>Nom de la catégorie</span><input value={category.category || ''} onChange={event => updateCategory(item => ({...item, category:event.target.value}))}/></label>
+    <label className="field"><span>Sous-titre de la catégorie</span><textarea rows={2} value={category.subtitle || ''} onChange={event => updateCategory(item => ({...item, subtitle:event.target.value}))}/></label>
+    <ImagePicker label="Photo d’en-tête de la catégorie" value={category.headerImage} setStatus={setStatus} onChange={headerImage => updateCategory(item => ({...item, headerImage}))}/>
+    <label className="field"><span>Style visuel</span><select value={menuStyles[category.style]?category.style:'bistrot'} onChange={event => updateCategory(item => ({...item, style:event.target.value}))}>{Object.entries(menuStyles).map(([key,label])=><option value={key} key={key}>{label}</option>)}</select></label>
+    {!preview&&<div className={styles.directPreview} aria-label="Aperçu visuel direct"><MenuExperience menu={[category]} activeKey={categoryKeys([category])[0]} compact/></div>}
     <div className={styles.actions}>
      <button type="button" className="secondary-button" aria-pressed={preview} onClick={() => setPreview(value => !value)}>{preview ? 'Fermer la prévisualisation' : 'Prévisualiser'}</button>
      <button type="button" className="primary-button" onClick={() => {
@@ -78,15 +83,7 @@ export default function MenuEditor({menu, onChange, introduction, onIntroduction
      }}>Ajouter un produit</button>
     </div>
    </section>
-   {preview ? <section className={`card ${styles.preview}`} aria-label="Prévisualisation de la catégorie">
-    <p className="muted">Aperçu des modifications en cours, avant publication.</p>
-    <h2>{category.category}</h2>
-    {(category.items || []).map((product, index) => <article className={styles.previewProduct} key={index}>
-     {product.image && <img src={photoUrl(product.image)} onError={photoFallback} alt={product.imageAlt || product.name || ''}/>}
-     <div><strong>{product.name}</strong>{product.description && <p>{product.description}</p>}</div><span>{product.price}</span>
-    </article>)}
-    {!category.items?.length && <p>Aucun produit dans cette catégorie.</p>}
-   </section> : <div className={styles.list}>
+   {preview ? <section className={styles.preview} aria-label="Prévisualisation de la catégorie"><MenuExperience menu={menu} activeKey={categoryKeys(menu)[selected]} introduction={introduction} preview onNavigate={key=>{if(key===null){open(null)}else{setSelected(categoryKeys(menu).indexOf(key));setEditing(null);window.scrollTo(0,0)}}}/></section> : <div className={styles.list}>
     {(category.items || []).map((product, index) => <section className="card" key={index} data-menu-product={index}>
      <div className={styles.productSummary}>
       {product.image && <img src={photoUrl(product.image)} onError={photoFallback} alt={product.imageAlt || ''}/>}
