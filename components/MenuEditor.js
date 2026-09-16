@@ -17,7 +17,7 @@ const move = (items, from, to) => {
  return next;
 };
 
-export default function MenuEditor({menu, onChange, introduction, onIntroductionChange, ImagePicker, setStatus}) {
+export default function MenuEditor({globalStyle='bistrot', onGlobalStyleChange, menu, onChange, introduction, onIntroductionChange, ImagePicker, setStatus}) {
  const [selected, setSelected] = useState(null);
  const [editing, setEditing] = useState(null);
  const [title, setTitle] = useState('');
@@ -36,7 +36,13 @@ export default function MenuEditor({menu, onChange, introduction, onIntroduction
   setStatus('Produit déplacé. Cliquez sur Publier pour enregistrer la carte.');
  };
 
+ const [globalPreviewKey,setGlobalPreviewKey]=useState(undefined);
  return <div className={styles.editor}>
+  <section className="card"><h2>Style global de la Carte</h2><p className="muted">Choisissez une ambiance, vérifiez l’aperçu, puis publiez. Les styles particuliers des catégories restent prioritaires.</p>
+   <div className={styles.styleChoices} role="group" aria-label="Style global de la Carte">{Object.entries(menuStyles).filter(([key])=>key!=='atelier').map(([key,label])=><button key={key} type="button" aria-pressed={globalStyle===key} className={styles.styleChoice} onClick={()=>onGlobalStyleChange(key)}><span aria-hidden="true" className={styles.miniature+' '+styles[key]}><span>LE BISTROT</span><strong>À savourer</strong><i/><small>Une belle assiette <b>18 €</b></small><small>Un moment à partager <b>12 €</b></small></span><strong>{label}</strong></button>)}</div>
+   <button type="button" className="secondary-button" onClick={()=>onChange(current=>current.map(item=>({...item,style:''})))}>Appliquer le style global à toutes les catégories</button>
+   <details className={styles.globalPreview} open><summary>Aperçu du style global</summary><p className="muted">Cette simulation utilise le style global. Les exceptions restent visibles dans l’aperçu de chaque catégorie.</p><MenuExperience globalStyle={globalStyle} menu={menu.map(item=>({...item,style:''}))} activeKey={globalPreviewKey === undefined ? categoryKeys(menu)[0] : globalPreviewKey} preview onNavigate={setGlobalPreviewKey}/></details>
+  </section>
   {!category ? <>
    <section className="card">
     <form className={styles.creation} onSubmit={event => {
@@ -72,8 +78,8 @@ export default function MenuEditor({menu, onChange, introduction, onIntroduction
     <label className="field"><span>Nom de la catégorie</span><input value={category.category || ''} onChange={event => updateCategory(item => ({...item, category:event.target.value}))}/></label>
     <label className="field"><span>Sous-titre de la catégorie</span><textarea rows={2} value={category.subtitle || ''} onChange={event => updateCategory(item => ({...item, subtitle:event.target.value}))}/></label>
     <ImagePicker label="Photo d’en-tête de la catégorie" value={category.headerImage} setStatus={setStatus} onChange={headerImage => updateCategory(item => ({...item, headerImage}))}/>
-    <label className="field"><span>Style visuel</span><select value={menuStyles[category.style]?category.style:'bistrot'} onChange={event => updateCategory(item => ({...item, style:event.target.value}))}>{Object.entries(menuStyles).map(([key,label])=><option value={key} key={key}>{label}</option>)}</select></label>
-    {!preview&&<div className={styles.directPreview} aria-label="Aperçu visuel direct"><MenuExperience menu={[category]} activeKey={categoryKeys([category])[0]} compact/></div>}
+    <label className="field"><span>Style visuel</span><select value={menuStyles[category.style]?category.style:''} onChange={event => updateCategory(item => ({...item, style:event.target.value}))}><option value="">Style global ({menuStyles[globalStyle]})</option>{Object.entries(menuStyles).map(([key,label])=><option value={key} key={key}>{label}</option>)}</select></label>
+    {!preview&&<div className={styles.directPreview} aria-label="Aperçu visuel direct"><MenuExperience globalStyle={globalStyle} menu={[category]} activeKey={categoryKeys([category])[0]} compact/></div>}
     <div className={styles.actions}>
      <button type="button" className="secondary-button" aria-pressed={preview} onClick={() => setPreview(value => !value)}>{preview ? 'Fermer la prévisualisation' : 'Prévisualiser'}</button>
      <button type="button" className="primary-button" onClick={() => {

@@ -1,3 +1,4 @@
+import {getPublishedLoyalty} from '../../../../lib/published-loyalty';
 import { NextResponse } from 'next/server';
 import { hasAnyRole, ROLES } from '../../../../lib/auth';
 import { loyalty, sb, tables } from '../../../../lib/supabase';
@@ -25,6 +26,7 @@ export async function GET(request) {
   const page = Math.max(0, Number(request.nextUrl.searchParams.get('page')) || 0);
   const pageSize = Math.min(100, Math.max(1, Number(request.nextUrl.searchParams.get('limit')) || 50));
   try {
+    const program=await getPublishedLoyalty();
     const filter = buildSearchFilter(query);
     const rows = await sb(`${tables.members}?select=id,personal_code,first_name,last_name,email,birthday,loyalty_points,reward_available,created_at,updated_at&order=created_at.desc&offset=${page * pageSize}&limit=${pageSize}${filter}`);
     const ids = rows.map((member) => member.id);
@@ -44,6 +46,6 @@ export async function GET(request) {
       rewards_count: events.filter((event) => event.member_id === member.id && event.event_type === 'reward').length,
       coupons_available: coupons.filter((coupon) => coupon.member_id === member.id && !coupon.used_at && (!coupon.expires_at || new Date(coupon.expires_at).getTime() >= now)).length,
     }));
-    return NextResponse.json({ members, page, pageSize, hasMore: rows.length === pageSize, stampsRequired: loyalty.stampsRequired });
+    return NextResponse.json({ members, page, pageSize, hasMore: rows.length === pageSize, programEnabled:program.enabled, stampsRequired: program.threshold });
   } catch (error) { return NextResponse.json({ error: error.message }, { status: 500 }); }
 }

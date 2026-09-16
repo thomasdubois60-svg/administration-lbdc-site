@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import styles from './MenuExperience.module.css';
-export const menuStyles = {bistrot:'Bistrot chic', moderne:'Moderne premium', ardoise:'Ardoise / brasserie', atelier:'Atelier / gourmet'};
+export const menuStyles = {bistrot:'Bistrot Élégance', moderne:'Maison Contemporaine', ardoise:'Brasserie Signature', nuit:'Nuit & Velours', atelier:'Atelier / gourmet (ancien)'};
 export function categoryKeys(menu) {
  const seen = new Map();
  return menu.map(section => {
@@ -11,13 +11,13 @@ export function categoryKeys(menu) {
 }
 const photo = value => typeof value==='string' && (value.startsWith('/photos/') || /^https:\/\//i.test(value)) ? (value.startsWith('/photos/') ? 'https://raw.githubusercontent.com/thomasdubois60-svg/lebistrotducoin/main/public'+value : value) : '';
 const prices = value => (value||'').split(/\s*(?:\/|·)\s*/).filter(Boolean).map(part=>part.replace(/^([^:]+):\s*(.+)$/, '$1 — $2'));
-export default function MenuExperience({menu=[], activeKey=null, introduction='', onNavigate, preview=false, compact=false}) {
+export default function MenuExperience({menu=[], globalStyle='bistrot', activeKey=null, introduction='', onNavigate, preview=false, compact=false}) {
  const keys=categoryKeys(menu), index=keys.indexOf(activeKey), category=menu[index];
  const heading=useRef(null);
  useEffect(()=>{if(!compact && heading.current) heading.current.focus({preventScroll:true});},[activeKey,compact]);
  const navigate=(event,key)=>{if(onNavigate && !event.metaKey && !event.ctrlKey && !event.shiftKey && event.button===0){event.preventDefault();onNavigate(key);}};
  const link=(key,label,className)=> <a className={className} href={key?'/carte/'+encodeURIComponent(key):'/carte'} onClick={event=>navigate(event,key)}>{label}</a>;
- const style=category && menuStyles[category.style]?category.style:'bistrot';
+ const style=category && menuStyles[category.style]?category.style:menuStyles[globalStyle]?globalStyle:'bistrot';
  return <div className={styles.experience+' '+styles[style]} data-menu-style={style}>
   {preview&&<p className={styles.draft}>Prévisualisation · modifications non publiées</p>}
   {!category ? <>
@@ -29,7 +29,7 @@ export default function MenuExperience({menu=[], activeKey=null, introduction=''
    </a>})}</div>{!menu.length&&<p className={styles.notice}>Notre carte sera bientôt disponible.</p>}
   </> : <>
    {!compact&&<nav className={styles.toolbar} aria-label="Navigation de la carte">{link(null,'← Toutes les catégories',styles.back)}<label><span className={styles.srOnly}>Choisir une catégorie</span><select value={activeKey} onChange={event=>onNavigate?onNavigate(event.target.value):window.location.assign('/carte/'+encodeURIComponent(event.target.value))}>{menu.map((s,i)=><option value={keys[i]} key={keys[i]}>{s.category}</option>)}</select></label></nav>}
-   <header className={styles.hero}>
+   <header className={styles.hero} data-photo={Boolean(photo(category.headerImage))}>
     {photo(category.headerImage)&&<img className={styles.heroImage} src={photo(category.headerImage)} alt=""/>}
     <div className={styles.heroText}><span className={styles.eyebrow}>La carte · {String(index+1).padStart(2,'0')} / {String(menu.length).padStart(2,'0')}</span><h1 ref={heading} tabIndex={-1}>{category.category}</h1>{category.subtitle&&<p>{category.subtitle}</p>}</div>
    </header>

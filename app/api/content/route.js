@@ -1,3 +1,4 @@
+import {normalizeLoyaltyProgram,validateLoyaltyProgram} from '../../../lib/loyalty-program';
 import { normalizeGalleryAlbums } from '../../../lib/gallery-albums';
 import { hasRole, ROLES } from '../../../lib/auth';
 import { sendNotification } from '../../../lib/notifications';
@@ -133,7 +134,8 @@ function normalizeContent(value) {
   return {
     ...defaultContent,
     ...sanitizedSource,
-    heroImage: typeof sanitizedSource.heroImage === 'string' && sanitizedSource.heroImage ? sanitizedSource.heroImage : defaultContent.heroImage,
+    loyaltyProgram:normalizeLoyaltyProgram(sanitizedSource.loyaltyProgram),
+    heroImage: typeof sanitizedSource.heroImage === 'string' ? sanitizedSource.heroImage : defaultContent.heroImage,
     general,
     pageTexts,
     daily,
@@ -189,6 +191,9 @@ function buildSuccessSummary(actual, expected) {
   const normalizedExpected = normalizeContent(expected);
   const checks = [
     ['heroImage', normalizedExpected.heroImage],
+    ['menuStyle', normalizedExpected.menuStyle],
+    ['sectionPhotos', normalizedExpected.sectionPhotos],
+    ['loyaltyProgram', normalizedExpected.loyaltyProgram],
     ['general.phone', normalizedExpected.general.phone],
     ['pageTexts.menuIntro', normalizedExpected.pageTexts.menuIntro],
     ['daily.formulas', normalizedExpected.daily.formulas],
@@ -242,6 +247,7 @@ export async function PUT(request) {
     if (body.notification && !hasRole(request, ROLES.ADMIN)) return NextResponse.json({ error: 'Droits Administrateur requis pour notifier.' }, { status: 403 });
 
     const current = await readGithubFile();
+    validateLoyaltyProgram(body.content.loyaltyProgram);
     const normalizedContent = normalizeContent(body.content);
     const nextText = JSON.stringify(normalizedContent, null, 2) + '\n';
     const currentText = JSON.stringify(current.content, null, 2) + '\n';

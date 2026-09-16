@@ -1,3 +1,4 @@
+import {getPublishedLoyalty} from '../../../../../lib/published-loyalty';
 import { NextResponse } from 'next/server';
 import { hasAnyRole, hasRole, ROLES } from '../../../../../lib/auth';
 import { loyalty, sb, tables } from '../../../../../lib/supabase';
@@ -6,6 +7,7 @@ const allowed = [ROLES.FIDELITY, ROLES.EMPLOYEE, ROLES.MANAGER, ROLES.ADMIN];
 export async function GET(request, { params }) {
   if (!hasAnyRole(request, allowed)) return NextResponse.json({ error: 'Accès Fidélité requis' }, { status: 403 });
   try {
+    const program=await getPublishedLoyalty();
     const id = encodeURIComponent(params.id);
     const [members, events, rawCoupons] = await Promise.all([
       sb(`${tables.members}?id=eq.${id}&select=*`),
@@ -31,7 +33,7 @@ export async function GET(request, { params }) {
       promotion_savings: usedCoupons.reduce((sum,coupon)=>sum+Number(coupon.discount_amount_ttc||0),0),
       last_promotion_used: lastUsedCoupon?{label:lastUsedCoupon.label,used_at:lastUsedCoupon.used_at}:null,
     };
-    return NextResponse.json({ member, history, coupons, stampsRequired: loyalty.stampsRequired, rewardLabel: loyalty.rewardLabel });
+    return NextResponse.json({ member, history, coupons, programEnabled:program.enabled, stampsRequired: program.threshold, rewardLabel: program.reward });
   } catch (error) { return NextResponse.json({ error: error.message }, { status: 500 }); }
 }
 
