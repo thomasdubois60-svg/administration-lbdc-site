@@ -150,7 +150,7 @@ function normalizeContent(value) {
     privatization: {
       ...defaultContent.privatization,
       ...(sanitizedSource.privatization && typeof sanitizedSource.privatization === 'object' && !Array.isArray(sanitizedSource.privatization) ? sanitizedSource.privatization : {}),
-      photos: Array.isArray(sanitizedSource.privatization?.photos) && sanitizedSource.privatization.photos.length ? sanitizedSource.privatization.photos : defaultContent.privatization.photos
+      photos: Array.isArray(sanitizedSource.privatization?.photos) ? sanitizedSource.privatization.photos : defaultContent.privatization.photos
     },
     events: Array.isArray(sanitizedSource.events) && sanitizedSource.events.length ? sanitizedSource.events : defaultContent.events,
     reviews: {
@@ -203,6 +203,7 @@ function buildSuccessSummary(actual, expected) {
     ['galleryAlbums', normalizedExpected.galleryAlbums],
     ['menu', normalizedExpected.menu],
     ['story.paragraphs', normalizedExpected.story.paragraphs],
+    ['privatization.photos', normalizedExpected.privatization.photos],
     ['events', normalizedExpected.events]
   ];
   const matched = checks.filter(([path, expectedValue]) => {

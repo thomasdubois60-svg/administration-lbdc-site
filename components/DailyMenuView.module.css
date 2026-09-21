@@ -121,3 +121,9 @@
 
 
 .view>img{height:clamp(180px,32cqw,420px)}
+
+/* Gentle shared shapes, identical in Administration preview. */
+.row img{border-radius:16px}
+.formulas{border-radius:26px}
+.suggestion{border-radius:28px}
+.navigation a{min-height:44px;display:inline-flex;align-items:center}
