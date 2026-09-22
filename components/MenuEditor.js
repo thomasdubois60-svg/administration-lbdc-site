@@ -109,9 +109,9 @@ export default function MenuEditor({globalStyle='bistrot', onGlobalStyleChange, 
      </div>
      {editing === index && <div className={styles.form}>
       <label className="field"><span>Nom</span><input value={product.name || ''} onChange={event => updateProduct(index, {name:event.target.value})}/></label>
-      {isWineCategory(category)&&<label className="field"><span>Type de vin</span><select value={product.wineType||''} onChange={event=>updateProduct(index,{wineType:event.target.value})}><option value="">Non renseigné (Tous)</option>{wineTypes.map(type=><option key={type.value} value={type.value}>{type.label}</option>)}</select></label>}
       <label className="field"><span>Prix</span><input value={product.price || ''} onChange={event => updateProduct(index, {price:event.target.value})}/></label>
       <label className="field"><span>Description</span><textarea rows={3} value={product.description || ''} onChange={event => updateProduct(index, {description:event.target.value})}/></label>
+      {isWineCategory(category)&&<label className="field"><span style={{textTransform:"uppercase"}}>Type de vin</span><select className={styles.wineType} aria-label="Type de vin" aria-describedby={`wine-type-help-${index}`} value={product.wineType||''} onChange={event=>updateProduct(index,{wineType:event.target.value})}><option value="">Non renseigné (Tous)</option>{wineTypes.map(type=><option key={type.value} value={type.value}>{type.label}</option>)}</select><small id={`wine-type-help-${index}`}>Facultatif. Sans type, le vin reste visible dans « Tous ».</small></label>}
       <ImagePicker label="Photo du produit" value={product.image} setStatus={setStatus} onChange={image => updateProduct(index, {image})}/>
       <label className="field"><span>Texte alternatif (facultatif)</span><input value={product.imageAlt || ''} onChange={event => updateProduct(index, {imageAlt:event.target.value})}/></label>
      </div>}

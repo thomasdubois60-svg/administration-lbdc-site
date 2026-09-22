@@ -2392,5 +2392,41 @@
     "es": "Espumoso / Champán",
     "pt": "Espumante / Champanhe",
     "de": "Schaumwein / Champagner"
+  },
+  "Album": {
+    "en": "Album",
+    "es": "Álbum",
+    "pt": "Álbum",
+    "de": "Album"
+  },
+  "Choisir un album": {
+    "en": "Choose an album",
+    "es": "Elegir un álbum",
+    "pt": "Escolher um álbum",
+    "de": "Album auswählen"
+  },
+  "1 photo": {
+    "en": "1 photo",
+    "es": "1 foto",
+    "pt": "1 fotografia",
+    "de": "1 Foto"
+  },
+  "{count} photos": {
+    "en": "{count} photos",
+    "es": "{count} fotos",
+    "pt": "{count} fotografias",
+    "de": "{count} Fotos"
+  },
+  "Demande de privatisation – {type}": {
+    "en": "Private event enquiry – {type}",
+    "es": "Solicitud de evento privado – {type}",
+    "pt": "Pedido de evento privado – {type}",
+    "de": "Anfrage für eine private Veranstaltung – {type}"
+  },
+  "Bonjour,\n\nJe souhaiterais obtenir des informations pour une privatisation concernant : {type}.\n\nDate souhaitée :\nNombre de personnes :\nInformations complémentaires :\n\nMerci.": {
+    "en": "Hello,\n\nI would like information about a private event for: {type}.\n\nPreferred date:\nNumber of guests:\nAdditional information:\n\nThank you.",
+    "es": "Hola,\n\nMe gustaría recibir información sobre un evento privado para: {type}.\n\nFecha deseada:\nNúmero de personas:\nInformación adicional:\n\nGracias.",
+    "pt": "Olá,\n\nGostaria de obter informações sobre um evento privado para: {type}.\n\nData pretendida:\nNúmero de pessoas:\nInformações adicionais:\n\nObrigado.",
+    "de": "Guten Tag,\n\nich möchte Informationen zu einer privaten Veranstaltung erhalten: {type}.\n\nGewünschtes Datum:\nPersonenzahl:\nWeitere Informationen:\n\nVielen Dank."
   }
 }
