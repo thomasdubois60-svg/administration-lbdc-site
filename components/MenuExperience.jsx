@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import {isWineCategory,wineTypes} from '../lib/wine-types';
 import styles from './MenuExperience.module.css';
 export const menuStyles = {bistrot:'Bistrot Élégance', moderne:'Maison Contemporaine', ardoise:'Brasserie Signature', nuit:'Nuit & Velours', atelier:'Atelier / gourmet (ancien)'};
 export function categoryKeys(menu) {
@@ -12,7 +13,13 @@ export function categoryKeys(menu) {
 const photo = value => typeof value==='string' && (value.startsWith('/photos/') || /^https:\/\//i.test(value)) ? (value.startsWith('/photos/') ? 'https://raw.githubusercontent.com/thomasdubois60-svg/lebistrotducoin/main/public'+value : value) : '';
 const prices = value => (value||'').split(/\s*(?:\/|·)\s*/).filter(Boolean).map(part=>part.replace(/^([^:]+):\s*(.+)$/, '$1 — $2'));
 export default function MenuExperience({menu=[], globalStyle='bistrot', activeKey=null, introduction='', onNavigate, preview=false, compact=false}) {
+ const t=value=>value;
  const keys=categoryKeys(menu), index=keys.indexOf(activeKey), category=menu[index];
+ const [wineSelection,setWineSelection]=useState({category:null,type:''});
+ const wineCategory=isWineCategory(category);
+ const availableTypes=wineTypes.filter(type=>category?.items?.some(item=>item.wineType===type.value));
+ const wineFilter=wineSelection.category===activeKey&&availableTypes.some(type=>type.value===wineSelection.type)?wineSelection.type:'';
+ const visibleItems=(category?.items||[]).filter(item=>!wineCategory||!wineFilter||item.wineType===wineFilter);
  const heading=useRef(null);
  useEffect(()=>{if(!compact && heading.current) heading.current.focus({preventScroll:true});},[activeKey,compact]);
  const navigate=(event,key)=>{if(onNavigate && !event.metaKey && !event.ctrlKey && !event.shiftKey && event.button===0){event.preventDefault();onNavigate(key);}};
@@ -33,7 +40,8 @@ export default function MenuExperience({menu=[], globalStyle='bistrot', activeKe
     {photo(category.headerImage)&&<img className={styles.heroImage} src={photo(category.headerImage)} alt=""/>}
     <div className={styles.heroText}><span className={styles.eyebrow}>La carte · {String(index+1).padStart(2,'0')} / {String(menu.length).padStart(2,'0')}</span><h1 ref={heading} tabIndex={-1}>{category.category}</h1>{category.subtitle&&<p>{category.subtitle}</p>}</div>
    </header>
-   <section className={styles.products} aria-label={'Produits — '+category.category}>{(category.items||[]).map((item,i)=>{const image=photo(item.image),priceDescription=Boolean(item.description&&/€/.test(item.description)&&/\b(?:cl|litres?|l)\b/i.test(item.description));return <article className={styles.product} key={i}>
+   {wineCategory&&availableTypes.length>0&&<div className={styles.wineFilters} role="group" aria-label={t('Type de vin')}>{[{value:'',label:'Tous'},...availableTypes].map(type=><button type="button" key={type.value} aria-pressed={wineFilter===type.value} onClick={()=>setWineSelection({category:activeKey,type:type.value})}>{t(type.label)}</button>)}</div>}
+   <section key={wineCategory?wineFilter:undefined} className={styles.products} aria-label={'Produits — '+category.category}>{visibleItems.map((item,i)=>{const image=photo(item.image),priceDescription=Boolean(item.description&&/€/.test(item.description)&&/\b(?:cl|litres?|l)\b/i.test(item.description));return <article className={styles.product} key={i}>
     {image&&<img className={styles.productImage} src={image} alt={item.imageAlt||item.name} loading="lazy"/>}<div className={styles.productText}><h2>{item.name}</h2>{item.description&&!priceDescription&&<p>{item.description}</p>}</div><div className={styles.price}>{prices([priceDescription?item.description:'',item.price].filter(Boolean).join(' · ')).map((part,j)=><span key={j}>{part}</span>)}</div>
    </article>})}{!category.items?.length&&<p className={styles.notice}>De nouvelles propositions arrivent bientôt.</p>}</section>
    {!compact&&<footer className={styles.footer}><p>Une autre envie ?</p><nav className={styles.pagination} aria-label="Catégories précédente et suivante">{index>0?link(keys[index-1],<><small>← Précédent</small><strong>{menu[index-1].category}</strong></>,styles.pageLink):<span/>}{index<menu.length-1?link(keys[index+1],<><small>Suivant →</small><strong>{menu[index+1].category}</strong></>,styles.pageLink):link(null,<><small>Carte complète ↗</small><strong>Toutes les catégories</strong></>,styles.pageLink)}</nav>{link(null,'Revenir à la liste des catégories',styles.back)}</footer>}

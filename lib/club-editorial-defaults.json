@@ -1,0 +1,13 @@
+{
+  "presentation": "Bienvenue dans votre Club LBDC : retrouvez en un coup d’œil les avantages que vous pouvez utiliser aujourd’hui et tout ce que votre fidélité vous a déjà apporté.",
+  "programExplanation": "À chaque formule achetée, un tampon est ajouté à votre carte. Après 10 tampons, votre prochaine formule complète est offerte.",
+  "conditions": "Une seule validation fidélité par jour et par personne. Les avantages sont personnels, non cessibles et utilisables pendant leur période de validité.",
+  "rewards": [
+    "Une formule complète offerte après 10 tampons",
+    "Des coupons et offres réservés aux membres"
+  ],
+  "availableTitle": "Mes avantages disponibles",
+  "historyTitle": "Historique de mes avantages",
+  "summaryTitle": "Mon bilan Club LBDC",
+  "savingsMessage": "Grâce au Club LBDC vous avez déjà économisé {amount}."
+}

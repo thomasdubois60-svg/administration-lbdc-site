@@ -1,0 +1,2396 @@
+{
+  "Lundi au jeudi : 7h–20h\nVendredi : 7h–15\nRestauration : 11h45–14h": {
+    "en": "Monday to Thursday: 7 am–8 pm\nFriday: 7 am–3 pm\nFood served: 11:45 am–2 pm",
+    "es": "De lunes a jueves: 7:00–20:00\nViernes: 7:00–15:00\nComidas: 11:45–14:00",
+    "pt": "Segunda a quinta: 7h–20h\nSexta: 7h–15h\nRefeições: 11h45–14h",
+    "de": "Montag bis Donnerstag: 7–20 Uhr\nFreitag: 7–15 Uhr\nKüche: 11:45–14 Uhr"
+  },
+  "Le Bistrot est exceptionnellement fermé jusqu’au 26/08/2026": {
+    "en": "The Bistrot is exceptionally closed until 26/08/2026",
+    "es": "El Bistrot permanecerá cerrado excepcionalmente hasta el 26/08/2026",
+    "pt": "O Bistrot está excecionalmente encerrado até 26/08/2026",
+    "de": "Das Bistrot ist ausnahmsweise bis zum 26.08.2026 geschlossen"
+  },
+  "Le Bistrot Du Coin est de retour — Nous vous attendons !": {
+    "en": "Le Bistrot Du Coin is back — We look forward to seeing you!",
+    "es": "Le Bistrot Du Coin vuelve a abrir. ¡Os esperamos!",
+    "pt": "O Le Bistrot Du Coin está de volta — Esperamos por si!",
+    "de": "Le Bistrot Du Coin ist wieder da — Wir freuen uns auf Sie!"
+  },
+  "Le Bistrot est avant tout un lieu où l’on vient se rencontrer, passer et partager de bons moments. Voilà ce que vous trouverez en poussant nos portes.": {
+    "en": "Above all, the Bistrot is a place to meet, spend time together and share good moments. That is what awaits you when you walk through our doors.",
+    "es": "El Bistrot es, ante todo, un lugar para encontrarse, pasar tiempo juntos y compartir buenos momentos. Eso es lo que descubrirás al cruzar nuestras puertas.",
+    "pt": "O Bistrot é, acima de tudo, um lugar para nos encontrarmos, passarmos tempo juntos e partilharmos bons momentos. É isso que encontrará ao entrar.",
+    "de": "Das Bistrot ist vor allem ein Ort, an dem Menschen zusammenkommen, Zeit miteinander verbringen und schöne Momente teilen. Genau das erwartet Sie, wenn Sie bei uns eintreten."
+  },
+  "Une formule qui change au fil des envies du chef et des produits disponibles.": {
+    "en": "A set menu that changes with the chef's inspiration and the ingredients available.",
+    "es": "Un menú que cambia según la inspiración del chef y los productos disponibles.",
+    "pt": "Um menu que muda ao sabor da inspiração do chef e dos produtos disponíveis.",
+    "de": "Ein Menü, das sich nach den Ideen des Küchenchefs und den verfügbaren Zutaten richtet."
+  },
+  "Des recettes de bistrot, généreuses et sans détour.": {
+    "en": "Generous, straightforward bistro cooking.",
+    "es": "Recetas de bistrot, generosas y sin complicaciones.",
+    "pt": "Receitas de bistrot, generosas e sem complicações.",
+    "de": "Großzügige, unkomplizierte Bistroküche."
+  },
+  "Quelques images de notre cuisine et de l’ambiance du Bistrot.": {
+    "en": "A few glimpses of our food and the atmosphere at the Bistrot.",
+    "es": "Unas imágenes de nuestra cocina y del ambiente del Bistrot.",
+    "pt": "Algumas imagens da nossa cozinha e do ambiente do Bistrot.",
+    "de": "Ein paar Eindrücke von unserer Küche und der Atmosphäre im Bistrot."
+  },
+  "Une question, une réservation ou simplement l’envie de venir nous voir ?": {
+    "en": "A question, a booking, or simply feel like visiting us?",
+    "es": "¿Una pregunta, una reserva o simplemente ganas de venir a vernos?",
+    "pt": "Tem uma pergunta, quer reservar ou simplesmente fazer-nos uma visita?",
+    "de": "Eine Frage, eine Reservierung oder einfach Lust, uns zu besuchen?"
+  },
+  "Concerts, karaokés, soirées à thème et rendez-vous à ne pas manquer.": {
+    "en": "Concerts, karaoke, themed evenings and dates for your diary.",
+    "es": "Conciertos, karaoke, noches temáticas y citas que no te puedes perder.",
+    "pt": "Concertos, karaoke, noites temáticas e encontros a não perder.",
+    "de": "Konzerte, Karaoke, Themenabende und Termine, die Sie nicht verpassen sollten."
+  },
+  "Retrouvez les avis de nos clients et suivez toute l’actualité du Bistrot.": {
+    "en": "Read our guests' reviews and keep up with all the latest news from the Bistrot.",
+    "es": "Consulta las opiniones de nuestros clientes y sigue todas las novedades del Bistrot.",
+    "pt": "Leia as opiniões dos nossos clientes e acompanhe todas as novidades do Bistrot.",
+    "de": "Lesen Sie die Bewertungen unserer Gäste und erfahren Sie alle Neuigkeiten aus dem Bistrot."
+  },
+  "Aujourd’hui": {
+    "en": "Today",
+    "es": "Hoy",
+    "pt": "Hoje",
+    "de": "Heute"
+  },
+  "3 entrées au choix": {
+    "en": "Choice of 3 starters",
+    "es": "3 entrantes a elegir",
+    "pt": "3 entradas à escolha",
+    "de": "3 Vorspeisen zur Auswahl"
+  },
+  "2 plats au choix": {
+    "en": "Choice of 2 main courses",
+    "es": "2 platos principales a elegir",
+    "pt": "2 pratos principais à escolha",
+    "de": "2 Hauptgerichte zur Auswahl"
+  },
+  "3 desserts au choix": {
+    "en": "Choice of 3 desserts",
+    "es": "3 postres a elegir",
+    "pt": "3 sobremesas à escolha",
+    "de": "3 Desserts zur Auswahl"
+  },
+  "+4 € sur le prix du plat du jour ou de la formule choisie": {
+    "en": "€4 supplement on the daily special or your chosen set menu",
+    "es": "Suplemento de 4 € sobre el plato del día o el menú elegido",
+    "pt": "Suplemento de 4 € sobre o prato do dia ou o menu escolhido",
+    "de": "4 € Aufpreis zum Tagesgericht oder zum gewählten Menü"
+  },
+  "Entrée seule": {
+    "en": "Starter only",
+    "es": "Solo entrante",
+    "pt": "Só entrada",
+    "de": "Nur Vorspeise"
+  },
+  "Plat du jour": {
+    "en": "Daily special",
+    "es": "Plato del día",
+    "pt": "Prato do dia",
+    "de": "Tagesgericht"
+  },
+  "Dessert seul": {
+    "en": "Dessert only",
+    "es": "Solo postre",
+    "pt": "Só sobremesa",
+    "de": "Nur Dessert"
+  },
+  "Entrée + plat ou plat + dessert": {
+    "en": "Starter + main or main + dessert",
+    "es": "Entrante + principal o principal + postre",
+    "pt": "Entrada + prato ou prato + sobremesa",
+    "de": "Vorspeise + Hauptgericht oder Hauptgericht + Dessert"
+  },
+  "Entrée + plat + dessert": {
+    "en": "Starter + main + dessert",
+    "es": "Entrante + principal + postre",
+    "pt": "Entrada + prato + sobremesa",
+    "de": "Vorspeise + Hauptgericht + Dessert"
+  },
+  "Oeuf mayo": {
+    "en": "Egg with mayonnaise",
+    "es": "Huevo con mayonesa",
+    "pt": "Ovo com maionese",
+    "de": "Ei mit Mayonnaise"
+  },
+  "Terrine du jour": {
+    "en": "Terrine of the day",
+    "es": "Terrina del día",
+    "pt": "Terrina do dia",
+    "de": "Terrine des Tages"
+  },
+  "Salade de pomme de terre": {
+    "en": "Potato salad",
+    "es": "Ensalada de patata",
+    "pt": "Salada de batata",
+    "de": "Kartoffelsalat"
+  },
+  "saucisse": {
+    "en": "Sausage",
+    "es": "Salchicha",
+    "pt": "Salsicha",
+    "de": "Bratwurst"
+  },
+  "Plat du jour 2": {
+    "en": "Daily special 2",
+    "es": "Plato del día 2",
+    "pt": "Prato do dia 2",
+    "de": "Tagesgericht 2"
+  },
+  "Suggestion du chef": {
+    "en": "Chef's suggestion",
+    "es": "Sugerencia del chef",
+    "pt": "Sugestão do chef",
+    "de": "Empfehlung des Küchenchefs"
+  },
+  "Faux filet et ses frites maison": {
+    "en": "Sirloin steak with homemade fries",
+    "es": "Entrecot con patatas fritas caseras",
+    "pt": "Bife do lombo com batatas fritas caseiras",
+    "de": "Rumpsteak mit hausgemachten Pommes frites"
+  },
+  "Dessert du jour 1": {
+    "en": "Dessert of the day 1",
+    "es": "Postre del día 1",
+    "pt": "Sobremesa do dia 1",
+    "de": "Dessert des Tages 1"
+  },
+  "Dessert du jour 2": {
+    "en": "Dessert of the day 2",
+    "es": "Postre del día 2",
+    "pt": "Sobremesa do dia 2",
+    "de": "Dessert des Tages 2"
+  },
+  "Nos pressions": {
+    "en": "Draught beers",
+    "es": "Cervezas de barril",
+    "pt": "Cervejas à pressão",
+    "de": "Biere vom Fass"
+  },
+  "Blonde française 5,8%": {
+    "en": "French blonde beer, 5.8%",
+    "es": "Cerveza rubia francesa, 5,8 %",
+    "pt": "Cerveja loira francesa, 5,8%",
+    "de": "Französisches helles Bier, 5,8 %"
+  },
+  "Blonde française non filtrée 7.5%": {
+    "en": "Unfiltered French blonde beer, 7.5%",
+    "es": "Cerveza rubia francesa sin filtrar, 7,5 %",
+    "pt": "Cerveja loira francesa não filtrada, 7,5%",
+    "de": "Ungefiltertes französisches helles Bier, 7,5 %"
+  },
+  "IPA française 6%": {
+    "en": "French IPA, 6%",
+    "es": "IPA francesa, 6 %",
+    "pt": "IPA francesa, 6%",
+    "de": "Französisches IPA, 6 %"
+  },
+  "Bière rouge à la griotte 7,5%": {
+    "en": "Red beer with sour cherry, 7.5%",
+    "es": "Cerveza roja con guinda, 7,5 %",
+    "pt": "Cerveja vermelha com ginja, 7,5%",
+    "de": "Rotes Bier mit Sauerkirsche, 7,5 %"
+  },
+  "Goût citron jaune/citron vert 4%": {
+    "en": "Lemon and lime flavour, 4%",
+    "es": "Sabor a limón y lima, 4 %",
+    "pt": "Sabor a limão e lima, 4%",
+    "de": "Zitronen- und Limettengeschmack, 4 %"
+  },
+  "Bières en bouteille": {
+    "en": "Bottled beers",
+    "es": "Cervezas de botella",
+    "pt": "Cervejas de garrafa",
+    "de": "Flaschenbiere"
+  },
+  "Belgique_ Blonde triple, fruitée, épicée et ronde. 10.0°": {
+    "en": "Belgium — Blonde triple, fruity, spicy and rounded. 10.0%",
+    "es": "Bélgica — Triple rubia, afrutada, especiada y redonda. 10,0 %",
+    "pt": "Bélgica — Tripel loira, frutada, especiada e redonda. 10,0%",
+    "de": "Belgien — Helles Tripel, fruchtig, würzig und rund. 10,0 %"
+  },
+  "Belgique_ Trappiste sèche, houblonnée, avec une note sauvage. 6.2°": {
+    "en": "Belgium — Dry, hoppy Trappist beer with a wild note. 6.2%",
+    "es": "Bélgica — Trapense seca y lupulada, con una nota salvaje. 6,2 %",
+    "pt": "Bélgica — Trapista seca e lupulada, com uma nota selvagem. 6,2%",
+    "de": "Belgien — Trockenes, hopfiges Trappistenbier mit einer wilden Note. 6,2 %"
+  },
+  "Belgique_Blonde fruitée, épicée et légèrement houblonnée. 8.0°": {
+    "en": "Belgium — Fruity, spicy and lightly hopped blonde beer. 8.0%",
+    "es": "Bélgica — Rubia afrutada, especiada y ligeramente lupulada. 8,0 %",
+    "pt": "Bélgica — Loira frutada, especiada e ligeiramente lupulada. 8,0%",
+    "de": "Belgien — Fruchtiges, würziges und leicht hopfiges helles Bier. 8,0 %"
+  },
+  "Belgique_Fruité et gourmand, notes de cerise mûre, fraise, amande et légère touche épicée. 8.0°": {
+    "en": "Belgium — Rich and fruity, with ripe cherry, strawberry and almond notes and a hint of spice. 8.0%",
+    "es": "Bélgica — Afrutada y golosa, con notas de cereza madura, fresa, almendra y un ligero toque especiado. 8,0 %",
+    "pt": "Bélgica — Frutada e gulosa, com notas de cereja madura, morango, amêndoa e um ligeiro toque de especiarias. 8,0%",
+    "de": "Belgien — Fruchtig und vollmundig, mit Noten von reifen Kirschen, Erdbeeren, Mandeln und einer leichten Würze. 8,0 %"
+  },
+  "Belgique_Goût : Blonde forte, fruitée, sèche et finement amère. 8.5°": {
+    "en": "Belgium — Strong blonde beer, fruity, dry and delicately bitter. 8.5%",
+    "es": "Bélgica — Rubia fuerte, afrutada, seca y delicadamente amarga. 8,5 %",
+    "pt": "Bélgica — Loira forte, frutada, seca e delicadamente amarga. 8,5%",
+    "de": "Belgien — Starkes helles Bier, fruchtig, trocken und feinherb. 8,5 %"
+  },
+  "Belgique_Tripel complexe, florale, vanillée et épicée. 8.4°": {
+    "en": "Belgium — Complex tripel with floral, vanilla and spice notes. 8.4%",
+    "es": "Bélgica — Tripel compleja, floral, con notas de vainilla y especias. 8,4 %",
+    "pt": "Bélgica — Tripel complexa, floral, com notas de baunilha e especiarias. 8,4%",
+    "de": "Belgien — Komplexes Tripel mit floralen Noten, Vanille und Gewürzen. 8,4 %"
+  },
+  "Belgique_Ambrée riche et gourmande, notes de biscuit, banane, orange, caramel et épices. 8.4°": {
+    "en": "Belgium — Rich, full-bodied amber beer with biscuit, banana, orange, caramel and spice notes. 8.4%",
+    "es": "Bélgica — Ámbar rica y golosa, con notas de galleta, plátano, naranja, caramelo y especias. 8,4 %",
+    "pt": "Bélgica — Âmbar rica e gulosa, com notas de bolacha, banana, laranja, caramelo e especiarias. 8,4%",
+    "de": "Belgien — Vollmundiges bernsteinfarbenes Bier mit Noten von Gebäck, Banane, Orange, Karamell und Gewürzen. 8,4 %"
+  },
+  "Belgique_Blonde forte, ronde, fruitée et légèrement épicée. 8.5°": {
+    "en": "Belgium — Strong blonde beer, rounded, fruity and lightly spiced. 8.5%",
+    "es": "Bélgica — Rubia fuerte, redonda, afrutada y ligeramente especiada. 8,5 %",
+    "pt": "Bélgica — Loira forte, redonda, frutada e ligeiramente especiada. 8,5%",
+    "de": "Belgien — Starkes helles Bier, rund, fruchtig und leicht würzig. 8,5 %"
+  },
+  "Belgique_Blanche douce et rafraîchissante, aux notes d’orange, coriandre, agrumes et épices. 4.9°": {
+    "en": "Belgium — Smooth, refreshing wheat beer with orange, coriander, citrus and spice notes. 4.9%",
+    "es": "Bélgica — Cerveza blanca suave y refrescante, con notas de naranja, cilantro, cítricos y especias. 4,9 %",
+    "pt": "Bélgica — Cerveja branca suave e refrescante, com notas de laranja, coentros, citrinos e especiarias. 4,9%",
+    "de": "Belgien — Mildes, erfrischendes Weißbier mit Noten von Orange, Koriander, Zitrusfrüchten und Gewürzen. 4,9 %"
+  },
+  "Belgique_Blonde d’abbaye, douce, maltée, avec vanille et clou de girofle. 6.6°": {
+    "en": "Belgium — Smooth, malty blonde abbey beer with vanilla and clove notes. 6.6%",
+    "es": "Bélgica — Rubia de abadía suave y maltosa, con vainilla y clavo. 6,6 %",
+    "pt": "Bélgica — Loira de abadia suave e maltada, com baunilha e cravinho. 6,6%",
+    "de": "Belgien — Mildes, malziges helles Abteibier mit Vanille und Gewürznelke. 6,6 %"
+  },
+  "À partager… ou pas": {
+    "en": "To share… or not",
+    "es": "Para compartir… o no",
+    "pt": "Para partilhar… ou não",
+    "de": "Zum Teilen … oder auch nicht"
+  },
+  "Planche mixte": {
+    "en": "Mixed sharing board",
+    "es": "Tabla mixta",
+    "pt": "Tábua mista",
+    "de": "Gemischte Platte"
+  },
+  "Rosette de Lyon, chorizo, terrine du moment, jambon de pays, jambon blanc et sélection de 3 fromages": {
+    "en": "Rosette de Lyon salami, chorizo, terrine of the moment, cured ham, cooked ham and a selection of 3 cheeses",
+    "es": "Rosette de Lyon, chorizo, terrina del momento, jamón curado, jamón cocido y selección de 3 quesos",
+    "pt": "Rosette de Lyon, chouriço, terrina do momento, presunto, fiambre e uma seleção de 3 queijos",
+    "de": "Rosette-de-Lyon-Salami, Chorizo, wechselnde Terrine, Rohschinken, Kochschinken und eine Auswahl von 3 Käsesorten"
+  },
+  "Saucisson sec du terroir": {
+    "en": "Traditional dry-cured sausage",
+    "es": "Salchichón tradicional",
+    "pt": "Salsichão seco tradicional",
+    "de": "Traditionelle luftgetrocknete Salami"
+  },
+  "Cèpes, nature ou piment d’Espelette": {
+    "en": "Porcini mushroom, plain or Espelette pepper",
+    "es": "Con boletus, natural o con pimiento de Espelette",
+    "pt": "Com cogumelos porcini, simples ou com pimento de Espelette",
+    "de": "Mit Steinpilzen, natur oder mit Piment d’Espelette"
+  },
+  "Chips Lay’s 145 g": {
+    "en": "Lay’s crisps, 145 g",
+    "es": "Patatas fritas Lay’s, 145 g",
+    "pt": "Batatas fritas Lay’s, 145 g",
+    "de": "Lay’s Chips, 145 g"
+  },
+  "Nature, barbecue…": {
+    "en": "Ready salted, barbecue…",
+    "es": "Al punto de sal, barbacoa…",
+    "pt": "Simples, barbecue…",
+    "de": "Gesalzen, Barbecue …"
+  },
+  "Cocktails du moment": {
+    "en": "Seasonal cocktails",
+    "es": "Cócteles del momento",
+    "pt": "Cocktails do momento",
+    "de": "Aktuelle Cocktails"
+  },
+  "Tequila, jus d’orange, sirop de grenadine": {
+    "en": "Tequila, orange juice and grenadine syrup",
+    "es": "Tequila, zumo de naranja y sirope de granadina",
+    "pt": "Tequila, sumo de laranja e xarope de grenadina",
+    "de": "Tequila, Orangensaft und Grenadinesirup"
+  },
+  "Délices des îles": {
+    "en": "Island Delight",
+    "es": "Delicia de las islas",
+    "pt": "Delícia das ilhas",
+    "de": "Inselgenuss"
+  },
+  "Rhum blanc martiniquais, jus de maracuja, sirop de grenadine": {
+    "en": "White rum from Martinique, passion fruit juice and grenadine syrup",
+    "es": "Ron blanco de Martinica, zumo de maracuyá y sirope de granadina",
+    "pt": "Rum branco da Martinica, sumo de maracujá e xarope de grenadina",
+    "de": "Weißer Rum aus Martinique, Maracujasaft und Grenadinesirup"
+  },
+  "Softs": {
+    "en": "Soft drinks",
+    "es": "Refrescos",
+    "pt": "Refrigerantes",
+    "de": "Alkoholfreie Getränke"
+  },
+  "Coca-Cola, Coca-Cola Zéro, Fuze Tea pêche, Schweppes, Orangina, Perrier, limonade et jus de fruits": {
+    "en": "Coca-Cola, Coca-Cola Zero, Fuze Tea peach, Schweppes, Orangina, Perrier, lemonade and fruit juices",
+    "es": "Coca-Cola, Coca-Cola Zero, Fuze Tea de melocotón, Schweppes, Orangina, Perrier, limonada y zumos de frutas",
+    "pt": "Coca-Cola, Coca-Cola Zero, Fuze Tea de pêssego, Schweppes, Orangina, Perrier, limonada e sumos de fruta",
+    "de": "Coca-Cola, Coca-Cola Zero, Fuze Tea Pfirsich, Schweppes, Orangina, Perrier, Limonade und Fruchtsäfte"
+  },
+  "Bières sans alcool": {
+    "en": "Alcohol-free beers",
+    "es": "Cervezas sin alcohol",
+    "pt": "Cervejas sem álcool",
+    "de": "Alkoholfreie Biere"
+  },
+  "Boissons chaudes": {
+    "en": "Hot drinks",
+    "es": "Bebidas calientes",
+    "pt": "Bebidas quentes",
+    "de": "Heißgetränke"
+  },
+  "Expresso / Café serré": {
+    "en": "Espresso / Ristretto",
+    "es": "Espreso / Café corto",
+    "pt": "Expresso / Café curto",
+    "de": "Espresso / Ristretto"
+  },
+  "Allongé / Noisette": {
+    "en": "Long coffee / Espresso with a dash of milk",
+    "es": "Café largo / Cortado",
+    "pt": "Café cheio / Expresso com um pouco de leite",
+    "de": "Verlängerter / Espresso mit einem Schuss Milch"
+  },
+  "Thé / Café crème": {
+    "en": "Tea / Coffee with milk",
+    "es": "Té / Café con leche",
+    "pt": "Chá / Café com leite",
+    "de": "Tee / Milchkaffee"
+  },
+  "Chocolat chaud": {
+    "en": "Hot chocolate",
+    "es": "Chocolate caliente",
+    "pt": "Chocolate quente",
+    "de": "Heiße Schokolade"
+  },
+  "Apéritifs": {
+    "en": "Aperitifs",
+    "es": "Aperitivos",
+    "pt": "Aperitivos",
+    "de": "Aperitifs"
+  },
+  "Cassis, mûre, pêche ou framboise": {
+    "en": "Blackcurrant, blackberry, peach or raspberry",
+    "es": "Grosella negra, mora, melocotón o frambuesa",
+    "pt": "Groselha preta, amora, pêssego ou framboesa",
+    "de": "Schwarze Johannisbeere, Brombeere, Pfirsich oder Himbeere"
+  },
+  "Kir pétillant": {
+    "en": "Sparkling kir",
+    "es": "Kir espumoso",
+    "pt": "Kir espumante",
+    "de": "Kir mit Schaumwein"
+  },
+  "Pétillant nature": {
+    "en": "Sparkling wine",
+    "es": "Vino espumoso",
+    "pt": "Vinho espumante",
+    "de": "Schaumwein"
+  },
+  "Blanc de blancs brut": {
+    "en": "Brut blanc de blancs",
+    "es": "Blanc de blancs brut",
+    "pt": "Blanc de blancs bruto",
+    "de": "Blanc de Blancs brut"
+  },
+  "Rouge ou blanc": {
+    "en": "Red or white",
+    "es": "Tinto o blanco",
+    "pt": "Tinto ou branco",
+    "de": "Rot oder weiß"
+  },
+  "Notre sélection de vins": {
+    "en": "Our wine selection",
+    "es": "Nuestra selección de vinos",
+    "pt": "A nossa seleção de vinhos",
+    "de": "Unsere Weinauswahl"
+  },
+  "Masfleury — rosé de Provence": {
+    "en": "Masfleury — Provence rosé",
+    "es": "Masfleury — rosado de Provenza",
+    "pt": "Masfleury — rosé da Provença",
+    "de": "Masfleury — Rosé aus der Provence"
+  },
+  "Saint-Nicolas-de-Bourgueil — rouge de Loire": {
+    "en": "Saint-Nicolas-de-Bourgueil — Loire red",
+    "es": "Saint-Nicolas-de-Bourgueil — tinto del Loira",
+    "pt": "Saint-Nicolas-de-Bourgueil — tinto do Loire",
+    "de": "Saint-Nicolas-de-Bourgueil — Rotwein von der Loire"
+  },
+  "Whiskys": {
+    "en": "Whiskies",
+    "es": "Whiskies",
+    "pt": "Whiskies",
+    "de": "Whiskys"
+  },
+  "Écosse_\n    Doux et rond, notes de bois, fruits secs et épices.": {
+    "en": "Scotland — Smooth and rounded, with wood, dried fruit and spice notes.",
+    "es": "Escocia — Suave y redondo, con notas de madera, frutos secos y especias.",
+    "pt": "Escócia — Suave e redondo, com notas de madeira, frutos secos e especiarias.",
+    "de": "Schottland — Mild und rund, mit Noten von Holz, Trockenfrüchten und Gewürzen."
+  },
+  "Irlande_\n    Souple et gourmand, notes de vanille, noix, épices et xérès.": {
+    "en": "Ireland — Smooth and rich, with vanilla, nut, spice and sherry notes.",
+    "es": "Irlanda — Suave y goloso, con notas de vainilla, nueces, especias y jerez.",
+    "pt": "Irlanda — Suave e rico, com notas de baunilha, nozes, especiarias e xerez.",
+    "de": "Irland — Weich und vollmundig, mit Noten von Vanille, Nüssen, Gewürzen und Sherry."
+  },
+  "Tennessee, États-Unis_\n    Rond et boisé, notes de caramel et de vanille.": {
+    "en": "Tennessee, USA — Rounded and woody, with caramel and vanilla notes.",
+    "es": "Tennessee, Estados Unidos — Redondo y amaderado, con notas de caramelo y vainilla.",
+    "pt": "Tennessee, Estados Unidos — Redondo e amadeirado, com notas de caramelo e baunilha.",
+    "de": "Tennessee, USA — Rund und holzig, mit Karamell- und Vanillenoten."
+  },
+  "Speyside, Écosse_\n    Doux et fruité, notes d’ananas, poire et vanille.": {
+    "en": "Speyside, Scotland — Smooth and fruity, with pineapple, pear and vanilla notes.",
+    "es": "Speyside, Escocia — Suave y afrutado, con notas de piña, pera y vainilla.",
+    "pt": "Speyside, Escócia — Suave e frutado, com notas de ananás, pera e baunilha.",
+    "de": "Speyside, Schottland — Mild und fruchtig, mit Noten von Ananas, Birne und Vanille."
+  },
+  "Hiroshima, Japon_\n    Fin et doux, notes de fruits, noix, vanille et épices.": {
+    "en": "Hiroshima, Japan — Delicate and smooth, with fruit, nut, vanilla and spice notes.",
+    "es": "Hiroshima, Japón — Fino y suave, con notas de fruta, nueces, vainilla y especias.",
+    "pt": "Hiroshima, Japão — Delicado e suave, com notas de fruta, nozes, baunilha e especiarias.",
+    "de": "Hiroshima, Japan — Fein und mild, mit Noten von Früchten, Nüssen, Vanille und Gewürzen."
+  },
+  "Écosse_\n    Légèrement tourbé, fumé, malté et chaleureux.": {
+    "en": "Scotland — Lightly peated, smoky, malty and warming.",
+    "es": "Escocia — Ligeramente turbado, ahumado, maltoso y cálido.",
+    "pt": "Escócia — Ligeiramente turfado, fumado, maltado e quente.",
+    "de": "Schottland — Leicht torfig, rauchig, malzig und wärmend."
+  },
+  "Islay, Écosse_\n    Très tourbé, fumé et marin, notes de cendre et de sel.": {
+    "en": "Islay, Scotland — Heavily peated, smoky and maritime, with ash and salt notes.",
+    "es": "Islay, Escocia — Muy turbado, ahumado y marino, con notas de ceniza y sal.",
+    "pt": "Islay, Escócia — Muito turfado, fumado e marítimo, com notas de cinza e sal.",
+    "de": "Islay, Schottland — Kräftig torfig, rauchig und maritim, mit Asche- und Salznoten."
+  },
+  "Depuis 2021": {
+    "en": "Since 2021",
+    "es": "Desde 2021",
+    "pt": "Desde 2021",
+    "de": "Seit 2021"
+  },
+  "La petite histoire du Bistrot": {
+    "en": "The story of our Bistrot",
+    "es": "La historia de nuestro Bistrot",
+    "pt": "A história do nosso Bistrot",
+    "de": "Die Geschichte unseres Bistrots"
+  },
+  "C’est l’histoire de deux passionnés réunis autour du goût, de l’accueil et du plaisir de partager.": {
+    "en": "This is the story of two enthusiasts brought together by good food, hospitality and the joy of sharing.",
+    "es": "Esta es la historia de dos apasionados unidos por el buen gusto, la hospitalidad y el placer de compartir.",
+    "pt": "Esta é a história de dois apaixonados unidos pelo gosto, pela hospitalidade e pelo prazer de partilhar.",
+    "de": "Dies ist die Geschichte zweier leidenschaftlicher Gastgeber, verbunden durch guten Geschmack, Gastfreundschaft und die Freude am Teilen."
+  },
+  "Depuis tout petit, Ismaël rêvait d’ouvrir son propre restaurant. Il a suivi les études qui lui ont permis de faire de sa passion son métier. En 2006, après plusieurs années d’expérience, il ouvre son premier restaurant, qu’il revendra treize ans plus tard.": {
+    "en": "Ever since he was a child, Ismaël dreamed of opening his own restaurant. He trained to turn his passion into his profession. In 2006, after several years of experience, he opened his first restaurant, which he sold thirteen years later.",
+    "es": "Desde pequeño, Ismaël soñaba con abrir su propio restaurante. Estudió para convertir su pasión en su profesión. En 2006, tras varios años de experiencia, abrió su primer restaurante, que vendería trece años después.",
+    "pt": "Desde pequeno, Ismaël sonhava abrir o seu próprio restaurante. Seguiu os estudos que lhe permitiram transformar a paixão em profissão. Em 2006, após vários anos de experiência, abriu o primeiro restaurante, que venderia treze anos mais tarde.",
+    "de": "Schon als Kind träumte Ismaël davon, ein eigenes Restaurant zu eröffnen. Mit seiner Ausbildung machte er seine Leidenschaft zum Beruf. 2006 eröffnete er nach mehreren Jahren Berufserfahrung sein erstes Restaurant, das er dreizehn Jahre später verkaufte."
+  },
+  "Thomas, lui, rêvait simplement de travailler avec plaisir. Il découvre la restauration en extra pendant ses études, en 2013, et se prend rapidement au jeu du service et de l’animation en salle.": {
+    "en": "Thomas simply dreamed of enjoying his work. He discovered the restaurant world through part-time work while studying in 2013, and soon developed a passion for service and bringing the dining room to life.",
+    "es": "Thomas, por su parte, soñaba simplemente con disfrutar de su trabajo. Descubrió la restauración haciendo trabajos extra durante sus estudios, en 2013, y pronto se apasionó por el servicio y por dar vida a la sala.",
+    "pt": "Thomas, por seu lado, sonhava simplesmente trabalhar com prazer. Descobriu a restauração fazendo trabalhos extra durante os estudos, em 2013, e rapidamente ganhou gosto pelo serviço e por dar vida à sala.",
+    "de": "Thomas träumte einfach davon, mit Freude zu arbeiten. 2013 entdeckte er die Gastronomie bei Nebenjobs während seines Studiums und fand schnell Gefallen daran, Gäste zu bedienen und Leben in den Gastraum zu bringen."
+  },
+  "En 2019, les deux passionnés se rencontrent. Deux ans plus tard, le 2 novembre 2021, ils ouvrent ensemble Le Bistrot Du Coin : Ismaël pour régaler vos papilles en cuisine, et Thomas pour vous servir et faire vivre la salle.": {
+    "en": "In 2019, the two enthusiasts met. Two years later, on 2 November 2021, they opened Le Bistrot Du Coin together: Ismaël delights your taste buds in the kitchen, while Thomas looks after you and brings the dining room to life.",
+    "es": "En 2019, los dos apasionados se conocieron. Dos años después, el 2 de noviembre de 2021, abrieron juntos Le Bistrot Du Coin: Ismaël para deleitar vuestro paladar en la cocina y Thomas para atenderos y dar vida a la sala.",
+    "pt": "Em 2019, os dois apaixonados conheceram-se. Dois anos depois, a 2 de novembro de 2021, abriram juntos o Le Bistrot Du Coin: Ismaël para deliciar o seu paladar na cozinha e Thomas para o receber e dar vida à sala.",
+    "de": "2019 lernten sich die beiden kennen. Zwei Jahre später, am 2. November 2021, eröffneten sie gemeinsam Le Bistrot Du Coin: Ismaël verwöhnt Ihren Gaumen in der Küche, während Thomas Sie bedient und für Leben im Gastraum sorgt."
+  },
+  "De cette rencontre est née une belle amitié, puis une adresse chaleureuse qui grandit chaque année grâce à vous.": {
+    "en": "That meeting grew into a wonderful friendship, then into a welcoming place that continues to grow every year thanks to you.",
+    "es": "De aquel encuentro nació una hermosa amistad y, después, un lugar acogedor que crece cada año gracias a vosotros.",
+    "pt": "Desse encontro nasceu uma bela amizade e, depois, um espaço acolhedor que cresce todos os anos graças a si.",
+    "de": "Aus dieser Begegnung entstand eine wunderbare Freundschaft und schließlich ein gastlicher Ort, der dank Ihnen jedes Jahr weiterwächst."
+  },
+  "Le bar chaleureux du Bistrot Du Coin": {
+    "en": "The welcoming bar at Le Bistrot Du Coin",
+    "es": "El acogedor bar de Le Bistrot Du Coin",
+    "pt": "O bar acolhedor do Le Bistrot Du Coin",
+    "de": "Die gemütliche Bar im Le Bistrot Du Coin"
+  },
+  "Privatisez Le Bistrot": {
+    "en": "Make the Bistrot yours",
+    "es": "Reserva el Bistrot en exclusiva",
+    "pt": "Reserve o Bistrot em exclusivo",
+    "de": "Das Bistrot ganz für Sie"
+  },
+  "Un moment rien qu’à vous, imaginé selon vos envies.": {
+    "en": "A moment just for you, created around your wishes.",
+    "es": "Un momento solo para vosotros, pensado a vuestra medida.",
+    "pt": "Um momento só para si, pensado à sua medida.",
+    "de": "Ein Moment nur für Sie, ganz nach Ihren Wünschen gestaltet."
+  },
+  "Nous pouvons privatiser le restaurant sur devis et selon les souhaits du client : repas de famille, anniversaire, réception professionnelle ou soirée privée. Contactez-nous directement afin que nous construisions ensemble une proposition adaptée.": {
+    "en": "The restaurant can be hired privately with a personalised quote: family meals, birthdays, business receptions or private parties. Contact us directly so we can put together a proposal that suits you.",
+    "es": "Podemos reservar el restaurante en exclusiva, con presupuesto a medida y según vuestros deseos: comidas familiares, cumpleaños, recepciones profesionales o fiestas privadas. Contactad directamente con nosotros para preparar juntos una propuesta adaptada.",
+    "pt": "Podemos reservar o restaurante em exclusivo, mediante orçamento e de acordo com os seus desejos: refeições de família, aniversários, receções profissionais ou festas privadas. Contacte-nos diretamente para prepararmos em conjunto uma proposta à sua medida.",
+    "de": "Sie können das Restaurant nach Ihren Wünschen exklusiv buchen: für Familienessen, Geburtstage, geschäftliche Empfänge oder private Feiern. Kontaktieren Sie uns direkt, damit wir gemeinsam ein passendes Angebot für Sie erstellen können."
+  },
+  "Salle du Bistrot": {
+    "en": "The Bistrot dining room",
+    "es": "La sala del Bistrot",
+    "pt": "A sala do Bistrot",
+    "de": "Der Gastraum des Bistrots"
+  },
+  "Un lieu à votre image": {
+    "en": "A place that feels like you",
+    "es": "Un lugar a vuestra medida",
+    "pt": "Um espaço à sua medida",
+    "de": "Ein Ort ganz nach Ihren Wünschen"
+  },
+  "Façade du Bistrot": {
+    "en": "The Bistrot facade",
+    "es": "La fachada del Bistrot",
+    "pt": "A fachada do Bistrot",
+    "de": "Die Fassade des Bistrots"
+  },
+  "Avis Google & réseaux sociaux": {
+    "en": "Google reviews & social media",
+    "es": "Opiniones de Google y redes sociales",
+    "pt": "Avaliações Google e redes sociais",
+    "de": "Google-Bewertungen & soziale Medien"
+  },
+  "Votre avis compte beaucoup pour nous. Consultez les témoignages de nos clients ou partagez votre expérience.": {
+    "en": "Your opinion means a great deal to us. Read what our guests have to say or share your own experience.",
+    "es": "Tu opinión nos importa mucho. Consulta los testimonios de nuestros clientes o comparte tu experiencia.",
+    "pt": "A sua opinião é muito importante para nós. Leia os testemunhos dos nossos clientes ou partilhe a sua experiência.",
+    "de": "Ihre Meinung bedeutet uns viel. Lesen Sie die Erfahrungen unserer Gäste oder teilen Sie Ihre eigenen."
+  },
+  "Façade du Bistrot Du Coin": {
+    "en": "The facade of Le Bistrot Du Coin",
+    "es": "La fachada de Le Bistrot Du Coin",
+    "pt": "A fachada do Le Bistrot Du Coin",
+    "de": "Die Fassade von Le Bistrot Du Coin"
+  },
+  "Bar et intérieur du restaurant": {
+    "en": "Bar and restaurant interior",
+    "es": "Bar e interior del restaurante",
+    "pt": "Bar e interior do restaurante",
+    "de": "Bar und Innenraum des Restaurants"
+  },
+  "Notre ambiance": {
+    "en": "Our atmosphere",
+    "es": "Nuestro ambiente",
+    "pt": "O nosso ambiente",
+    "de": "Unsere Atmosphäre"
+  },
+  "Assiette maison": {
+    "en": "A homemade dish",
+    "es": "Un plato casero",
+    "pt": "Um prato caseiro",
+    "de": "Ein hausgemachtes Gericht"
+  },
+  "Cuisine maison": {
+    "en": "Homemade cooking",
+    "es": "Cocina casera",
+    "pt": "Cozinha caseira",
+    "de": "Hausgemachte Küche"
+  },
+  "Couscous du Bistrot": {
+    "en": "Bistrot couscous",
+    "es": "Cuscús del Bistrot",
+    "pt": "Cuscuz do Bistrot",
+    "de": "Couscous des Bistrots"
+  },
+  "Pavé de saumon": {
+    "en": "Salmon fillet",
+    "es": "Lomo de salmón",
+    "pt": "Lombo de salmão",
+    "de": "Lachsfilet"
+  },
+  "Produits frais": {
+    "en": "Fresh ingredients",
+    "es": "Productos frescos",
+    "pt": "Produtos frescos",
+    "de": "Frische Zutaten"
+  },
+  "Crevettes et riz": {
+    "en": "Prawns and rice",
+    "es": "Gambas con arroz",
+    "pt": "Camarão com arroz",
+    "de": "Garnelen mit Reis"
+  },
+  "Saveurs du moment": {
+    "en": "Seasonal flavours",
+    "es": "Sabores del momento",
+    "pt": "Sabores do momento",
+    "de": "Aktuelle Geschmackserlebnisse"
+  },
+  "Choucroute du Bistrot": {
+    "en": "Bistrot sauerkraut platter",
+    "es": "Chucrut del Bistrot",
+    "pt": "Chucrute do Bistrot",
+    "de": "Sauerkrautplatte des Bistrots"
+  },
+  "Générosité": {
+    "en": "Generous portions",
+    "es": "Generosidad",
+    "pt": "Generosidade",
+    "de": "Großzügigkeit"
+  },
+  "Nouvelle photo": {
+    "en": "New photo",
+    "es": "Nueva foto",
+    "pt": "Nova fotografia",
+    "de": "Neues Foto"
+  },
+  "Langue de bœuf et son écrasé de pomme de terre maison": {
+    "en": "Beef tongue with homemade crushed potatoes",
+    "es": "Lengua de ternera con patatas machacadas caseras",
+    "pt": "Língua de vaca com batata esmagada caseira",
+    "de": "Rinderzunge mit hausgemachtem Kartoffelstampf"
+  },
+  "Magret de canard": {
+    "en": "Duck breast",
+    "es": "Magret de pato",
+    "pt": "Magret de pato",
+    "de": "Entenbrust"
+  },
+  "Nos entrées": {
+    "en": "Our starters",
+    "es": "Nuestros entrantes",
+    "pt": "As nossas entradas",
+    "de": "Unsere Vorspeisen"
+  },
+  "Nos plats": {
+    "en": "Our main courses",
+    "es": "Nuestros platos",
+    "pt": "Os nossos pratos",
+    "de": "Unsere Hauptgerichte"
+  },
+  "Nos desserts": {
+    "en": "Our desserts",
+    "es": "Nuestros postres",
+    "pt": "As nossas sobremesas",
+    "de": "Unsere Desserts"
+  },
+  "Bienvenue dans votre Club LBDC : retrouvez en un coup d’œil les avantages que vous pouvez utiliser aujourd’hui et tout ce que votre fidélité vous a déjà apporté.": {
+    "en": "Welcome to your Club LBDC: see at a glance the benefits you can use today and everything your loyalty has already earned you.",
+    "es": "Bienvenido a tu Club LBDC: consulta de un vistazo las ventajas disponibles hoy y todo lo que tu fidelidad ya te ha aportado.",
+    "pt": "Bem-vindo ao seu Club LBDC: veja de relance as vantagens que pode utilizar hoje e tudo o que a sua fidelidade já lhe proporcionou.",
+    "de": "Willkommen in Ihrem Club LBDC: Sehen Sie auf einen Blick, welche Vorteile Sie heute nutzen können und was Ihnen Ihre Treue bereits gebracht hat."
+  },
+  "À chaque formule achetée, un tampon est ajouté à votre carte. Après 10 tampons, votre prochaine formule complète est offerte.": {
+    "en": "You receive a stamp for every set menu purchased. After 10 stamps, your next full set menu is free.",
+    "es": "Por cada menú comprado, se añade un sello a tu tarjeta. Después de 10 sellos, el siguiente menú completo es gratis.",
+    "pt": "Por cada menu comprado, recebe um carimbo no seu cartão. Após 10 carimbos, o próximo menu completo é oferecido.",
+    "de": "Für jedes gekaufte Menü erhalten Sie einen Stempel. Nach 10 Stempeln ist Ihr nächstes vollständiges Menü kostenlos."
+  },
+  "Une seule validation fidélité par jour et par personne. Les avantages sont personnels, non cessibles et utilisables pendant leur période de validité.": {
+    "en": "One loyalty validation per day and per person. Benefits are personal, non-transferable and can only be used within their validity period.",
+    "es": "Una sola validación de fidelidad por día y persona. Las ventajas son personales, intransferibles y utilizables durante su período de validez.",
+    "pt": "Uma única validação de fidelidade por dia e por pessoa. As vantagens são pessoais, intransmissíveis e utilizáveis durante o respetivo período de validade.",
+    "de": "Eine Treuegutschrift pro Tag und Person. Die Vorteile sind persönlich, nicht übertragbar und nur innerhalb ihrer Gültigkeitsdauer nutzbar."
+  },
+  "Une formule complète offerte après 10 tampons": {
+    "en": "A free full set menu after 10 stamps",
+    "es": "Un menú completo gratis después de 10 sellos",
+    "pt": "Um menu completo oferecido após 10 carimbos",
+    "de": "Ein vollständiges Menü gratis nach 10 Stempeln"
+  },
+  "Des coupons et offres réservés aux membres": {
+    "en": "Coupons and offers exclusively for members",
+    "es": "Cupones y ofertas exclusivos para socios",
+    "pt": "Cupões e ofertas exclusivos para membros",
+    "de": "Gutscheine und Angebote exklusiv für Mitglieder"
+  },
+  "Mes avantages disponibles": {
+    "en": "My available benefits",
+    "es": "Mis ventajas disponibles",
+    "pt": "As minhas vantagens disponíveis",
+    "de": "Meine verfügbaren Vorteile"
+  },
+  "Historique de mes avantages": {
+    "en": "My benefits history",
+    "es": "Historial de mis ventajas",
+    "pt": "Histórico das minhas vantagens",
+    "de": "Meine bisherigen Vorteile"
+  },
+  "Mon bilan Club LBDC": {
+    "en": "My Club LBDC summary",
+    "es": "Mi balance Club LBDC",
+    "pt": "O meu balanço Club LBDC",
+    "de": "Meine Club-LBDC-Bilanz"
+  },
+  "Grâce au Club LBDC vous avez déjà économisé {amount}.": {
+    "en": "With Club LBDC, you have already saved {amount}.",
+    "es": "Con Club LBDC ya has ahorrado {amount}.",
+    "pt": "Com o Club LBDC já poupou {amount}.",
+    "de": "Mit Club LBDC haben Sie bereits {amount} gespart."
+  },
+  "Programme de fidélité permanent": {
+    "en": "Ongoing loyalty programme",
+    "es": "Programa de fidelidad permanente",
+    "pt": "Programa de fidelidade permanente",
+    "de": "Dauerhaftes Treueprogramm"
+  },
+  "10 formules achetées, la 11e offerte": {
+    "en": "Buy 10 set menus, get the 11th free",
+    "es": "Compra 10 menús y el 11.º es gratis",
+    "pt": "Compre 10 menus e receba o 11.º de oferta",
+    "de": "10 Menüs kaufen, das 11. gratis erhalten"
+  },
+  "Formule offerte": {
+    "en": "Free set menu",
+    "es": "Menú gratis",
+    "pt": "Menu oferecido",
+    "de": "Kostenloses Menü"
+  },
+  "Tampons sur votre carte": {
+    "en": "Stamps on your card",
+    "es": "Sellos en tu tarjeta",
+    "pt": "Carimbos no seu cartão",
+    "de": "Stempel auf Ihrer Karte"
+  },
+  "Progression de fidélité": {
+    "en": "Loyalty progress",
+    "es": "Progreso de fidelidad",
+    "pt": "Progresso de fidelidade",
+    "de": "Treuefortschritt"
+  },
+  "Votre occasion, notre maison": {
+    "en": "Your occasion, our home",
+    "es": "Tu ocasión, nuestra casa",
+    "pt": "A sua ocasião, a nossa casa",
+    "de": "Ihr Anlass, unser Haus"
+  },
+  "Les beaux moments se partagent": {
+    "en": "Good moments are made to be shared",
+    "es": "Los buenos momentos se comparten",
+    "pt": "Os bons momentos são para partilhar",
+    "de": "Schöne Momente teilt man miteinander"
+  },
+  "Repas de famille": {
+    "en": "Family meals",
+    "es": "Comidas familiares",
+    "pt": "Refeições de família",
+    "de": "Familienessen"
+  },
+  "Anniversaire": {
+    "en": "Birthdays",
+    "es": "Cumpleaños",
+    "pt": "Aniversários",
+    "de": "Geburtstage"
+  },
+  "Réception professionnelle": {
+    "en": "Business receptions",
+    "es": "Recepciones profesionales",
+    "pt": "Receções profissionais",
+    "de": "Geschäftliche Empfänge"
+  },
+  "Soirée privée": {
+    "en": "Private parties",
+    "es": "Fiestas privadas",
+    "pt": "Festas privadas",
+    "de": "Private Feiern"
+  },
+  "Imaginons votre événement": {
+    "en": "Let's imagine your event",
+    "es": "Imaginemos tu evento",
+    "pt": "Vamos imaginar o seu evento",
+    "de": "Gestalten wir Ihre Veranstaltung"
+  },
+  "Parlons de vos envies": {
+    "en": "Tell us what you have in mind",
+    "es": "Cuéntanos lo que tienes en mente",
+    "pt": "Conte-nos o que tem em mente",
+    "de": "Erzählen Sie uns von Ihren Wünschen"
+  },
+  "Demander un devis": {
+    "en": "Request a quote",
+    "es": "Pedir presupuesto",
+    "pt": "Pedir orçamento",
+    "de": "Angebot anfragen"
+  },
+  "Réserver pour cet événement": {
+    "en": "Book for this event",
+    "es": "Reservar para este evento",
+    "pt": "Reservar para este evento",
+    "de": "Für diese Veranstaltung reservieren"
+  },
+  "Adresse e-mail ou mot de passe invalide.": {
+    "en": "Invalid email address or password.",
+    "es": "Dirección de correo o contraseña no válidos.",
+    "pt": "Endereço de e-mail ou palavra-passe inválidos.",
+    "de": "Ungültige E-Mail-Adresse oder ungültiges Passwort."
+  },
+  "Adresse e-mail ou mot de passe incorrect.": {
+    "en": "Incorrect email address or password.",
+    "es": "Correo o contraseña incorrectos.",
+    "pt": "E-mail ou palavra-passe incorretos.",
+    "de": "E-Mail-Adresse oder Passwort falsch."
+  },
+  "Prénom obligatoire.": {
+    "en": "Please enter your first name.",
+    "es": "Introduce tu nombre.",
+    "pt": "Indique o seu nome próprio.",
+    "de": "Bitte geben Sie Ihren Vornamen ein."
+  },
+  "Nom de famille obligatoire.": {
+    "en": "Please enter your surname.",
+    "es": "Introduce tus apellidos.",
+    "pt": "Indique o seu apelido.",
+    "de": "Bitte geben Sie Ihren Nachnamen ein."
+  },
+  "Adresse e-mail invalide.": {
+    "en": "Invalid email address.",
+    "es": "Dirección de correo no válida.",
+    "pt": "Endereço de e-mail inválido.",
+    "de": "Ungültige E-Mail-Adresse."
+  },
+  "Le mot de passe doit contenir au moins 8 caractères.": {
+    "en": "Your password must contain at least 8 characters.",
+    "es": "La contraseña debe tener al menos 8 caracteres.",
+    "pt": "A palavra-passe deve ter pelo menos 8 caracteres.",
+    "de": "Das Passwort muss mindestens 8 Zeichen enthalten."
+  },
+  "Vous devez accepter l’utilisation de vos données.": {
+    "en": "You must agree to the use of your data.",
+    "es": "Debes aceptar el uso de tus datos.",
+    "pt": "Tem de aceitar a utilização dos seus dados.",
+    "de": "Sie müssen der Verwendung Ihrer Daten zustimmen."
+  },
+  "Connexion impossible.": {
+    "en": "Unable to sign in.",
+    "es": "No se ha podido iniciar sesión.",
+    "pt": "Não foi possível iniciar sessão.",
+    "de": "Anmeldung nicht möglich."
+  },
+  "Inscription impossible.": {
+    "en": "Unable to register.",
+    "es": "No se ha podido completar el registro.",
+    "pt": "Não foi possível efetuar a inscrição.",
+    "de": "Registrierung nicht möglich."
+  },
+  "Coupon promotionnel — {title}": {
+    "en": "Promotional coupon — {title}",
+    "es": "Cupón promocional — {title}",
+    "pt": "Cupão promocional — {title}",
+    "de": "Aktionsgutschein — {title}"
+  },
+  "Une erreur est survenue. Veuillez réessayer.": {
+    "en": "Something went wrong. Please try again.",
+    "es": "Se ha producido un error. Inténtalo de nuevo.",
+    "pt": "Ocorreu um erro. Tente novamente.",
+    "de": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "Pelforth": {
+    "en": "Pelforth",
+    "es": "Pelforth",
+    "pt": "Pelforth",
+    "de": "Pelforth"
+  },
+  "Pélican blonde": {
+    "en": "Pélican blonde",
+    "es": "Pélican blonde",
+    "pt": "Pélican blonde",
+    "de": "Pélican blonde"
+  },
+  "Gallia West IPA": {
+    "en": "Gallia West IPA",
+    "es": "Gallia West IPA",
+    "pt": "Gallia West IPA",
+    "de": "Gallia West IPA"
+  },
+  "Pélican rouge": {
+    "en": "Pélican rouge",
+    "es": "Pélican rouge",
+    "pt": "Pélican rouge",
+    "de": "Pélican rouge"
+  },
+  "Desperados Sunlight": {
+    "en": "Desperados Sunlight",
+    "es": "Desperados Sunlight",
+    "pt": "Desperados Sunlight",
+    "de": "Desperados Sunlight"
+  },
+  "Paix Dieu": {
+    "en": "Paix Dieu",
+    "es": "Paix Dieu",
+    "pt": "Paix Dieu",
+    "de": "Paix Dieu"
+  },
+  "Orval": {
+    "en": "Orval",
+    "es": "Orval",
+    "pt": "Orval",
+    "de": "Orval"
+  },
+  "Chouffe blonde": {
+    "en": "Chouffe blonde",
+    "es": "Chouffe blonde",
+    "pt": "Chouffe blonde",
+    "de": "Chouffe blonde"
+  },
+  "Cherry Chouffe": {
+    "en": "Cherry Chouffe",
+    "es": "Cherry Chouffe",
+    "pt": "Cherry Chouffe",
+    "de": "Cherry Chouffe"
+  },
+  "Duvel": {
+    "en": "Duvel",
+    "es": "Duvel",
+    "pt": "Duvel",
+    "de": "Duvel"
+  },
+  "Triple Karmeliet": {
+    "en": "Triple Karmeliet",
+    "es": "Triple Karmeliet",
+    "pt": "Triple Karmeliet",
+    "de": "Triple Karmeliet"
+  },
+  "Kwak": {
+    "en": "Kwak",
+    "es": "Kwak",
+    "pt": "Kwak",
+    "de": "Kwak"
+  },
+  "Rince Cochon": {
+    "en": "Rince Cochon",
+    "es": "Rince Cochon",
+    "pt": "Rince Cochon",
+    "de": "Rince Cochon"
+  },
+  "Hoagarden blanche": {
+    "en": "Hoagarden blanche",
+    "es": "Hoagarden blanche",
+    "pt": "Hoagarden blanche",
+    "de": "Hoagarden blanche"
+  },
+  "Leffe  blonde": {
+    "en": "Leffe  blonde",
+    "es": "Leffe  blonde",
+    "pt": "Leffe  blonde",
+    "de": "Leffe  blonde"
+  },
+  "Tequila Sunrise": {
+    "en": "Tequila Sunrise",
+    "es": "Tequila Sunrise",
+    "pt": "Tequila Sunrise",
+    "de": "Tequila Sunrise"
+  },
+  "Heineken 0.0": {
+    "en": "Heineken 0.0",
+    "es": "Heineken 0.0",
+    "pt": "Heineken 0.0",
+    "de": "Heineken 0.0"
+  },
+  "Desperados 00": {
+    "en": "Desperados 00",
+    "es": "Desperados 00",
+    "pt": "Desperados 00",
+    "de": "Desperados 00"
+  },
+  "Cappuccino": {
+    "en": "Cappuccino",
+    "es": "Cappuccino",
+    "pt": "Cappuccino",
+    "de": "Cappuccino"
+  },
+  "Ricard": {
+    "en": "Ricard",
+    "es": "Ricard",
+    "pt": "Ricard",
+    "de": "Ricard"
+  },
+  "Kir": {
+    "en": "Kir",
+    "es": "Kir",
+    "pt": "Kir",
+    "de": "Kir"
+  },
+  "Porto": {
+    "en": "Porto",
+    "es": "Porto",
+    "pt": "Porto",
+    "de": "Porto"
+  },
+  "Martini": {
+    "en": "Martini",
+    "es": "Martini",
+    "pt": "Martini",
+    "de": "Martini"
+  },
+  "Sir Edwards": {
+    "en": "Sir Edwards",
+    "es": "Sir Edwards",
+    "pt": "Sir Edwards",
+    "de": "Sir Edwards"
+  },
+  "Jameson": {
+    "en": "Jameson",
+    "es": "Jameson",
+    "pt": "Jameson",
+    "de": "Jameson"
+  },
+  "Jack Daniel’s": {
+    "en": "Jack Daniel’s",
+    "es": "Jack Daniel’s",
+    "pt": "Jack Daniel’s",
+    "de": "Jack Daniel’s"
+  },
+  "Glenlivet": {
+    "en": "Glenlivet",
+    "es": "Glenlivet",
+    "pt": "Glenlivet",
+    "de": "Glenlivet"
+  },
+  "Togouchi": {
+    "en": "Togouchi",
+    "es": "Togouchi",
+    "pt": "Togouchi",
+    "de": "Togouchi"
+  },
+  "Aerstone": {
+    "en": "Aerstone",
+    "es": "Aerstone",
+    "pt": "Aerstone",
+    "de": "Aerstone"
+  },
+  "Big Peat": {
+    "en": "Big Peat",
+    "es": "Big Peat",
+    "pt": "Big Peat",
+    "de": "Big Peat"
+  },
+  "Le Bistrot": {
+    "en": "Le Bistrot",
+    "es": "Le Bistrot",
+    "pt": "Le Bistrot",
+    "de": "Le Bistrot"
+  },
+  "Le Bistrot Du Coin": {
+    "en": "Le Bistrot Du Coin",
+    "es": "Le Bistrot Du Coin",
+    "pt": "Le Bistrot Du Coin",
+    "de": "Le Bistrot Du Coin"
+  },
+  "12 cl:5 € · 25 cl:9€.  50cl:16€": {
+    "en": "12 cl:5 € · 25 cl:9€.  50cl:16€",
+    "es": "12 cl:5 € · 25 cl:9€.  50cl:16€",
+    "pt": "12 cl:5 € · 25 cl:9€.  50cl:16€",
+    "de": "12 cl:5 € · 25 cl:9€.  50cl:16€"
+  },
+  "12 cl:5€. 25 cl:9€. 50cl:16€": {
+    "en": "12 cl:5€. 25 cl:9€. 50cl:16€",
+    "es": "12 cl:5€. 25 cl:9€. 50cl:16€",
+    "pt": "12 cl:5€. 25 cl:9€. 50cl:16€",
+    "de": "12 cl:5€. 25 cl:9€. 50cl:16€"
+  },
+  "Accueil": {
+    "en": "Home",
+    "es": "Inicio",
+    "pt": "Início",
+    "de": "Startseite"
+  },
+  "Carte": {
+    "en": "Menu",
+    "es": "Carta",
+    "pt": "Ementa",
+    "de": "Speisekarte"
+  },
+  "Notre histoire": {
+    "en": "Our story",
+    "es": "Nuestra historia",
+    "pt": "A nossa história",
+    "de": "Unsere Geschichte"
+  },
+  "Privatisation": {
+    "en": "Private events",
+    "es": "Eventos privados",
+    "pt": "Eventos privados",
+    "de": "Private Feiern"
+  },
+  "Événements": {
+    "en": "Events",
+    "es": "Eventos",
+    "pt": "Eventos",
+    "de": "Veranstaltungen"
+  },
+  "Avis & réseaux": {
+    "en": "Reviews & social",
+    "es": "Opiniones y redes",
+    "pt": "Avaliações e redes",
+    "de": "Bewertungen & Social Media"
+  },
+  "Galerie": {
+    "en": "Gallery",
+    "es": "Galería",
+    "pt": "Galeria",
+    "de": "Galerie"
+  },
+  "Contact": {
+    "en": "Contact",
+    "es": "Contacto",
+    "pt": "Contacto",
+    "de": "Kontakt"
+  },
+  "Réserver": {
+    "en": "Book a table",
+    "es": "Reservar",
+    "pt": "Reservar",
+    "de": "Reservieren"
+  },
+  "Ouvrir le menu": {
+    "en": "Open menu",
+    "es": "Abrir menú",
+    "pt": "Abrir menu",
+    "de": "Menü öffnen"
+  },
+  "Fermer le menu": {
+    "en": "Close menu",
+    "es": "Cerrar menú",
+    "pt": "Fechar menu",
+    "de": "Menü schließen"
+  },
+  "Choisir la langue": {
+    "en": "Choose language",
+    "es": "Elegir idioma",
+    "pt": "Escolher idioma",
+    "de": "Sprache wählen"
+  },
+  "Bienvenue à Saint-Laurent-Nouan": {
+    "en": "Welcome to Saint-Laurent-Nouan",
+    "es": "Bienvenidos a Saint-Laurent-Nouan",
+    "pt": "Bem-vindo a Saint-Laurent-Nouan",
+    "de": "Willkommen in Saint-Laurent-Nouan"
+  },
+  "Voir le menu du jour": {
+    "en": "See today's menu",
+    "es": "Ver el menú del día",
+    "pt": "Ver a ementa do dia",
+    "de": "Tagesmenü ansehen"
+  },
+  "La carte": {
+    "en": "The menu",
+    "es": "La carta",
+    "pt": "A ementa",
+    "de": "Die Speisekarte"
+  },
+  "L’esprit bistrot": {
+    "en": "The bistro spirit",
+    "es": "El espíritu del bistrot",
+    "pt": "O espírito do bistrot",
+    "de": "Bistro-Atmosphäre"
+  },
+  "Simple, généreux et convivial": {
+    "en": "Simple, generous and welcoming",
+    "es": "Sencillo, generoso y acogedor",
+    "pt": "Simples, generoso e acolhedor",
+    "de": "Einfach, großzügig und gesellig"
+  },
+  "Une cuisine de saison, des produits choisis avec soin et une équipe heureuse de vous accueillir.": {
+    "en": "Seasonal cooking, carefully chosen ingredients and a team delighted to welcome you.",
+    "es": "Cocina de temporada, productos elegidos con esmero y un equipo encantado de recibirte.",
+    "pt": "Cozinha sazonal, produtos escolhidos com cuidado e uma equipa feliz por o receber.",
+    "de": "Saisonale Küche, sorgfältig ausgewählte Zutaten und ein Team, das Sie herzlich willkommen heißt."
+  },
+  "Découvrir la carte →": {
+    "en": "Explore the menu →",
+    "es": "Descubrir la carta →",
+    "pt": "Descobrir a ementa →",
+    "de": "Speisekarte entdecken →"
+  },
+  "Lire notre histoire →": {
+    "en": "Read our story →",
+    "es": "Conocer nuestra historia →",
+    "pt": "Conhecer a nossa história →",
+    "de": "Unsere Geschichte lesen →"
+  },
+  "Privatiser le restaurant →": {
+    "en": "Book a private event →",
+    "es": "Reservar el restaurante en exclusiva →",
+    "pt": "Reservar o restaurante em exclusivo →",
+    "de": "Restaurant exklusiv buchen →"
+  },
+  "Horaires": {
+    "en": "Opening hours",
+    "es": "Horario",
+    "pt": "Horário",
+    "de": "Öffnungszeiten"
+  },
+  "Adresse": {
+    "en": "Address",
+    "es": "Dirección",
+    "pt": "Morada",
+    "de": "Adresse"
+  },
+  "Une table pour aujourd’hui ?": {
+    "en": "A table for today?",
+    "es": "¿Una mesa para hoy?",
+    "pt": "Uma mesa para hoje?",
+    "de": "Ein Tisch für heute?"
+  },
+  "Appelez-nous, on s’occupe du reste.": {
+    "en": "Give us a call, we'll take care of the rest.",
+    "es": "Llámanos, nos encargamos del resto.",
+    "pt": "Ligue-nos, tratamos do resto.",
+    "de": "Rufen Sie uns an, wir kümmern uns um den Rest."
+  },
+  "Réserver par téléphone": {
+    "en": "Book by phone",
+    "es": "Reservar por teléfono",
+    "pt": "Reservar por telefone",
+    "de": "Telefonisch reservieren"
+  },
+  "Avis Google": {
+    "en": "Google reviews",
+    "es": "Opiniones en Google",
+    "pt": "Avaliações no Google",
+    "de": "Google-Bewertungen"
+  },
+  "Installer l’application": {
+    "en": "Install the app",
+    "es": "Instalar la aplicación",
+    "pt": "Instalar a aplicação",
+    "de": "App installieren"
+  },
+  "Le Bistrot Du Coin · À notre table": {
+    "en": "Le Bistrot Du Coin · At our table",
+    "es": "Le Bistrot Du Coin · A nuestra mesa",
+    "pt": "Le Bistrot Du Coin · À nossa mesa",
+    "de": "Le Bistrot Du Coin · An unserem Tisch"
+  },
+  "au Bistrot": {
+    "en": "at the Bistrot",
+    "es": "en el Bistrot",
+    "pt": "no Bistrot",
+    "de": "im Bistrot"
+  },
+  "Nos formules": {
+    "en": "Our set menus",
+    "es": "Nuestros menús",
+    "pt": "Os nossos menus",
+    "de": "Unsere Menüs"
+  },
+  "Le plaisir de déjeuner": {
+    "en": "The pleasure of lunch",
+    "es": "El placer de almorzar",
+    "pt": "O prazer de almoçar",
+    "de": "Mittags genießen"
+  },
+  "Sur place ou à emporter": {
+    "en": "Eat in or take away",
+    "es": "Para tomar aquí o para llevar",
+    "pt": "No local ou para levar",
+    "de": "Vor Ort oder zum Mitnehmen"
+  },
+  "À emporter :": {
+    "en": "Take away:",
+    "es": "Para llevar:",
+    "pt": "Para levar:",
+    "de": "Zum Mitnehmen:"
+  },
+  "Parcourir le menu du jour": {
+    "en": "Browse today's menu",
+    "es": "Explorar el menú del día",
+    "pt": "Explorar a ementa do dia",
+    "de": "Tagesmenü durchsehen"
+  },
+  "Le petit mot de la cuisine": {
+    "en": "A note from the kitchen",
+    "es": "Una nota de la cocina",
+    "pt": "Uma nota da cozinha",
+    "de": "Ein Gruß aus der Küche"
+  },
+  "Pour connaître le menu exact du jour, appelez-nous.": {
+    "en": "Call us for today's full menu.",
+    "es": "Llámanos para conocer el menú completo de hoy.",
+    "pt": "Ligue-nos para conhecer a ementa completa de hoje.",
+    "de": "Rufen Sie uns an, um das aktuelle Tagesmenü zu erfahren."
+  },
+  "À la carte": {
+    "en": "À la carte",
+    "es": "A la carta",
+    "pt": "À carta",
+    "de": "À la carte"
+  },
+  "À partager, à savourer, à découvrir. Choisissez votre envie.": {
+    "en": "To share, savour and discover. Find your favourite.",
+    "es": "Para compartir, saborear y descubrir. Elige lo que te apetezca.",
+    "pt": "Para partilhar, saborear e descobrir. Escolha o que lhe apetece.",
+    "de": "Zum Teilen, Genießen und Entdecken. Wählen Sie nach Lust und Laune."
+  },
+  "Cette catégorie n’est plus disponible. Découvrez notre carte actuelle.": {
+    "en": "This category is no longer available. Explore our current menu.",
+    "es": "Esta categoría ya no está disponible. Descubre nuestra carta actual.",
+    "pt": "Esta categoria já não está disponível. Descubra a nossa ementa atual.",
+    "de": "Diese Kategorie ist nicht mehr verfügbar. Entdecken Sie unsere aktuelle Speisekarte."
+  },
+  "À savourer": {
+    "en": "Enjoy",
+    "es": "Para saborear",
+    "pt": "Para saborear",
+    "de": "Zum Genießen"
+  },
+  "propositions à découvrir": {
+    "en": "options to discover",
+    "es": "opciones por descubrir",
+    "pt": "opções para descobrir",
+    "de": "Angebote zum Entdecken"
+  },
+  "Découvrir": {
+    "en": "Discover",
+    "es": "Descubrir",
+    "pt": "Descobrir",
+    "de": "Entdecken"
+  },
+  "Notre carte sera bientôt disponible.": {
+    "en": "Our menu will be available soon.",
+    "es": "Nuestra carta estará disponible pronto.",
+    "pt": "A nossa ementa estará disponível em breve.",
+    "de": "Unsere Speisekarte ist bald verfügbar."
+  },
+  "Navigation de la carte": {
+    "en": "Menu navigation",
+    "es": "Navegación de la carta",
+    "pt": "Navegação da ementa",
+    "de": "Navigation der Speisekarte"
+  },
+  "← Toutes les catégories": {
+    "en": "← All categories",
+    "es": "← Todas las categorías",
+    "pt": "← Todas as categorias",
+    "de": "← Alle Kategorien"
+  },
+  "Choisir une catégorie": {
+    "en": "Choose a category",
+    "es": "Elegir una categoría",
+    "pt": "Escolher uma categoria",
+    "de": "Kategorie auswählen"
+  },
+  "La carte ·": {
+    "en": "The menu ·",
+    "es": "La carta ·",
+    "pt": "A ementa ·",
+    "de": "Die Speisekarte ·"
+  },
+  "Produits —": {
+    "en": "Dishes —",
+    "es": "Platos —",
+    "pt": "Pratos —",
+    "de": "Gerichte —"
+  },
+  "De nouvelles propositions arrivent bientôt.": {
+    "en": "New dishes are coming soon.",
+    "es": "Pronto llegarán nuevas propuestas.",
+    "pt": "Novas propostas em breve.",
+    "de": "Neue Angebote folgen in Kürze."
+  },
+  "Une autre envie ?": {
+    "en": "Fancy something else?",
+    "es": "¿Te apetece algo más?",
+    "pt": "Apetece-lhe outra coisa?",
+    "de": "Lust auf etwas anderes?"
+  },
+  "Catégories précédente et suivante": {
+    "en": "Previous and next categories",
+    "es": "Categorías anterior y siguiente",
+    "pt": "Categorias anterior e seguinte",
+    "de": "Vorherige und nächste Kategorie"
+  },
+  "← Précédent": {
+    "en": "← Previous",
+    "es": "← Anterior",
+    "pt": "← Anterior",
+    "de": "← Zurück"
+  },
+  "Suivant →": {
+    "en": "Next →",
+    "es": "Siguiente →",
+    "pt": "Seguinte →",
+    "de": "Weiter →"
+  },
+  "Carte complète ↗": {
+    "en": "Full menu ↗",
+    "es": "Carta completa ↗",
+    "pt": "Ementa completa ↗",
+    "de": "Gesamte Speisekarte ↗"
+  },
+  "Toutes les catégories": {
+    "en": "All categories",
+    "es": "Todas las categorías",
+    "pt": "Todas as categorias",
+    "de": "Alle Kategorien"
+  },
+  "Revenir à la liste des catégories": {
+    "en": "Back to all categories",
+    "es": "Volver a las categorías",
+    "pt": "Voltar às categorias",
+    "de": "Zurück zur Kategorieübersicht"
+  },
+  "Prévisualisation · modifications non publiées": {
+    "en": "Preview · unpublished changes",
+    "es": "Vista previa · cambios sin publicar",
+    "pt": "Pré-visualização · alterações não publicadas",
+    "de": "Vorschau · unveröffentlichte Änderungen"
+  },
+  "Au Bistrot": {
+    "en": "At the Bistrot",
+    "es": "En el Bistrot",
+    "pt": "No Bistrot",
+    "de": "Im Bistrot"
+  },
+  "Événements à venir": {
+    "en": "Upcoming events",
+    "es": "Próximos eventos",
+    "pt": "Próximos eventos",
+    "de": "Kommende Veranstaltungen"
+  },
+  "Événements passés": {
+    "en": "Past events",
+    "es": "Eventos pasados",
+    "pt": "Eventos anteriores",
+    "de": "Vergangene Veranstaltungen"
+  },
+  "Les prochains événements arrivent bientôt": {
+    "en": "New events coming soon",
+    "es": "Próximamente, nuevos eventos",
+    "pt": "Novos eventos em breve",
+    "de": "Neue Veranstaltungen folgen bald"
+  },
+  "Suivez nos actualités ou contactez-nous pour en savoir plus.": {
+    "en": "Follow our news or contact us to find out more.",
+    "es": "Sigue nuestras novedades o contacta con nosotros para saber más.",
+    "pt": "Acompanhe as novidades ou contacte-nos para saber mais.",
+    "de": "Verfolgen Sie unsere Neuigkeiten oder kontaktieren Sie uns für weitere Informationen."
+  },
+  "Nous contacter": {
+    "en": "Contact us",
+    "es": "Contactar",
+    "pt": "Contacte-nos",
+    "de": "Kontakt aufnehmen"
+  },
+  "— Voir l’événement →": {
+    "en": "— View event →",
+    "es": "— Ver el evento →",
+    "pt": "— Ver o evento →",
+    "de": "— Veranstaltung ansehen →"
+  },
+  "Voir l’événement": {
+    "en": "View event",
+    "es": "Ver el evento",
+    "pt": "Ver o evento",
+    "de": "Veranstaltung ansehen"
+  },
+  "Sur devis": {
+    "en": "On request",
+    "es": "Bajo presupuesto",
+    "pt": "Mediante orçamento",
+    "de": "Auf Anfrage"
+  },
+  "Nous appeler": {
+    "en": "Call us",
+    "es": "Llamar",
+    "pt": "Ligue-nos",
+    "de": "Anrufen"
+  },
+  "Nous écrire": {
+    "en": "Email us",
+    "es": "Escribirnos",
+    "pt": "Escreva-nos",
+    "de": "Schreiben Sie uns"
+  },
+  "Deux parcours, une même envie": {
+    "en": "Two journeys, one shared vision",
+    "es": "Dos caminos, una misma ilusión",
+    "pt": "Dois percursos, uma vontade comum",
+    "de": "Zwei Wege, ein gemeinsamer Wunsch"
+  },
+  "Une belle aventure humaine": {
+    "en": "A story of people and passion",
+    "es": "Una bonita aventura humana",
+    "pt": "Uma bela aventura humana",
+    "de": "Eine Geschichte voller Begegnungen"
+  },
+  "Ambiance & assiettes": {
+    "en": "Atmosphere & food",
+    "es": "Ambiente y platos",
+    "pt": "Ambiente e pratos",
+    "de": "Atmosphäre & Gerichte"
+  },
+  "Photo agrandie": {
+    "en": "Enlarged photo",
+    "es": "Foto ampliada",
+    "pt": "Fotografia ampliada",
+    "de": "Vergrößertes Foto"
+  },
+  "Fermer la photo": {
+    "en": "Close photo",
+    "es": "Cerrar foto",
+    "pt": "Fechar fotografia",
+    "de": "Foto schließen"
+  },
+  "Fermer ×": {
+    "en": "Close ×",
+    "es": "Cerrar ×",
+    "pt": "Fechar ×",
+    "de": "Schließen ×"
+  },
+  "Photos précédentes": {
+    "en": "Previous photos",
+    "es": "Fotos anteriores",
+    "pt": "Fotografias anteriores",
+    "de": "Vorherige Fotos"
+  },
+  "Photos suivantes": {
+    "en": "Next photos",
+    "es": "Fotos siguientes",
+    "pt": "Fotografias seguintes",
+    "de": "Nächste Fotos"
+  },
+  "Photos de": {
+    "en": "Photos of",
+    "es": "Fotos de",
+    "pt": "Fotografias de",
+    "de": "Fotos von"
+  },
+  "Agrandir la photo": {
+    "en": "Enlarge photo",
+    "es": "Ampliar foto",
+    "pt": "Ampliar fotografia",
+    "de": "Foto vergrößern"
+  },
+  "Votre expérience": {
+    "en": "Your experience",
+    "es": "Tu experiencia",
+    "pt": "A sua experiência",
+    "de": "Ihr Erlebnis"
+  },
+  "Voir les avis Google": {
+    "en": "Read Google reviews",
+    "es": "Ver opiniones en Google",
+    "pt": "Ver avaliações no Google",
+    "de": "Google-Bewertungen lesen"
+  },
+  "Laisser un avis": {
+    "en": "Leave a review",
+    "es": "Dejar una opinión",
+    "pt": "Deixar uma avaliação",
+    "de": "Bewertung schreiben"
+  },
+  "Suivez-nous": {
+    "en": "Follow us",
+    "es": "Síguenos",
+    "pt": "Siga-nos",
+    "de": "Folgen Sie uns"
+  },
+  "Ouvrir le compte →": {
+    "en": "Visit profile →",
+    "es": "Ver perfil →",
+    "pt": "Visitar perfil →",
+    "de": "Profil öffnen →"
+  },
+  "Poussez nos portes": {
+    "en": "Come on in",
+    "es": "Ven a conocernos",
+    "pt": "Entre e conheça-nos",
+    "de": "Kommen Sie vorbei"
+  },
+  "Téléphone": {
+    "en": "Phone",
+    "es": "Teléfono",
+    "pt": "Telefone",
+    "de": "Telefon"
+  },
+  "Email": {
+    "en": "Email",
+    "es": "Correo electrónico",
+    "pt": "Email",
+    "de": "E-Mail"
+  },
+  "Appeler": {
+    "en": "Call",
+    "es": "Llamar",
+    "pt": "Ligar",
+    "de": "Anrufen"
+  },
+  "Itinéraire": {
+    "en": "Directions",
+    "es": "Cómo llegar",
+    "pt": "Como chegar",
+    "de": "Route planen"
+  },
+  "Itinéraire vers": {
+    "en": "Directions to",
+    "es": "Cómo llegar a",
+    "pt": "Como chegar a",
+    "de": "Route nach"
+  },
+  "Carte Le Bistrot Du Coin": {
+    "en": "Le Bistrot Du Coin map",
+    "es": "Mapa de Le Bistrot Du Coin",
+    "pt": "Mapa do Le Bistrot Du Coin",
+    "de": "Karte Le Bistrot Du Coin"
+  },
+  "Avantages & actualités": {
+    "en": "Benefits & news",
+    "es": "Ventajas y novedades",
+    "pt": "Vantagens e novidades",
+    "de": "Vorteile & Neuigkeiten"
+  },
+  "Le Bistrot dans votre poche, avec les menus, événements et futurs avantages fidélité.": {
+    "en": "The Bistrot in your pocket: menus, events and loyalty benefits.",
+    "es": "El Bistrot en tu bolsillo: menús, eventos y ventajas de fidelidad.",
+    "pt": "O Bistrot no seu bolso: ementas, eventos e vantagens de fidelidade.",
+    "de": "Das Bistrot für unterwegs: Menüs, Veranstaltungen und Treuevorteile."
+  },
+  "Déjà membre ?": {
+    "en": "Already a member?",
+    "es": "¿Ya eres miembro?",
+    "pt": "Já é membro?",
+    "de": "Schon Mitglied?"
+  },
+  "Accéder à mon espace": {
+    "en": "My member area",
+    "es": "Acceder a mi espacio",
+    "pt": "Aceder à minha área",
+    "de": "Zu meinem Mitgliederbereich"
+  },
+  "Vos avantages": {
+    "en": "Your benefits",
+    "es": "Tus ventajas",
+    "pt": "As suas vantagens",
+    "de": "Ihre Vorteile"
+  },
+  "Comment ça marche ?": {
+    "en": "How does it work?",
+    "es": "¿Cómo funciona?",
+    "pt": "Como funciona?",
+    "de": "Wie funktioniert es?"
+  },
+  "Inscription gratuite": {
+    "en": "Free membership",
+    "es": "Inscripción gratuita",
+    "pt": "Inscrição gratuita",
+    "de": "Kostenlose Anmeldung"
+  },
+  "Rejoindre le Club LBDC": {
+    "en": "Join Club LBDC",
+    "es": "Unirse al Club LBDC",
+    "pt": "Aderir ao Club LBDC",
+    "de": "Dem Club LBDC beitreten"
+  },
+  "Rejoindre le Club": {
+    "en": "Join the Club",
+    "es": "Unirse al Club",
+    "pt": "Aderir ao Club",
+    "de": "Dem Club beitreten"
+  },
+  "Recevez les menus, les événements et les avantages réservés aux membres.": {
+    "en": "Get menus, events and members-only benefits.",
+    "es": "Recibe menús, eventos y ventajas exclusivas para miembros.",
+    "pt": "Receba ementas, eventos e vantagens exclusivas para membros.",
+    "de": "Erhalten Sie Menüs, Veranstaltungen und exklusive Mitgliedervorteile."
+  },
+  "Prénom": {
+    "en": "First name",
+    "es": "Nombre",
+    "pt": "Nome próprio",
+    "de": "Vorname"
+  },
+  "Nom de famille": {
+    "en": "Last name",
+    "es": "Apellidos",
+    "pt": "Apelido",
+    "de": "Nachname"
+  },
+  "Adresse e-mail": {
+    "en": "Email address",
+    "es": "Correo electrónico",
+    "pt": "Endereço de email",
+    "de": "E-Mail-Adresse"
+  },
+  "Mot de passe": {
+    "en": "Password",
+    "es": "Contraseña",
+    "pt": "Palavra-passe",
+    "de": "Passwort"
+  },
+  "(8 caractères minimum)": {
+    "en": "(at least 8 characters)",
+    "es": "(mínimo 8 caracteres)",
+    "pt": "(mínimo 8 caracteres)",
+    "de": "(mindestens 8 Zeichen)"
+  },
+  "Date d’anniversaire": {
+    "en": "Birthday",
+    "es": "Fecha de nacimiento",
+    "pt": "Data de nascimento",
+    "de": "Geburtstag"
+  },
+  "(facultative)": {
+    "en": "(optional)",
+    "es": "(opcional)",
+    "pt": "(opcional)",
+    "de": "(optional)"
+  },
+  "Je souhaite recevoir les notifications du menu et des événements.": {
+    "en": "I'd like notifications about menus and events.",
+    "es": "Quiero recibir notificaciones sobre menús y eventos.",
+    "pt": "Quero receber notificações sobre ementas e eventos.",
+    "de": "Ich möchte Benachrichtigungen zu Menüs und Veranstaltungen erhalten."
+  },
+  "J’accepte de recevoir occasionnellement des offres du Bistrot par e-mail.": {
+    "en": "I agree to receive occasional Bistrot offers by email.",
+    "es": "Acepto recibir ocasionalmente ofertas del Bistrot por correo electrónico.",
+    "pt": "Aceito receber ocasionalmente ofertas do Bistrot por email.",
+    "de": "Ich möchte gelegentlich Angebote des Bistrot per E-Mail erhalten."
+  },
+  "J’accepte l’enregistrement de ces informations pour gérer mon inscription au Club. Je pourrai demander leur suppression à tout moment.": {
+    "en": "I agree to this information being stored to manage my Club membership. I can request its deletion at any time.",
+    "es": "Acepto que se guarden estos datos para gestionar mi inscripción en el Club. Puedo solicitar su eliminación en cualquier momento.",
+    "pt": "Aceito que estes dados sejam guardados para gerir a minha inscrição no Club. Posso pedir a sua eliminação a qualquer momento.",
+    "de": "Ich stimme der Speicherung dieser Angaben zur Verwaltung meiner Clubmitgliedschaft zu. Ich kann jederzeit ihre Löschung beantragen."
+  },
+  "Veuillez patienter…": {
+    "en": "Please wait…",
+    "es": "Espera un momento…",
+    "pt": "Aguarde…",
+    "de": "Bitte warten…"
+  },
+  "Inscription en cours…": {
+    "en": "Creating your account…",
+    "es": "Creando tu cuenta…",
+    "pt": "A criar a sua conta…",
+    "de": "Konto wird erstellt…"
+  },
+  "Bienvenue au Club LBDC, {name} !": {
+    "en": "Welcome to Club LBDC, {name}!",
+    "es": "¡Bienvenido al Club LBDC, {name}!",
+    "pt": "Bem-vindo ao Club LBDC, {name}!",
+    "de": "Willkommen im Club LBDC, {name}!"
+  },
+  "Votre compte est créé. Vous pourrez désormais vous connecter avec votre adresse e-mail et votre mot de passe.": {
+    "en": "Your account is ready. You can now sign in with your email address and password.",
+    "es": "Tu cuenta está creada. Ya puedes acceder con tu correo electrónico y contraseña.",
+    "pt": "A sua conta está criada. Já pode entrar com o seu email e palavra-passe.",
+    "de": "Ihr Konto wurde erstellt. Sie können sich jetzt mit E-Mail-Adresse und Passwort anmelden."
+  },
+  "Ouvrir mon espace": {
+    "en": "Open my member area",
+    "es": "Abrir mi espacio",
+    "pt": "Abrir a minha área",
+    "de": "Mitgliederbereich öffnen"
+  },
+  "Espace membre": {
+    "en": "Member area",
+    "es": "Espacio de miembros",
+    "pt": "Área de membro",
+    "de": "Mitgliederbereich"
+  },
+  "Mon espace membre": {
+    "en": "My member area",
+    "es": "Mi espacio",
+    "pt": "A minha área",
+    "de": "Mein Mitgliederbereich"
+  },
+  "Mon espace Club LBDC": {
+    "en": "My Club LBDC account",
+    "es": "Mi espacio Club LBDC",
+    "pt": "A minha área Club LBDC",
+    "de": "Mein Club-LBDC-Bereich"
+  },
+  "Accédez à votre espace membre du Club LBDC.": {
+    "en": "Access your Club LBDC member area.",
+    "es": "Accede a tu espacio de miembro del Club LBDC.",
+    "pt": "Aceda à sua área de membro do Club LBDC.",
+    "de": "Öffnen Sie Ihren Mitgliederbereich im Club LBDC."
+  },
+  "Retrouvez votre fidélité, vos avantages et vos préférences.": {
+    "en": "Your loyalty card, benefits and preferences.",
+    "es": "Tu fidelidad, ventajas y preferencias.",
+    "pt": "A sua fidelidade, vantagens e preferências.",
+    "de": "Ihre Treuekarte, Vorteile und Einstellungen."
+  },
+  "Ouverture de votre espace…": {
+    "en": "Opening your account…",
+    "es": "Abriendo tu espacio…",
+    "pt": "A abrir a sua área…",
+    "de": "Ihr Bereich wird geöffnet…"
+  },
+  "Votre connexion est vérifiée automatiquement.": {
+    "en": "Your session is checked automatically.",
+    "es": "Tu sesión se comprueba automáticamente.",
+    "pt": "A sua sessão é verificada automaticamente.",
+    "de": "Ihre Sitzung wird automatisch geprüft."
+  },
+  "Connectez-vous avec votre adresse e-mail et votre mot de passe.": {
+    "en": "Sign in with your email address and password.",
+    "es": "Accede con tu correo electrónico y contraseña.",
+    "pt": "Entre com o seu email e palavra-passe.",
+    "de": "Melden Sie sich mit E-Mail-Adresse und Passwort an."
+  },
+  "Connexion…": {
+    "en": "Signing in…",
+    "es": "Accediendo…",
+    "pt": "A entrar…",
+    "de": "Anmeldung läuft…"
+  },
+  "Connexion en cours…": {
+    "en": "Signing in…",
+    "es": "Accediendo…",
+    "pt": "A entrar…",
+    "de": "Anmeldung läuft…"
+  },
+  "Se connecter": {
+    "en": "Sign in",
+    "es": "Iniciar sesión",
+    "pt": "Entrar",
+    "de": "Anmelden"
+  },
+  "Se déconnecter": {
+    "en": "Sign out",
+    "es": "Cerrar sesión",
+    "pt": "Sair",
+    "de": "Abmelden"
+  },
+  "Vous êtes déconnecté.": {
+    "en": "You are signed out.",
+    "es": "Has cerrado la sesión.",
+    "pt": "Terminou a sessão.",
+    "de": "Sie sind abgemeldet."
+  },
+  "Pas encore membre ?": {
+    "en": "Not a member yet?",
+    "es": "¿Aún no eres miembro?",
+    "pt": "Ainda não é membro?",
+    "de": "Noch kein Mitglied?"
+  },
+  "Membre du Club": {
+    "en": "Club member",
+    "es": "Miembro del Club",
+    "pt": "Membro do Club",
+    "de": "Clubmitglied"
+  },
+  "Bonjour": {
+    "en": "Hello",
+    "es": "Hola",
+    "pt": "Olá",
+    "de": "Hallo"
+  },
+  "Cadeau de bienvenue": {
+    "en": "Welcome gift",
+    "es": "Regalo de bienvenida",
+    "pt": "Presente de boas-vindas",
+    "de": "Willkommensgeschenk"
+  },
+  "10 % de remise sur votre prochaine addition.": {
+    "en": "10% off your next bill.",
+    "es": "10 % de descuento en tu próxima cuenta.",
+    "pt": "10% de desconto na sua próxima conta.",
+    "de": "10 % Rabatt auf Ihre nächste Rechnung."
+  },
+  "Coupon": {
+    "en": "Coupon",
+    "es": "Cupón",
+    "pt": "Cupão",
+    "de": "Gutschein"
+  },
+  "Récompense": {
+    "en": "Reward",
+    "es": "Recompensa",
+    "pt": "Recompensa",
+    "de": "Prämie"
+  },
+  "Offre": {
+    "en": "Offer",
+    "es": "Oferta",
+    "pt": "Oferta",
+    "de": "Angebot"
+  },
+  "Cadeau": {
+    "en": "Gift",
+    "es": "Regalo",
+    "pt": "Presente",
+    "de": "Geschenk"
+  },
+  "Vous n’avez aucun avantage disponible pour le moment.": {
+    "en": "You have no available benefits at the moment.",
+    "es": "No tienes ventajas disponibles por el momento.",
+    "pt": "Não tem vantagens disponíveis neste momento.",
+    "de": "Zurzeit sind keine Vorteile verfügbar."
+  },
+  "Valable jusqu’au": {
+    "en": "Valid until",
+    "es": "Válido hasta",
+    "pt": "Válido até",
+    "de": "Gültig bis"
+  },
+  "Disponible dès aujourd’hui": {
+    "en": "Available from today",
+    "es": "Disponible desde hoy",
+    "pt": "Disponível a partir de hoje",
+    "de": "Ab heute verfügbar"
+  },
+  "Aucun avantage utilisé pour le moment.": {
+    "en": "No benefits used yet.",
+    "es": "Aún no has usado ninguna ventaja.",
+    "pt": "Ainda não utilizou vantagens.",
+    "de": "Bisher wurden keine Vorteile genutzt."
+  },
+  "Date": {
+    "en": "Date",
+    "es": "Fecha",
+    "pt": "Data",
+    "de": "Datum"
+  },
+  "Type d’avantage": {
+    "en": "Benefit type",
+    "es": "Tipo de ventaja",
+    "pt": "Tipo de vantagem",
+    "de": "Art des Vorteils"
+  },
+  "Remise ou cadeau": {
+    "en": "Discount or gift",
+    "es": "Descuento o regalo",
+    "pt": "Desconto ou presente",
+    "de": "Rabatt oder Geschenk"
+  },
+  "Statut": {
+    "en": "Status",
+    "es": "Estado",
+    "pt": "Estado",
+    "de": "Status"
+  },
+  "Utilisé": {
+    "en": "Used",
+    "es": "Utilizado",
+    "pt": "Utilizado",
+    "de": "Genutzt"
+  },
+  "Coupon de bienvenue": {
+    "en": "Welcome coupon",
+    "es": "Cupón de bienvenida",
+    "pt": "Cupão de boas-vindas",
+    "de": "Willkommensgutschein"
+  },
+  "Coupon promotionnel —": {
+    "en": "Promotional coupon —",
+    "es": "Cupón promocional —",
+    "pt": "Cupão promocional —",
+    "de": "Aktionsgutschein —"
+  },
+  "Récompense fidélité": {
+    "en": "Loyalty reward",
+    "es": "Recompensa de fidelidad",
+    "pt": "Recompensa de fidelidade",
+    "de": "Treueprämie"
+  },
+  "Tampons gagnés": {
+    "en": "Stamps earned",
+    "es": "Sellos obtenidos",
+    "pt": "Carimbos ganhos",
+    "de": "Gesammelte Stempel"
+  },
+  "Récompenses obtenues": {
+    "en": "Rewards earned",
+    "es": "Recompensas obtenidas",
+    "pt": "Recompensas obtidas",
+    "de": "Erhaltene Prämien"
+  },
+  "Coupons utilisés": {
+    "en": "Coupons used",
+    "es": "Cupones utilizados",
+    "pt": "Cupões utilizados",
+    "de": "Genutzte Gutscheine"
+  },
+  "Total économisé": {
+    "en": "Total saved",
+    "es": "Total ahorrado",
+    "pt": "Total poupado",
+    "de": "Insgesamt gespart"
+  },
+  "Total des remises": {
+    "en": "Total discounts",
+    "es": "Total de descuentos",
+    "pt": "Total de descontos",
+    "de": "Rabatte insgesamt"
+  },
+  "Cadeaux reçus": {
+    "en": "Gifts received",
+    "es": "Regalos recibidos",
+    "pt": "Presentes recebidos",
+    "de": "Erhaltene Geschenke"
+  },
+  "Comment fonctionne le Club ?": {
+    "en": "How does the Club work?",
+    "es": "¿Cómo funciona el Club?",
+    "pt": "Como funciona o Club?",
+    "de": "Wie funktioniert der Club?"
+  },
+  "Ma carte de fidélité": {
+    "en": "My loyalty card",
+    "es": "Mi tarjeta de fidelidad",
+    "pt": "O meu cartão de fidelidade",
+    "de": "Meine Treuekarte"
+  },
+  "QR code personnel de fidélité": {
+    "en": "Personal loyalty QR code",
+    "es": "Código QR personal de fidelidad",
+    "pt": "Código QR pessoal de fidelidade",
+    "de": "Persönlicher Treue-QR-Code"
+  },
+  "Présentez ce QR code au Bistrot pour ajouter un repas à votre fidélité.": {
+    "en": "Show this QR code at the Bistrot to add a meal to your loyalty card.",
+    "es": "Muestra este código QR en el Bistrot para añadir una comida a tu tarjeta.",
+    "pt": "Mostre este código QR no Bistrot para adicionar uma refeição ao seu cartão.",
+    "de": "Zeigen Sie diesen QR-Code im Bistrot, um einen Stempel für Ihr Essen zu erhalten."
+  },
+  "tampons sur votre carte actuelle": {
+    "en": "stamps on your current card",
+    "es": "sellos en tu tarjeta actual",
+    "pt": "carimbos no seu cartão atual",
+    "de": "Stempel auf Ihrer aktuellen Karte"
+  },
+  "achats nécessaires ·": {
+    "en": "purchases required ·",
+    "es": "compras necesarias ·",
+    "pt": "compras necessárias ·",
+    "de": "erforderliche Käufe ·"
+  },
+  "Valeur :": {
+    "en": "Value:",
+    "es": "Valor:",
+    "pt": "Valor:",
+    "de": "Wert:"
+  },
+  "Programme temporairement suspendu. Vos tampons sont conservés.": {
+    "en": "Programme temporarily paused. Your stamps are saved.",
+    "es": "Programa suspendido temporalmente. Tus sellos se conservan.",
+    "pt": "Programa temporariamente suspenso. Os seus carimbos são guardados.",
+    "de": "Programm vorübergehend pausiert. Ihre Stempel bleiben erhalten."
+  },
+  "Application gratuite": {
+    "en": "Free app",
+    "es": "Aplicación gratuita",
+    "pt": "Aplicação gratuita",
+    "de": "Kostenlose App"
+  },
+  "Application mobile": {
+    "en": "Mobile app",
+    "es": "Aplicación móvil",
+    "pt": "Aplicação móvel",
+    "de": "Mobile App"
+  },
+  "Le Bistrot dans votre poche": {
+    "en": "The Bistrot in your pocket",
+    "es": "El Bistrot en tu bolsillo",
+    "pt": "O Bistrot no seu bolso",
+    "de": "Das Bistrot für unterwegs"
+  },
+  "Installez le site sur votre téléphone et recevez les menus, événements et actualités.": {
+    "en": "Install the site on your phone for menus, events and news.",
+    "es": "Instala el sitio en tu teléfono y recibe menús, eventos y novedades.",
+    "pt": "Instale o site no seu telefone e receba ementas, eventos e novidades.",
+    "de": "Installieren Sie die Website auf Ihrem Smartphone und erhalten Sie Menüs, Veranstaltungen und Neuigkeiten."
+  },
+  "Sur iPhone": {
+    "en": "On iPhone",
+    "es": "En iPhone",
+    "pt": "No iPhone",
+    "de": "Auf dem iPhone"
+  },
+  "Ouvrez cette page dans Safari, touchez le bouton": {
+    "en": "Open this page in Safari, tap",
+    "es": "Abre esta página en Safari y pulsa",
+    "pt": "Abra esta página no Safari e toque em",
+    "de": "Öffnen Sie diese Seite in Safari und tippen Sie auf"
+  },
+  "Partager": {
+    "en": "Share",
+    "es": "Compartir",
+    "pt": "Partilhar",
+    "de": "Teilen"
+  },
+  ", puis": {
+    "en": ", then",
+    "es": ", después",
+    "pt": ", depois",
+    "de": ", dann"
+  },
+  "Sur l’écran d’accueil": {
+    "en": "Add to Home Screen",
+    "es": "Añadir a pantalla de inicio",
+    "pt": "Adicionar ao ecrã principal",
+    "de": "Zum Home-Bildschirm"
+  },
+  "Sur Android": {
+    "en": "On Android",
+    "es": "En Android",
+    "pt": "No Android",
+    "de": "Auf Android"
+  },
+  "Touchez": {
+    "en": "Tap",
+    "es": "Pulsa",
+    "pt": "Toque em",
+    "de": "Tippen Sie auf"
+  },
+  "Installer": {
+    "en": "Install",
+    "es": "Instalar",
+    "pt": "Instalar",
+    "de": "Installieren"
+  },
+  "lorsque la proposition apparaît, ou ouvrez le menu du navigateur puis choisissez": {
+    "en": "when prompted, or open the browser menu and select",
+    "es": "cuando aparezca la opción, o abre el menú del navegador y elige",
+    "pt": "quando aparecer a opção, ou abra o menu do navegador e escolha",
+    "de": "wenn die Option erscheint, oder öffnen Sie das Browsermenü und wählen Sie"
+  },
+  "L’installation est gratuite.": {
+    "en": "Installation is free.",
+    "es": "La instalación es gratuita.",
+    "pt": "A instalação é gratuita.",
+    "de": "Die Installation ist kostenlos."
+  },
+  "QR code vers l’application Le Bistrot Du Coin": {
+    "en": "QR code for the Le Bistrot Du Coin app",
+    "es": "Código QR de la aplicación Le Bistrot Du Coin",
+    "pt": "Código QR da aplicação Le Bistrot Du Coin",
+    "de": "QR-Code zur App Le Bistrot Du Coin"
+  },
+  "Scannez ce QR code avec l’appareil photo de votre téléphone.": {
+    "en": "Scan this QR code with your phone's camera.",
+    "es": "Escanea este código QR con la cámara de tu teléfono.",
+    "pt": "Leia este código QR com a câmara do seu telefone.",
+    "de": "Scannen Sie diesen QR-Code mit der Kamera Ihres Smartphones."
+  },
+  "Installer l’application Le Bistrot Du Coin": {
+    "en": "Install the Le Bistrot Du Coin app",
+    "es": "Instalar la aplicación Le Bistrot Du Coin",
+    "pt": "Instalar a aplicação Le Bistrot Du Coin",
+    "de": "App Le Bistrot Du Coin installieren"
+  },
+  "Fermer": {
+    "en": "Close",
+    "es": "Cerrar",
+    "pt": "Fechar",
+    "de": "Schließen"
+  },
+  "Ajoutez le site à votre écran d’accueil depuis le bouton Partager.": {
+    "en": "Add this site to your home screen using the Share button.",
+    "es": "Añade el sitio a tu pantalla de inicio desde el botón Compartir.",
+    "pt": "Adicione o site ao ecrã principal através do botão Partilhar.",
+    "de": "Fügen Sie die Website über Teilen zum Home-Bildschirm hinzu."
+  },
+  "Installez gratuitement le site comme une application.": {
+    "en": "Install this site as an app for free.",
+    "es": "Instala el sitio como una aplicación gratuita.",
+    "pt": "Instale o site como uma aplicação gratuita.",
+    "de": "Installieren Sie diese Website kostenlos als App."
+  },
+  "Voir comment faire": {
+    "en": "See how",
+    "es": "Ver cómo hacerlo",
+    "pt": "Ver como fazer",
+    "de": "So geht's"
+  },
+  "Notifications du Bistrot": {
+    "en": "Bistrot notifications",
+    "es": "Notificaciones del Bistrot",
+    "pt": "Notificações do Bistrot",
+    "de": "Bistrot-Benachrichtigungen"
+  },
+  "Vérification de votre appareil…": {
+    "en": "Checking your device…",
+    "es": "Comprobando tu dispositivo…",
+    "pt": "A verificar o seu dispositivo…",
+    "de": "Ihr Gerät wird geprüft…"
+  },
+  "Les notifications ne sont pas prises en charge sur ce navigateur.": {
+    "en": "This browser does not support notifications.",
+    "es": "Este navegador no admite notificaciones.",
+    "pt": "Este navegador não suporta notificações.",
+    "de": "Dieser Browser unterstützt keine Benachrichtigungen."
+  },
+  "Sur iPhone, ajoutez d’abord le site à l’écran d’accueil pour activer les notifications.": {
+    "en": "On iPhone, first add the site to your home screen to enable notifications.",
+    "es": "En iPhone, añade primero el sitio a la pantalla de inicio para activar las notificaciones.",
+    "pt": "No iPhone, adicione primeiro o site ao ecrã principal para ativar as notificações.",
+    "de": "Fügen Sie auf dem iPhone die Website zuerst zum Home-Bildschirm hinzu, um Benachrichtigungen zu aktivieren."
+  },
+  "Les notifications seront disponibles après la configuration finale du site.": {
+    "en": "Notifications will be available once site setup is complete.",
+    "es": "Las notificaciones estarán disponibles cuando finalice la configuración del sitio.",
+    "pt": "As notificações estarão disponíveis após a configuração final do site.",
+    "de": "Benachrichtigungen sind nach Abschluss der Einrichtung verfügbar."
+  },
+  "Les notifications sont bloquées dans les réglages de votre navigateur.": {
+    "en": "Notifications are blocked in your browser settings.",
+    "es": "Las notificaciones están bloqueadas en los ajustes del navegador.",
+    "pt": "As notificações estão bloqueadas nas definições do navegador.",
+    "de": "Benachrichtigungen sind in Ihren Browsereinstellungen blockiert."
+  },
+  "Notifications activées. Elles peuvent arriver même lorsque l’application est fermée.": {
+    "en": "Notifications are on. You can receive them even when the app is closed.",
+    "es": "Notificaciones activadas. Puedes recibirlas aunque la aplicación esté cerrada.",
+    "pt": "Notificações ativadas. Pode recebê-las mesmo com a aplicação fechada.",
+    "de": "Benachrichtigungen sind aktiviert. Sie können auch bei geschlossener App eintreffen."
+  },
+  "Activez les notifications pour ne rien manquer.": {
+    "en": "Enable notifications to stay up to date.",
+    "es": "Activa las notificaciones para no perderte nada.",
+    "pt": "Ative as notificações para não perder novidades.",
+    "de": "Aktivieren Sie Benachrichtigungen, um nichts zu verpassen."
+  },
+  "Vérification impossible.": {
+    "en": "Unable to check.",
+    "es": "No se ha podido comprobar.",
+    "pt": "Não foi possível verificar.",
+    "de": "Prüfung nicht möglich."
+  },
+  "Autorisation refusée. Vous pourrez la modifier dans les réglages du navigateur.": {
+    "en": "Permission denied. You can change it in your browser settings.",
+    "es": "Permiso denegado. Puedes cambiarlo en los ajustes del navegador.",
+    "pt": "Permissão recusada. Pode alterá-la nas definições do navegador.",
+    "de": "Berechtigung verweigert. Sie können dies in den Browsereinstellungen ändern."
+  },
+  "Notifications non configurées.": {
+    "en": "Notifications are not configured.",
+    "es": "Notificaciones sin configurar.",
+    "pt": "Notificações não configuradas.",
+    "de": "Benachrichtigungen sind nicht eingerichtet."
+  },
+  "Abonnement impossible.": {
+    "en": "Unable to subscribe.",
+    "es": "No se ha podido activar la suscripción.",
+    "pt": "Não foi possível ativar a subscrição.",
+    "de": "Abonnement nicht möglich."
+  },
+  "Notifications désactivées.": {
+    "en": "Notifications are off.",
+    "es": "Notificaciones desactivadas.",
+    "pt": "Notificações desativadas.",
+    "de": "Benachrichtigungen sind deaktiviert."
+  },
+  "Désabonnement impossible.": {
+    "en": "Unable to unsubscribe.",
+    "es": "No se ha podido cancelar la suscripción.",
+    "pt": "Não foi possível cancelar a subscrição.",
+    "de": "Abmeldung nicht möglich."
+  },
+  "Sur iPhone :": {
+    "en": "On iPhone:",
+    "es": "En iPhone:",
+    "pt": "No iPhone:",
+    "de": "Auf dem iPhone:"
+  },
+  "touchez Partager, puis « Sur l’écran d’accueil ». Ouvrez ensuite l’icône LBDC et revenez sur cette page.": {
+    "en": "tap Share, then Add to Home Screen. Open the LBDC icon and return to this page.",
+    "es": "pulsa Compartir y Añadir a pantalla de inicio. Abre el icono LBDC y vuelve a esta página.",
+    "pt": "toque em Partilhar e Adicionar ao ecrã principal. Abra o ícone LBDC e volte a esta página.",
+    "de": "tippen Sie auf Teilen und Zum Home-Bildschirm. Öffnen Sie das LBDC-Symbol und kehren Sie zu dieser Seite zurück."
+  },
+  "Activation…": {
+    "en": "Enabling…",
+    "es": "Activando…",
+    "pt": "A ativar…",
+    "de": "Wird aktiviert…"
+  },
+  "Activer les notifications": {
+    "en": "Enable notifications",
+    "es": "Activar notificaciones",
+    "pt": "Ativar notificações",
+    "de": "Benachrichtigungen aktivieren"
+  },
+  "Désactiver les notifications": {
+    "en": "Disable notifications",
+    "es": "Desactivar notificaciones",
+    "pt": "Desativar notificações",
+    "de": "Benachrichtigungen deaktivieren"
+  },
+  "Rejoignez gratuitement le Club du Bistrot Du Coin.": {
+    "en": "Join the Bistrot Du Coin Club for free.",
+    "es": "Únete gratis al Club del Bistrot Du Coin.",
+    "pt": "Adira gratuitamente ao Club do Bistrot Du Coin.",
+    "de": "Treten Sie kostenlos dem Club Le Bistrot Du Coin bei."
+  },
+  "Restaurant convivial à Saint-Laurent-Nouan : cuisine maison, plats du jour et moments à partager.": {
+    "en": "A welcoming restaurant in Saint-Laurent-Nouan: home cooking, daily specials and good times together.",
+    "es": "Restaurante acogedor en Saint-Laurent-Nouan: cocina casera, platos del día y momentos para compartir.",
+    "pt": "Restaurante acolhedor em Saint-Laurent-Nouan: cozinha caseira, pratos do dia e momentos para partilhar.",
+    "de": "Ein gemütliches Restaurant in Saint-Laurent-Nouan: hausgemachte Küche, Tagesgerichte und gemeinsame Genussmomente."
+  },
+  "Un lieu où se rencontrer et partager de bons moments.": {
+    "en": "A place to meet and share good times.",
+    "es": "Un lugar para encontrarse y compartir buenos momentos.",
+    "pt": "Um lugar para se encontrar e partilhar bons momentos.",
+    "de": "Ein Ort für Begegnungen und schöne gemeinsame Momente."
+  },
+  "Menu du jour": {
+    "en": "Today's menu",
+    "es": "Menú del día",
+    "pt": "Ementa do dia",
+    "de": "Tagesmenü"
+  },
+  "Type de vin": {
+    "en": "Wine type",
+    "es": "Tipo de vino",
+    "pt": "Tipo de vinho",
+    "de": "Weinart"
+  },
+  "Tous": {
+    "en": "All",
+    "es": "Todos",
+    "pt": "Todos",
+    "de": "Alle"
+  },
+  "Rouge": {
+    "en": "Red",
+    "es": "Tinto",
+    "pt": "Tinto",
+    "de": "Rot"
+  },
+  "Blanc": {
+    "en": "White",
+    "es": "Blanco",
+    "pt": "Branco",
+    "de": "Weiß"
+  },
+  "Rosé": {
+    "en": "Rosé",
+    "es": "Rosado",
+    "pt": "Rosé",
+    "de": "Rosé"
+  },
+  "Pétillant / Champagne": {
+    "en": "Sparkling / Champagne",
+    "es": "Espumoso / Champán",
+    "pt": "Espumante / Champanhe",
+    "de": "Schaumwein / Champagner"
+  }
+}
