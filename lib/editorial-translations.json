@@ -1267,8 +1267,8 @@
   },
   "Avis Google": {
     "en": "Google reviews",
-    "es": "Opiniones en Google",
-    "pt": "Avaliações no Google",
+    "es": "Reseñas de Google",
+    "pt": "Avaliações Google",
     "de": "Google-Bewertungen"
   },
   "Installer l’application": {
@@ -2428,5 +2428,239 @@
     "es": "Hola,\n\nMe gustaría recibir información sobre un evento privado para: {type}.\n\nFecha deseada:\nNúmero de personas:\nInformación adicional:\n\nGracias.",
     "pt": "Olá,\n\nGostaria de obter informações sobre um evento privado para: {type}.\n\nData pretendida:\nNúmero de pessoas:\nInformações adicionais:\n\nObrigado.",
     "de": "Guten Tag,\n\nich möchte Informationen zu einer privaten Veranstaltung erhalten: {type}.\n\nGewünschtes Datum:\nPersonenzahl:\nWeitere Informationen:\n\nVielen Dank."
+  },
+  "Photo précédente": {
+    "en": "Previous photo",
+    "es": "Foto anterior",
+    "pt": "Foto anterior",
+    "de": "Vorheriges Foto"
+  },
+  "Photo suivante": {
+    "en": "Next photo",
+    "es": "Foto siguiente",
+    "pt": "Foto seguinte",
+    "de": "Nächstes Foto"
+  },
+  "Photo jointe à un avis": {
+    "en": "Photo attached to a review",
+    "es": "Foto adjunta a una reseña",
+    "pt": "Foto anexada a uma avaliação",
+    "de": "Foto zu einer Bewertung"
+  },
+  "Voir nos avis Google": {
+    "en": "Read our Google reviews",
+    "es": "Ver nuestras reseñas de Google",
+    "pt": "Ver as nossas avaliações Google",
+    "de": "Unsere Google-Bewertungen lesen"
+  },
+  "Laisser un avis Google": {
+    "en": "Write a Google review",
+    "es": "Escribir una reseña en Google",
+    "pt": "Deixar uma avaliação no Google",
+    "de": "Bei Google bewerten"
+  },
+  "Sélection proposée par Google": {
+    "en": "Selected by Google",
+    "es": "Selección de Google",
+    "pt": "Seleção do Google",
+    "de": "Von Google ausgewählt"
+  },
+  "Voir sur Google Maps": {
+    "en": "View on Google Maps",
+    "es": "Ver en Google Maps",
+    "pt": "Ver no Google Maps",
+    "de": "Auf Google Maps ansehen"
+  },
+  "Les avis de nos clients": {
+    "en": "Our guests’ reviews",
+    "es": "Las opiniones de nuestros clientes",
+    "pt": "As opiniões dos nossos clientes",
+    "de": "Bewertungen unserer Gäste"
+  },
+  "Avis client sur notre site": {
+    "en": "Guest review on our website",
+    "es": "Reseña de un cliente en nuestra web",
+    "pt": "Avaliação de cliente no nosso site",
+    "de": "Gästebewertung auf unserer Website"
+  },
+  "Partagez le premier avis sur notre site.": {
+    "en": "Be the first to leave a review on our website.",
+    "es": "Deja la primera reseña en nuestra web.",
+    "pt": "Deixe a primeira avaliação no nosso site.",
+    "de": "Schreiben Sie die erste Bewertung auf unserer Website."
+  },
+  "Votre avis compte": {
+    "en": "Your opinion matters",
+    "es": "Tu opinión cuenta",
+    "pt": "A sua opinião conta",
+    "de": "Ihre Meinung zählt"
+  },
+  "Partagez votre expérience": {
+    "en": "Share your experience",
+    "es": "Comparte tu experiencia",
+    "pt": "Partilhe a sua experiência",
+    "de": "Teilen Sie Ihre Erfahrung"
+  },
+  "Prénom ou prénom et initiale du nom": {
+    "en": "First name, optionally with surname initial",
+    "es": "Nombre, opcionalmente con inicial del apellido",
+    "pt": "Nome, opcionalmente com inicial do apelido",
+    "de": "Vorname, optional mit Nachnamensinitiale"
+  },
+  "Note": {
+    "en": "Rating",
+    "es": "Puntuación",
+    "pt": "Classificação",
+    "de": "Bewertung"
+  },
+  "Commentaire": {
+    "en": "Comment",
+    "es": "Comentario",
+    "pt": "Comentário",
+    "de": "Kommentar"
+  },
+  "Ajouter des photos": {
+    "en": "Add photos",
+    "es": "Añadir fotos",
+    "pt": "Adicionar fotos",
+    "de": "Fotos hinzufügen"
+  },
+  "Retirer": {
+    "en": "Remove",
+    "es": "Quitar",
+    "pt": "Remover",
+    "de": "Entfernen"
+  },
+  "Aperçu": {
+    "en": "Preview",
+    "es": "Vista previa",
+    "pt": "Pré-visualização",
+    "de": "Vorschau"
+  },
+  "5 photos maximum.": {
+    "en": "Up to 5 photos.",
+    "es": "Máximo 5 fotos.",
+    "pt": "Máximo de 5 fotos.",
+    "de": "Maximal 5 Fotos."
+  },
+  "5 photos maximum, 15 Mo par original. Photos réduites avant envoi.": {
+    "en": "Up to 5 photos, 15 MB per original. Images are resized before upload.",
+    "es": "Máximo 5 fotos, 15 MB por original. Se reducen antes del envío.",
+    "pt": "Até 5 fotos, 15 MB por original. As imagens são reduzidas antes do envio.",
+    "de": "Bis zu 5 Fotos, je 15 MB. Bilder werden vor dem Senden verkleinert."
+  },
+  "Je consens à la publication de mon prénom, de mon avis et de mes photos après validation.": {
+    "en": "I agree to the publication of my first name, review and photos after approval.",
+    "es": "Acepto la publicación de mi nombre, reseña y fotos tras su validación.",
+    "pt": "Autorizo a publicação do meu nome, avaliação e fotos após aprovação.",
+    "de": "Ich stimme der Veröffentlichung meines Vornamens, meiner Bewertung und Fotos nach Freigabe zu."
+  },
+  "Envoyer mon avis": {
+    "en": "Submit my review",
+    "es": "Enviar mi reseña",
+    "pt": "Enviar a minha avaliação",
+    "de": "Bewertung senden"
+  },
+  "Préparation ou envoi en cours…": {
+    "en": "Preparing or uploading…",
+    "es": "Preparando o enviando…",
+    "pt": "A preparar ou enviar…",
+    "de": "Wird vorbereitet oder gesendet…"
+  },
+  "Merci pour votre avis. Il sera publié après validation par notre équipe.": {
+    "en": "Thank you for your review. It will be published after our team approves it.",
+    "es": "Gracias por tu reseña. Se publicará tras la validación de nuestro equipo.",
+    "pt": "Obrigado pela sua avaliação. Será publicada após aprovação da nossa equipa.",
+    "de": "Vielen Dank für Ihre Bewertung. Sie wird nach Freigabe durch unser Team veröffentlicht."
+  },
+  "Mes fidélités": {
+    "en": "My loyalty programmes",
+    "es": "Mis programas de fidelidad",
+    "pt": "Os meus programas de fidelidade",
+    "de": "Meine Treueprogramme"
+  },
+  "Encore {count} achat(s) avant votre récompense": {
+    "en": "{count} more purchase(s) until your reward",
+    "es": "Faltan {count} compras para tu recompensa",
+    "pt": "Faltam {count} compras para a sua recompensa",
+    "de": "Noch {count} Käufe bis zu Ihrer Prämie"
+  },
+  "Votre récompense est prête": {
+    "en": "Your reward is ready",
+    "es": "Tu recompensa está lista",
+    "pt": "A sua recompensa está pronta",
+    "de": "Ihre Prämie ist bereit"
+  },
+  "Afficher mon QR": {
+    "en": "Show my QR",
+    "es": "Mostrar mi QR",
+    "pt": "Mostrar o meu QR",
+    "de": "Meinen QR anzeigen"
+  },
+  "Masquer le QR": {
+    "en": "Hide QR",
+    "es": "Ocultar QR",
+    "pt": "Ocultar QR",
+    "de": "QR ausblenden"
+  },
+  "Actualiser le QR": {
+    "en": "Refresh QR",
+    "es": "Actualizar QR",
+    "pt": "Atualizar QR",
+    "de": "QR erneuern"
+  },
+  "QR temporairement indisponible": {
+    "en": "QR temporarily unavailable",
+    "es": "QR temporalmente no disponible",
+    "pt": "QR temporariamente indisponível",
+    "de": "QR vorübergehend nicht verfügbar"
+  },
+  "QR de fidélité": {
+    "en": "Loyalty QR",
+    "es": "QR de fidelidad",
+    "pt": "QR de fidelidade",
+    "de": "Treue-QR"
+  },
+  "Présentez ce QR à notre équipe. Il se renouvelle automatiquement.": {
+    "en": "Show this QR to our team. It refreshes automatically.",
+    "es": "Muestra este QR a nuestro equipo. Se renueva automáticamente.",
+    "pt": "Mostre este QR à nossa equipa. É renovado automaticamente.",
+    "de": "Zeigen Sie diesen QR unserem Team. Er wird automatisch erneuert."
+  },
+  "récompenses obtenues": {
+    "en": "rewards earned",
+    "es": "recompensas obtenidas",
+    "pt": "recompensas obtidas",
+    "de": "erhaltene Prämien"
+  },
+  "utilisées": {
+    "en": "used",
+    "es": "utilizadas",
+    "pt": "utilizadas",
+    "de": "eingelöst"
+  },
+  "Achat enregistré": {
+    "en": "Purchase recorded",
+    "es": "Compra registrada",
+    "pt": "Compra registada",
+    "de": "Kauf erfasst"
+  },
+  "Récompense utilisée": {
+    "en": "Reward redeemed",
+    "es": "Recompensa utilizada",
+    "pt": "Recompensa utilizada",
+    "de": "Prämie eingelöst"
+  },
+  "Inactive": {
+    "en": "Inactive",
+    "es": "Inactiva",
+    "pt": "Inativa",
+    "de": "Inaktiv"
+  },
+  "Les autres fidélités sont momentanément indisponibles.": {
+    "en": "Other loyalty programmes are temporarily unavailable.",
+    "es": "Los otros programas de fidelidad no están disponibles temporalmente.",
+    "pt": "Os outros programas de fidelidade estão temporariamente indisponíveis.",
+    "de": "Weitere Treueprogramme sind vorübergehend nicht verfügbar."
   }
 }

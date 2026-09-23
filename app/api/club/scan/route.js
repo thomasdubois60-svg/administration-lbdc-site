@@ -1,3 +1,4 @@
+import {permanentScan} from '../../../../lib/permanent-scan';
 import { NextResponse } from 'next/server';
 import { hasAnyRole, ROLES } from '../../../../lib/auth';
 import { sb, tables } from '../../../../lib/supabase';
@@ -60,6 +61,7 @@ export async function POST(request) {
   if (!hasAnyRole(request, allowed)) return NextResponse.json({ error: 'Accès Fidélité requis' }, { status: 403 });
   try {
     const { value } = await request.json();
+    if(typeof value==='string'&&value.startsWith('lbdc-permanent:'))return NextResponse.json(await permanentScan(value.slice(15)));
     const identifier = extractIdentifier(value);
     if (!identifier) return NextResponse.json({ error: 'QR Code ou code membre vide' }, { status: 400 });
     const member = await findMember(identifier);

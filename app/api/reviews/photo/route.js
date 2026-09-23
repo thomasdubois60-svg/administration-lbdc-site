@@ -1,0 +1,1 @@
+import {hasRole,ROLES} from '../../../../lib/auth';import {photoResponse} from '../../../../lib/final-features';export async function GET(r){if(!hasRole(r,ROLES.MANAGER))return new Response(null,{status:403});const u=new URL(r.url);try{return await photoResponse(u.searchParams.get('id'),u.searchParams.get('photo'),true)}catch{return new Response(null,{status:503})}}
