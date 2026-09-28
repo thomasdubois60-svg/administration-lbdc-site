@@ -1,4 +1,6 @@
 'use client';
+import ProductLanguages from './ProductLanguages';
+import {translationFor} from '../lib/content-translations';
 import { useState } from 'react';
 import {isWineCategory,wineTypes} from '../lib/wine-types';
 import styles from './MenuEditor.module.css';
@@ -18,7 +20,8 @@ const move = (items, from, to) => {
  return next;
 };
 
-export default function MenuEditor({globalStyle='bistrot', onGlobalStyleChange, menu, onChange, introduction, onIntroductionChange, ImagePicker, setStatus}) {
+export default function MenuEditor({content,globalStyle='bistrot', onGlobalStyleChange, menu, onChange, introduction, onIntroductionChange, ImagePicker, setStatus}) {
+ const legacy=(object,base,fields)=>Object.fromEntries(['en','es','pt','de'].map(lang=>[lang,Object.fromEntries(fields.map(key=>[key,{source:object[key]||'',value:translationFor(content||{menu},{path:base+'.'+key,source:object[key]||''},lang)}]))]));
  const [selected, setSelected] = useState(null);
  const [editing, setEditing] = useState(null);
  const [title, setTitle] = useState('');
@@ -76,8 +79,7 @@ export default function MenuEditor({globalStyle='bistrot', onGlobalStyleChange, 
    <section className="card">
     <button type="button" className="secondary-button" onClick={() => open(null)}>← Retour aux catégories</button>
     <h2>{category.category || 'Sans titre'}</h2>
-    <label className="field"><span>Nom de la catégorie</span><input value={category.category || ''} onChange={event => updateCategory(item => ({...item, category:event.target.value}))}/></label>
-    <label className="field"><span>Sous-titre de la catégorie</span><textarea rows={2} value={category.subtitle || ''} onChange={event => updateCategory(item => ({...item, subtitle:event.target.value}))}/></label>
+    <ProductLanguages value={category} fields={[["category","Nom de la catégorie"],["subtitle","Sous-titre de la catégorie"]]} legacy={legacy(category,'menu.'+selected,['category','subtitle'])} onChange={values=>updateCategory(item=>({...item,...values}))}/>
     <ImagePicker label="Photo d’en-tête de la catégorie" value={category.headerImage} setStatus={setStatus} onChange={headerImage => updateCategory(item => ({...item, headerImage}))}/>
     <label className="field"><span>Style visuel</span><select value={menuStyles[category.style]?category.style:''} onChange={event => updateCategory(item => ({...item, style:event.target.value}))}><option value="">Style global ({menuStyles[globalStyle]})</option>{Object.entries(menuStyles).map(([key,label])=><option value={key} key={key}>{label}</option>)}</select></label>
     {!preview&&<div className={styles.directPreview} aria-label="Aperçu visuel direct"><MenuExperience globalStyle={globalStyle} menu={[category]} activeKey={categoryKeys([category])[0]} compact/></div>}
@@ -108,9 +110,9 @@ export default function MenuEditor({globalStyle='bistrot', onGlobalStyleChange, 
       }}>Supprimer</button>
      </div>
      {editing === index && <div className={styles.form}>
-      <label className="field"><span>Nom</span><input value={product.name || ''} onChange={event => updateProduct(index, {name:event.target.value})}/></label>
+      <ProductLanguages value={product} fields={[["name","Nom"],["description","Description"]]} legacy={legacy(product,'menu.'+selected+'.items.'+index,['name','description'])} onChange={values=>updateProduct(index,values)}/>
       <label className="field"><span>Prix</span><input value={product.price || ''} onChange={event => updateProduct(index, {price:event.target.value})}/></label>
-      <label className="field"><span>Description</span><textarea rows={3} value={product.description || ''} onChange={event => updateProduct(index, {description:event.target.value})}/></label>
+
       {isWineCategory(category)&&<label className="field"><span style={{textTransform:"uppercase"}}>Type de vin</span><select className={styles.wineType} aria-label="Type de vin" aria-describedby={`wine-type-help-${index}`} value={product.wineType||''} onChange={event=>updateProduct(index,{wineType:event.target.value})}><option value="">Non renseigné (Tous)</option>{wineTypes.map(type=><option key={type.value} value={type.value}>{type.label}</option>)}</select><small id={`wine-type-help-${index}`}>Facultatif. Sans type, le vin reste visible dans « Tous ».</small></label>}
       <ImagePicker label="Photo du produit" value={product.image} setStatus={setStatus} onChange={image => updateProduct(index, {image})}/>
       <label className="field"><span>Texte alternatif (facultatif)</span><input value={product.imageAlt || ''} onChange={event => updateProduct(index, {imageAlt:event.target.value})}/></label>
