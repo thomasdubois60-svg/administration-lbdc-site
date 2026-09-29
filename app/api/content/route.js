@@ -1,3 +1,4 @@
+import {queueMenuNotifications,dispatchCommunity,menuIdentity} from '../../../lib/community-server';
 import {normalizeLoyaltyProgram,validateLoyaltyProgram} from '../../../lib/loyalty-program';
 import { normalizeGalleryAlbums } from '../../../lib/gallery-albums';
 import { hasRole, ROLES } from '../../../lib/auth';
@@ -294,6 +295,8 @@ export async function PUT(request) {
       }, { status: 200 });
     }
 
+    let community=null;
+    if(body.dailyPublication===true||JSON.stringify(current.content.daily)!==JSON.stringify(normalizedContent.daily)){try{community={key:menuIdentity(normalizedContent.daily).key,queued:await queueMenuNotifications(normalizedContent.daily),...await dispatchCommunity()}}catch{community={key:menuIdentity(normalizedContent.daily).key,error:'Menu publié. Notifications préférences en attente de vérification ; vous pouvez republier sans doublon.'}}}
     let notification = null;
     if (body.notification) notification = await sendNotification(body.notification);
     return NextResponse.json({
@@ -303,6 +306,7 @@ export async function PUT(request) {
       changed,
       sha,
       notification,
+      community,
       verification: published.summary,
       message: verifyEvents ? 'Événement publié et confirmé' : 'Publication réussie. Le site public est à jour.'
     });

@@ -47,7 +47,8 @@ export async function POST(request) {
     const idempotencyKey = String(request.headers.get('idempotency-key') || '').trim();
     if (!idempotencyKey) return NextResponse.json({ ok: false, error: 'Clé d’idempotence obligatoire.' }, { status: 400 });
 
-    const normalizedPayload = { title, body, url: String(payload?.url || '/'), tag: payload?.tag ? String(payload.tag) : undefined };
+    if(payload.communityPublication!==undefined&&(!/^[a-f0-9]{64}$/.test(payload.communityPublication)||payload.url!=='/aujourdhui'))return NextResponse.json({error:'Publication du menu invalide.'},{status:400});
+    const normalizedPayload = { communityPublication:payload.communityPublication,title, body, url: String(payload?.url || '/'), tag: payload?.tag ? String(payload.tag) : undefined };
     const fingerprint = JSON.stringify(normalizedPayload);
     const now = Date.now();
     pruneIdempotencyStore(now);

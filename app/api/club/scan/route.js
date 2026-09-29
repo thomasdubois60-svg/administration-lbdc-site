@@ -1,3 +1,4 @@
+import {referralScan} from '../../../../lib/referral-scan';
 import {permanentScan} from '../../../../lib/permanent-scan';
 import { NextResponse } from 'next/server';
 import { hasAnyRole, ROLES } from '../../../../lib/auth';
@@ -62,6 +63,7 @@ export async function POST(request) {
   try {
     const { value } = await request.json();
     if(typeof value==='string'&&value.startsWith('lbdc-permanent:'))return NextResponse.json(await permanentScan(value.slice(15)));
+    if(typeof value==='string'&&value.startsWith('lbdc-referral:')){try{return NextResponse.json(await referralScan(value.slice(14)))}catch{return NextResponse.json({error:'QR expiré, récompense utilisée ou indisponible.'},{status:409})}}
     const identifier = extractIdentifier(value);
     if (!identifier) return NextResponse.json({ error: 'QR Code ou code membre vide' }, { status: 400 });
     const member = await findMember(identifier);

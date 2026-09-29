@@ -1,4 +1,5 @@
 'use client';
+import BulkTranslations from './BulkTranslations';
 import ProductLanguages from './ProductLanguages';
 import {translationFor} from '../lib/content-translations';
 import { useState } from 'react';
@@ -41,7 +42,7 @@ export default function MenuEditor({content,globalStyle='bistrot', onGlobalStyle
  };
 
  const [globalPreviewKey,setGlobalPreviewKey]=useState(undefined);
- return <div className={styles.editor}>
+ return <div className={styles.editor}><BulkTranslations content={content||{menu}} onChange={onChange}/>
   <section className="card"><h2>Style global de la Carte</h2><p className="muted">Choisissez une ambiance, vérifiez l’aperçu, puis publiez. Les styles particuliers des catégories restent prioritaires.</p>
    <div className={styles.styleChoices} role="group" aria-label="Style global de la Carte">{Object.entries(menuStyles).filter(([key])=>key!=='atelier').map(([key,label])=><button key={key} type="button" aria-pressed={globalStyle===key} className={styles.styleChoice} onClick={()=>onGlobalStyleChange(key)}><span aria-hidden="true" className={styles.miniature+' '+styles[key]}><span>LE BISTROT</span><strong>À savourer</strong><i/><small>Une belle assiette <b>18 €</b></small><small>Un moment à partager <b>12 €</b></small></span><strong>{label}</strong></button>)}</div>
    <button type="button" className="secondary-button" onClick={()=>onChange(current=>current.map(item=>({...item,style:''})))}>Appliquer le style global à toutes les catégories</button>
