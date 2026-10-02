@@ -5,11 +5,11 @@ import { hasRole, ROLES } from '../../../lib/auth';
 import { sendNotification } from '../../../lib/notifications';
 import { confirmPublishedEvents } from '../../../lib/event-publication';
 import { NextResponse } from 'next/server';
+import {githubRepository,githubFailure,upstreamDiagnostic} from '../../../lib/club-diagnostics';
 
 export const maxDuration = 60;
 
-const owner = process.env.GITHUB_OWNER || 'thomasdubois60-svg';
-const repo = process.env.GITHUB_REPO || 'lebistrotducoin';
+const repo = githubRepository();
 const branch = process.env.GITHUB_BRANCH || 'main';
 const path = 'data/site-content.json';
 const defaultContent = Object.freeze({
@@ -173,12 +173,12 @@ function githubHeaders(authenticated = false) {
 }
 
 async function readGithubFile(ref = branch, signal) {
-  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(ref)}`, {
+  const response = await fetch(`https://api.github.com/repos/${repo}/contents/${path}?ref=${encodeURIComponent(ref)}`, {
     headers: githubHeaders(Boolean(process.env.GITHUB_TOKEN)),
     cache: 'no-store',
     signal
   });
-  if (!response.ok) throw new Error('Impossible de charger le contenu du site.');
+  if (!response.ok) throw await githubFailure(response,'lecture du contenu');
   const file = await response.json();
   const content = JSON.parse(Buffer.from(file.content, 'base64').toString('utf8'));
   return { file, content: normalizeContent(content) };
@@ -219,13 +219,17 @@ function buildSuccessSummary(actual, expected) {
 }
 
 async function verifyPublicContent(expected, verifyEvents = false, savedSha, savedRef = branch) {
-  if (verifyEvents) return confirmPublishedEvents(expected.events, () => readGithubFile(savedRef, AbortSignal.timeout(3000)), savedSha);
+  if (verifyEvents) {
+    let diagnostic;
+    const result=await confirmPublishedEvents(expected.events,async()=>{try{return await readGithubFile(savedRef,AbortSignal.timeout(3000))}catch(error){diagnostic=upstreamDiagnostic(error);throw error}},savedSha);
+    return {...result,...(!result.success&&diagnostic?{diagnostic}:{})};
+  }
   try {
     const { content } = await readGithubFile();
     const summary = buildSuccessSummary(content, expected);
     return { success: summary.success, summary };
-  } catch {
-    return { success: false, summary: null };
+  } catch (error) {
+    return { success: false, summary: null, diagnostic:upstreamDiagnostic(error) };
   }
 }
 
@@ -233,9 +237,9 @@ export async function GET(request) {
   if (!hasRole(request, ROLES.EMPLOYEE)) return NextResponse.json({ error: 'Accès Administration requis.' }, { status: 403 });
   try {
     const { file, content } = await readGithubFile();
-    return NextResponse.json({ content, sha: file.sha });
+    return NextResponse.json({ content, sha: file.sha },{headers:{'Cache-Control':'private, no-store'}});
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 502 });
+    return NextResponse.json({ error: error.message,diagnostic:upstreamDiagnostic(error) }, { status: 502,headers:{'Cache-Control':'private, no-store'} });
   }
 }
 
@@ -261,7 +265,7 @@ export async function PUT(request) {
       if (body.sha && body.sha !== current.file.sha) {
         return NextResponse.json({ error: 'Le contenu a changé depuis son chargement. Recharge la page avant de republier.', sha }, { status: 409 });
       }
-      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+      const response = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
         method: 'PUT',
         headers: { ...githubHeaders(true), 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -271,8 +275,11 @@ export async function PUT(request) {
           branch
         })
       });
+      if (!response.ok) {
+        const error=await githubFailure(response,'écriture du contenu');
+        return NextResponse.json({error:error.message,diagnostic:upstreamDiagnostic(error),sha},{status:response.status});
+      }
       const result = await response.json();
-      if (!response.ok) return NextResponse.json({ error: result.message || 'Échec de l’enregistrement GitHub.', sha }, { status: response.status });
       sha = result.content.sha;
       savedRef = result.commit?.sha || branch;
       changed = true;
@@ -288,15 +295,15 @@ export async function PUT(request) {
         changed,
         sha,
         published: false,
-        ...(verifyEvents ? { verification: published } : {}),
+        verification: published,
         message: verifyEvents
           ? `Événement enregistré, mais relecture GitHub non confirmée après ${published.attempts} vérifications : ${published.reason === 'events-not-saved' ? 'les événements attendus ne correspondent pas au fichier enregistré' : published.reason === 'github-version-mismatch' ? 'la version relue ne correspond pas à la version enregistrée' : 'GitHub ne permet pas de relire le fichier enregistré'}. Aucune notification envoyée. Réessayez « Publier et notifier ».`
-          : 'La publication GitHub a bien été enregistrée, mais la vérification de lecture sur le site public n’a pas encore confirmé l’affichage. Le contenu peut déjà être disponible après quelques secondes.'
+          : 'Le contenu a été enregistré dans GitHub, mais sa relecture n’est pas confirmée. Consultez le diagnostic avant de republier.'
       }, { status: 200 });
     }
 
     let community=null;
-    if(body.dailyPublication===true||JSON.stringify(current.content.daily)!==JSON.stringify(normalizedContent.daily)){try{community={key:menuIdentity(normalizedContent.daily).key,queued:await queueMenuNotifications(normalizedContent.daily),...await dispatchCommunity()}}catch{community={key:menuIdentity(normalizedContent.daily).key,error:'Menu publié. Notifications préférences en attente de vérification ; vous pouvez republier sans doublon.'}}}
+    if(body.dailyPublication===true||JSON.stringify(current.content.daily)!==JSON.stringify(normalizedContent.daily)){try{community={key:menuIdentity(normalizedContent.daily).key,queued:await queueMenuNotifications(normalizedContent.daily),...await dispatchCommunity()}}catch(error){community={key:menuIdentity(normalizedContent.daily).key,error:'Menu publié. Notifications préférences en attente de vérification ; vous pouvez republier sans doublon.',diagnostic:upstreamDiagnostic(error)}}}
     let notification = null;
     if (body.notification) notification = await sendNotification(body.notification);
     return NextResponse.json({
@@ -308,9 +315,11 @@ export async function PUT(request) {
       notification,
       community,
       verification: published.summary,
-      message: verifyEvents ? 'Événement publié et confirmé' : 'Publication réussie. Le site public est à jour.'
+      message: verifyEvents ? 'Événement publié et confirmé' : 'Contenu enregistré et relu dans GitHub.',
+      verificationScope:'github',
+      publicDisplayVerified:false
     });
   } catch (error) {
-    return NextResponse.json({ error: error.message || 'Publication impossible.' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Publication impossible.',diagnostic:upstreamDiagnostic(error) }, { status: 500 });
   }
 }
