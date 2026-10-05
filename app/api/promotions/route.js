@@ -68,12 +68,14 @@ export async function PATCH(request) {
     const input = await request.json();
     const id = String(input?.id || '').trim();
     if (!id) return NextResponse.json({ ok: false, error: 'Promotion manquante.' }, { status: 400 });
-    const body = typeof input.active === 'boolean' && Object.keys(input).every((key) => ['id', 'active'].includes(key))
-      ? { active: input.active }
+    const archiveChange=typeof input.archived==='boolean'&&Object.keys(input).every(key=>['id','archived'].includes(key));
+    const body = archiveChange ? {archived:input.archived,active:false} : typeof input.active === 'boolean' && Object.keys(input).every((key) => ['id', 'active'].includes(key))
+      ? { active: input.active,...(input.active?{archived:false}:{}) }
       : cleanPromotion(input);
     const rows = await sb(`${tables.promotions}?id=eq.${encodeURIComponent(id)}`, { method: 'PATCH', body });
     const promotion = rows[0];
     if (!promotion) return NextResponse.json({ ok: false, error: 'Promotion introuvable.' }, { status: 404 });
+    if(archiveChange) return NextResponse.json({ok:true,promotion:publicPromotion(promotion),coupons:{created:0}});
     try {
       const coupons = await ensurePromotionCoupons(promotion);
       return NextResponse.json({ ok: true, promotion:publicPromotion(promotion), coupons });
@@ -82,5 +84,20 @@ export async function PATCH(request) {
     }
   } catch (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 400 });
+  }
+}
+
+export async function DELETE(request) {
+  if(!hasRole(request,ROLES.MANAGER)) return NextResponse.json({error:'Droits Responsable requis'},{status:403});
+  if(request.headers.get('origin')&&request.headers.get('origin')!==new URL(request.url).origin) return NextResponse.json({error:'Origine refusée.'},{status:403});
+  try {
+    const {id}=await request.json();
+    if(typeof id!=='string'||!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(id)) return NextResponse.json({error:'Promotion invalide.'},{status:400});
+    const deleted=await sb('rpc/club_delete_unused_promotion',{method:'POST',body:{p_id:id}});
+    if(!deleted) return NextResponse.json({error:'Promotion introuvable.'},{status:404});
+    return NextResponse.json({ok:true});
+  } catch(error) {
+    const linked=String(error.message).startsWith('Suppression refusée :');
+    return NextResponse.json({error:linked?'Suppression refusée : cet avantage possède des données liées. Archivez-le pour conserver les coupons et l’historique.':'Suppression impossible. Vérifiez que le SQL d’archivage est installé, puis réessayez.',canArchive:linked},{status:409});
   }
 }
